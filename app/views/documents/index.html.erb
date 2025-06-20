@@ -1,0 +1,6 @@
+<h1>All Documents</h1>
+<% @documents.each do |document| %>
+  <%= document.document_type %>
+  <%= document.expiration_date %>
+<% end %>
+<%= link_to 'New Document',  new_document_path  %>
