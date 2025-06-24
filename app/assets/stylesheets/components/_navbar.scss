@@ -1,12 +1,136 @@
-.navbar-lewagon {
-  justify-content: space-between;
-  background: white;
+.navbar {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  transition: box-shadow 0.3s ease;
+  background-color: #fff;
+  z-index: 1030;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+  &:hover {
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+  }
+
+  .container {
+    max-width: 1320px;
+    width: 100%;
+  }
 }
 
-.navbar-lewagon .navbar-collapse {
-  flex-grow: 0;
+.navbar-brand {
+  font-size: 1.4rem;
+  letter-spacing: 0.05em;
+  margin-right: 4rem;
+  color: #0d6efd !important;
 }
 
-.navbar-lewagon .navbar-brand img {
-  width: 40px;
+.nav-link {
+  position: relative;
+  color: #4a4a4a !important;
+  transition: color 0.25s ease;
+  font-size: 1rem;
+  font-weight: 600;
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    height: 2px;
+    width: 0;
+    background: #0d6efd;
+    transition: width 0.3s ease;
+    border-radius: 2px;
+  }
+
+  &:hover,
+  &:focus {
+    color: #0d6efd !important;
+
+    &::after {
+      width: 100%;
+    }
+  }
+}
+
+/* Dropdown automatico on hover */
+.nav-item.dropdown {
+  position: relative;
+
+  & > .dropdown-menu {
+    display: none;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.25s ease;
+  }
+
+  &:hover > .dropdown-menu {
+    display: block;
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+.btn-primary {
+  background-image: linear-gradient(135deg, #3a8dff, #0053ba);
+  border: none;
+  box-shadow: 0 4px 8px rgba(58, 141, 255, 0.4);
+  transition: background-image 0.3s ease, box-shadow 0.3s ease;
+  font-weight: 600;
+
+  &:hover,
+  &:focus {
+    background-image: linear-gradient(135deg, #0053ba, #003f7f);
+    box-shadow: 0 6px 12px rgba(0, 63, 127, 0.6);
+  }
+}
+
+.dropdown-menu {
+  border-radius: 0.5rem;
+  font-size: 0.95rem;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+}
+
+.dropdown-item {
+  transition: background-color 0.2s ease;
+  font-weight: 500;
+}
+
+.dropdown-item:hover,
+.dropdown-item:focus {
+  background-color: #e7f1ff;
+  color: #0d6efd !important;
+}
+
+.navbar-toggler {
+  filter: brightness(0.8);
+  transition: filter 0.3s ease;
+
+  &:hover,
+  &:focus {
+    filter: brightness(1);
+  }
+}
+
+/* Center nav links */
+#mainNavbar {
+  display: flex !important;
+  flex-grow: 1;
+  justify-content: center;
+  align-items: center;
+}
+
+#mainNavbar > .navbar-nav.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+  gap: 1.5rem;
+  display: flex;
+  align-items: center;
+  padding-left: 3rem;
+}
+
+#mainNavbar > ul.navbar-nav.ms-auto {
+  margin-left: auto;
+  margin-right: 0;
+  gap: 1rem;
+  display: flex;
+  align-items: center;
 }

@@ -1,0 +1,458 @@
+/*============= FEATURES CSS AREA ===============*/
+.features1-section-area{
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    .features-elements1{
+        position: absolute;
+        top: 0;
+        left: 22%;
+        z-index: -2;
+        right: 22%;
+        top: 50px;
+    }
+    @media #{$xs} {
+        padding: 50px 0 20px;
+    }
+    @media #{$md} {
+        padding: 50px 0 20px;
+    }
+    .features1-header{
+        span{
+            color: $white;
+            font-family: $font1;
+            font-size: $small-size;
+            font-style: normal;
+            font-weight: $medium;
+            line-height: 16px;
+            display: inline-block;
+            margin-bottom: 16px;
+        }
+        h2{
+            color: $white;
+        }
+    }
+    .features-box-area{
+        position: relative;
+        z-index: 1;
+        transition: $trans;
+        &:hover{
+            transform: translateY(-5px);
+            transition: $trans;
+        }
+        .features-author-box{
+            border-radius: var(--4, 4px);
+            border: 1px solid $border1;
+            background: $bg6;
+            backdrop-filter: blur(57.034095764160156px);
+            padding: 32px 32px 0 32px;
+            max-height: 478px;
+            overflow: hidden;
+            margin-bottom: 30px;
+            transition: $trans;
+            &:hover{
+                transform: translateY(-5px);
+                transition: $trans;
+                .images{
+                    img{
+                        transform: scale(1.1);
+                        transition: all .4s;
+                    }
+                }
+            }
+            a{
+                color: $white;
+                font-family:$font2;
+                font-size: $heading4_size;
+                font-style: normal;
+                font-weight: $semi_bold;
+                line-height: 24px;
+                display: inline-block;
+                margin-bottom: 16px;
+                @media #{$xs} {
+                    font-size: $small-size + 4;
+                    line-height: 30px;
+                }
+                @media #{$md} {
+                    font-size: $small-size + 4;
+                    line-height: 30px;
+                }
+            }
+            p{
+                color: $white;
+                font-family: $font1;
+                font-size: $small-size;
+                font-style: normal;
+                font-weight: $medium;
+                line-height: 28px;
+                opacity: 0.7;
+                margin-bottom: 32px;
+                @media #{$xs} {
+                    font-size: $small-size;
+                    line-height: 26px;
+                }
+            }
+            .images{
+                overflow: hidden;
+                border-radius: 4px;
+                transition: all .4s;
+                img{
+                    height: 100%;
+                    width: 100%;
+                    object-fit: cover;
+                    transition: all .4s;
+                }
+            }
+        }
+        .features2{
+            max-height: 430px !important;
+        }
+    }
+}
+
+.more-features-scetion-area{
+    overflow: hidden;
+    @media #{$xs} {
+        padding: 50px 0 20px;
+    }
+    @media #{$md} {
+        padding: 50px 0 20px;
+    }
+    .more-features-header{
+        span{
+            color: $btn-bg1;
+            font-family: $font1;
+            font-size: $small-size;
+            font-style: normal;
+            font-weight: $medium;
+            line-height: 16px;
+            display: inline-block;
+            margin-bottom: 16px;
+        }
+    }
+    .more-features-box{
+        border-radius: var(--4, 4px);
+        border: 1px solid $border2;
+        padding: 32px 24px;
+        overflow: hidden;
+        transition: $trans;
+        position: relative;
+        z-index: 1;
+        margin-bottom: 30px;
+        .features-content{
+            position: relative;
+            z-index: 3;
+        }
+        .more-elements{
+            position: absolute;
+            top: 0;
+            left:30px;
+            z-index: -1;
+        }
+        &:hover{
+            transform: translateY(-5px);
+            background: $btn-bg1;
+            transition: $trans;
+            .features-icon{
+                background: $white;
+                transition: $trans;
+            }
+            a{
+                color: $white;
+                transition: $trans;
+            }
+            p{
+                color: $white;
+                opacity: 0.7;
+                transition: $trans;
+            }
+            a.learnmore{
+                color: $white;
+                transition: $trans;
+            }
+        }
+        .features-icon{
+            background: $bg5;
+            height: 60px;
+            width: 60px;
+            text-align: center;
+            line-height: 60px;
+            border-radius: 50%;
+            margin-bottom: 24px;
+            transition: $trans;
+        }
+        a{
+            color:$color1;
+            font-family:$font2;
+            font-size: $heading4_size;
+            font-style: normal;
+            font-weight: $semi_bold;
+            line-height: 24px;
+            display: inline-block;
+            margin-bottom: 16px;
+            transition: $trans;
+            @media #{$xs} {
+                font-size: $heading4_size - 4;
+                line-height: 30px;
+            }
+            @media #{$md} {
+                font-size: $heading4_size - 4;
+                line-height: 30px;
+            }
+        }
+        p{
+            color: $color3;
+            font-family: $font1;
+            font-size: $small-size;
+            font-style: normal;
+            font-weight: $medium;
+            line-height: 28px ;
+            transition: $trans;
+        }
+        a.learnmore{
+            color: $color1;
+            font-family: $font1;
+            font-size: $small-size;
+            font-style: normal;
+            font-weight: $bold;
+            line-height: 18px;
+            display: inline-block;
+            margin-bottom: 0;
+            margin-top: 24px;
+            transition: $trans;
+            i{
+                margin-left: 4px;
+                transform: rotate(-45deg);
+            }
+        }
+    }
+}
+
+// homepage3 //
+.features3-section-area{
+    padding: 100px 0 200px;
+    @media #{$xs} {
+        padding: 50px 0 50px;
+    }
+    @media #{$md} {
+        padding: 50px 0 50px;
+    }
+    .features3-images{
+        position: relative;
+        .img1{
+            img{
+                border-radius: 4px;
+            }
+        }
+        .img2{
+            img{
+                width: 300px;
+                height: 200px;
+                object-fit:cover;
+                position: absolute;
+                right: -100px;
+                bottom: -100px;
+                @media #{$xs} {
+                    height: 100%;
+                    width: 100%;
+                    right: 0;
+                    bottom: 0;
+                    top: 20px;
+                    position: relative;
+                }
+                @media #{$md} {
+                    height: 100%;
+                    width: 100%;
+                    right: 0;
+                    bottom: 0;
+                    top: 20px;
+                    position: relative;
+                }
+            }
+        }
+    }
+    .features3-content{
+        @media #{$xs} {
+            margin-top: 30px;
+        }
+        @media #{$md} {
+            margin-top: 30px;
+        }
+        .features-content-box{
+            position: relative;
+            background: $bg20;
+            padding: 16px 24px;
+            border-radius: 4px;
+            transition: $trans;
+            &:hover{
+                background: $white;
+                transition: $trans;
+                box-shadow:0px 4px 50px 0px rgba(0, 0, 0, 0.08);
+                transform: translateY(-5px);
+                &::after{
+                    background: $color11;
+                    transition: $trans;
+                    opacity: 1;
+                }
+            }
+            &::after{
+                position: absolute;
+                content: "";
+                height: 100%;
+                width: 6px;
+                left: 0;
+                top: 0;
+                background: $color3;
+                border-radius: 4px 0 0 4px;
+                transition: $trans;
+                opacity: .4;
+            }
+            .img1{
+                height: 32px;
+                width: 32px;
+                object-fit: cover;
+                position: absolute;
+            }
+            .content{
+                padding-left: 50px;
+                a{
+                    font-family: $font1;
+                    font-size: $small-size + 4;
+                    font-weight: $semi_bold;
+                    color: $color1;
+                    display: inline-block;
+                    line-height: 20px;
+                    transition: $trans;
+                    &:hover{
+                        color: $color11;
+                        transition: $trans;
+                    }
+                }
+                p{
+                    font-family: $font1;
+                    font-size: $small-size;
+                    font-weight: $medium;
+                    color: $color3;
+                    line-height: 28px;
+                }
+            }
+        }
+    }
+}
+
+.step-section-area{
+    background:$bg20;
+    position: relative;
+    z-index: 1;
+    @media #{$xs} {
+        padding: 50px 0 50px;
+    }
+    @media #{$md} {
+        padding: 50px 0 50px;
+    }
+    .step-header-area{
+        @media #{$xs} {
+            margin-bottom: 30px;
+        }
+        @media #{$md} {
+            margin-bottom: 30px;
+        }
+    }
+    .step-author-area{
+        display: flex;
+        position: relative;
+        transition: $trans;
+        margin: 0 30px 0 0;
+        @media #{$xs} {
+            margin: 0;
+        }
+        @media #{$md} {
+            margin: 0;
+        }
+        &::after{
+            position: absolute;
+            content: "";
+            height: 100%;
+            width: 1px;
+            border: 1px dashed $color11;
+            z-index: -1;
+            left:35px;
+            top: 50px;
+            opacity: 0.4;
+        }
+        &:hover{
+            .icons{
+                h2{
+                    background: $color11;
+                    color: $white;
+                    transition: $trans;
+                }
+            }
+        }
+        .icons{
+            h2{
+                font-family: $font1;
+                font-size: $heading4_size;
+                font-weight: $bold;
+                color: $color1;
+                background: $white;
+                position: relative;
+                z-index: 1;
+                height: 70px;
+                width: 70px;
+                text-align: center;
+                border-radius: 50%;
+                border: 1px solid $color11;
+                line-height: 70px;
+                transition: $trans;
+            }
+        }
+        .content{
+            margin-left: 32px;
+            a{
+                font-family: $font2;
+                font-weight: $semi_bold;
+                display: inline-block;
+                color: $color1;
+                font-size: $heading4_size;
+                line-height: 24px;
+                transition: $trans;
+                &:hover{
+                    color: $color11;
+                    transition: $trans;
+                }
+            }
+            p{
+                font-family: $font1;
+                font-size: $small-size;
+                font-weight: $medium;
+                color: $color3;
+
+            }
+        }
+    }
+    .step-author-area.step2{
+        &::after{
+            display: none;
+        }
+    }
+}
+
+// innerpages //
+.features2{
+    .features1-header{
+        span{
+            font-family: $font1;
+            font-weight: $medium;
+            color: $color5;
+            transition: $trans;
+            display: inline-block;
+            padding: 8px 12px;
+            border-radius: 32px;
+            background: $white;
+            line-height: 16px;
+            font-size: $small-size;
+        }
+    }
+}
+/*============= FEATURES CSS AREA ENDS ===============*/

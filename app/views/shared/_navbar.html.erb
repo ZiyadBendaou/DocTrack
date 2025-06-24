@@ -1,38 +1,107 @@
-<div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
-  <div class="container-fluid">
-    <%= link_to "#", class: "navbar-brand" do %>
-      <%= image_tag "https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/logo.png" %>
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+  <div class="container d-flex align-items-center">
+    <%= link_to root_path, class: "navbar-brand d-flex align-items-center fw-bold text-primary" do %>
+      <%= image_tag("https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/logo.png", height: 30, class: "me-2") %>
+      DocTrack
     <% end %>
 
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button
+      class="navbar-toggler border-0"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#mainNavbar"
+      aria-controls="mainNavbar"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto">
+    <div class="collapse navbar-collapse" id="mainNavbar">
+      <ul class="navbar-nav mx-auto align-items-center gap-4">
         <% if user_signed_in? %>
-          <li class="nav-item active">
-            <%= link_to "Home", documents_path, class: "nav-link" %>
+          <li class="nav-item">
+            <%= link_to "Dashboard", documents_path, class: "nav-link fw-semibold text-secondary" %>
           </li>
           <li class="nav-item">
-            <%= link_to "Messages", "#", class: "nav-link" %>
+            <%= link_to "Reminders", "#", class: "nav-link fw-semibold text-secondary" %>
           </li>
           <li class="nav-item dropdown">
-          <a href="#" class="avatar" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar", alt: "dropdown menu" %>
-          </a>
-            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-              <%= link_to "Action", "#", class: "dropdown-item" %>
-              <%= link_to "Another action", "#", class: "dropdown-item" %>
-              <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %>
-            </div>
+            <a
+              class="nav-link dropdown-toggle fw-semibold text-secondary"
+              href="#"
+              id="supportDropdown"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Support
+            </a>
+            <ul class="dropdown-menu shadow-sm" aria-labelledby="supportDropdown">
+              <li><%= link_to "How it works", "#", class: "dropdown-item" %></li>
+              <li><%= link_to "Contact us", "#", class: "dropdown-item" %></li>
+              <li><%= link_to "FAQ", "#", class: "dropdown-item" %></li>
+            </ul>
           </li>
         <% else %>
           <li class="nav-item">
-            <%= link_to "Login", new_user_session_path, class: "nav-link" %>
+            <%= link_to "About", "#", class: "nav-link fw-semibold text-secondary" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "Features", "#", class: "nav-link fw-semibold text-secondary" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "Testimonials", "#", class: "nav-link fw-semibold text-secondary" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "FAQ", "#", class: "nav-link fw-semibold text-secondary" %>
           </li>
         <% end %>
       </ul>
+
+      <% if user_signed_in? %>
+        <ul class="navbar-nav ms-auto align-items-center gap-3">
+          <li class="nav-item">
+            <%= link_to "Upload Document", new_document_path, class: "btn btn-primary px-4 py-2 rounded-pill fw-semibold" %>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle d-flex align-items-center gap-2"
+              href="#"
+              id="userDropdown"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+              aria-haspopup="true"
+            >
+              <%= image_tag(
+                    "https://kitt.lewagon.com/placeholder/users/ssaunier",
+                    alt: "User avatar",
+                    class: "rounded-circle border border-2 border-primary",
+                    size: "36x36"
+                  ) %>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end shadow-sm" aria-labelledby="userDropdown">
+              <li><%= link_to "Profile", edit_user_registration_path, class: "dropdown-item" %></li>
+              <li><%= link_to "Help", "#", class: "dropdown-item" %></li>
+              <li><hr class="dropdown-divider" /></li>
+              <li>
+                <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item text-danger"%>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      <% else %>
+        <ul class="navbar-nav ms-auto gap-3">
+          <li class="nav-item">
+            <%= link_to "Sign In", new_user_session_path, class: "nav-link fw-semibold text-secondary" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "Register", new_user_registration_path, class: "btn btn-outline-primary rounded-pill px-4 fw-semibold" %>
+          </li>
+        </ul>
+      <% end %>
     </div>
   </div>
-</div>
+</nav>

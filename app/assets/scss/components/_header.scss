@@ -1,0 +1,964 @@
+
+/*============= HEADER CSS AREA ===============*/
+
+.header-area.homepage1 {
+    position: absolute;
+    width: 100%;
+    z-index:9999;
+    .navbar{
+        display: block;
+    }
+    .header-elements {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 24px;
+        background: $header-bg1;
+        padding: 10px 24px;
+        border: 1px solid rgba(255, 255, 255, 0.20);
+        border-radius: 35px;
+        transition: $trans;
+        .site-log{
+            margin-top: 5px;
+        }
+        .main-menu{
+            .nav-item{
+                .nav-link.active{
+                    background: none;
+                    color: $white;
+                    opacity: 0.7;
+                }
+            }
+            ul {
+                li {
+                    display: inline-block;
+                    position: relative;
+                    &:hover {
+                        ul.dropdown-padding{
+                            visibility: visible;
+                            transition: all 0.5s ease-in-out;
+                            opacity: 1;
+                            z-index: 9;
+                            top: 50px;
+                            position: absolute;
+                        }
+                    }
+
+                    a {
+                        font-family: $font1;
+                        font-size: $small-size;
+                        font-weight: $medium;
+                        color: $white;
+                        display: inline-block;
+                        transition: $trans;
+                        padding: 0 10px;
+                    }
+
+                    ul.dropdown-padding {
+                        visibility: hidden;
+                        opacity: 0;
+                        box-shadow: rgb(0 0 0 / 20%) 0px 20px 30px;
+                        position: absolute;
+                        background: $white;
+                        top: 100px;
+                        width: 220px;
+                        z-index: 1;
+                        transition: $trans;
+                        border-radius: 5px;
+                        padding: 15px;
+
+                        li.main-small-menu {
+                            position: relative;
+                            &:hover > a{
+                                color:$btn-bg1 ;
+                                transition: $trans;
+                                padding-left: 25px;
+                              }
+                              &:hover > a::after{
+                                color:$btn-bg1 ;
+                                transition: $trans;
+                                visibility: visible;
+                                opacity: 1;
+                              }
+                            a {
+                                display: flex;
+                                align-items: center;
+                                justify-content: space-between;
+                            }
+
+                            ul.small-dropdown {
+                                visibility: hidden;
+                                opacity: 0;
+                                box-shadow: rgb(0 0 0 / 20%) 0px 20px 30px;
+                                background: $white;
+                                position: absolute;
+                                top: 70px;
+                                width: 220px;
+                                z-index: 1;
+                                left: 195px;
+                                transition: $trans;
+                                border-radius: 5px;
+                                padding: 15px
+                            }
+
+                            &:hover{
+                                ul.small-dropdown {
+                                    visibility: visible;
+                                    transition: all 0.5s ease-in-out;
+                                    opacity: 1;
+                                    z-index: 9;
+                                    top: 0;
+                                    position: absolute;
+                                }
+                            }
+                        }
+
+                        li {
+                            display: block;
+                            a {
+                                font-family: $font1;
+                                font-weight: $medium;
+                                color: $color1;
+                                padding: 8px;
+                                display: inline-block;
+                                position: relative;
+                                z-index: 1;
+                                border-radius: 4px;
+                                transition: $trans;
+                                &::after{
+                                    position: absolute;
+                                    content: "";
+                                    height: 2px;
+                                    width: 10px;
+                                    transition: $trans;
+                                    z-index: -1;
+                                    background: $btn-bg1;
+                                    left: 10px;
+                                    top: 22px;
+                                    border-radius: 4px;
+                                    display: inline-block;
+                                    visibility: hidden;
+                                    opacity: 0;
+                                    transition: $trans;
+                                }
+                                &:hover{
+                                    transition: $trans;
+                                    color: $btn-bg1;
+                                    padding-left: 25px;
+                                    &::after{
+                                        transition: $trans;
+                                        border-radius: 4px;
+                                        visibility: visible;
+                                        transition: $trans;
+                                        opacity: 1;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .navbar-expand{
+        display: block;
+    }
+}
+.header-area.homepage1.sticky {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    transform: translate3d(0, 0, 0);
+    z-index: 111;
+    -webkit-animation-name: fade-in-down;
+    animation-name: fade-in-down;
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+    background-color: $color1;
+    transition: $trans;
+    z-index: 99;
+    .header-elements{
+        margin-top: 0;
+        transform: $trans;
+        border: none;
+        background: none;
+        padding: 14px 0;
+    }
+  }
+
+//   homepgae2 //
+.header-area.homepage2{
+    position: absolute;
+    width: 100%;
+    z-index: 2;
+    .navbar{
+        display: block;
+    }
+    .header-elements{
+        display: flex;
+        align-self: center;
+        justify-content: space-between;
+        padding: 25px 0;
+        transition: $trans;
+        .site-logo{
+            margin-top: 5px;
+        }
+        .main-menu{
+            display: flex;
+            align-items: center;
+            .nav-item{
+                .nav-link.active{
+                    background: none;
+                    color: $btn-bg2;
+                }
+            }
+            ul {
+                li {
+                    display: inline-block;
+                    position: relative;
+                    &:hover > a{
+                        color:$btn-bg2 ;
+                        transition: $trans;
+                      }
+                    &:hover {
+                        ul.dropdown-padding{
+                            visibility: visible;
+                            transition: all 0.5s ease-in-out;
+                            opacity: 1;
+                            z-index: 9;
+                            top: 50px;
+                            position: absolute;
+                        }
+                    }
+                    a {
+                        font-family: $font3 !important;
+                        font-size: $small-size;
+                        font-weight: $medium;
+                        color: $white;
+                        display: inline-block;
+                        transition: $trans;
+                        padding: 0 10px;
+                    }
+
+                    ul.dropdown-padding {
+                        visibility: hidden;
+                        opacity: 0;
+                        box-shadow: rgb(0 0 0 / 20%) 0px 20px 30px;
+                        position: absolute;
+                        background: $white;
+                        top: 100px;
+                        width: 220px;
+                        z-index: 1;
+                        transition: $trans;
+                        border-radius: 5px;
+                        padding: 15px;
+
+                        li.main-small-menu {
+                            position: relative;
+                            &:hover > a{
+                                color:$btn-bg2 ;
+                                transition: $trans;
+                                padding-left: 25px;
+                              }
+                              &:hover > a::after{
+                                color:$btn-bg2 ;
+                                transition: $trans;
+                                visibility: visible;
+                                opacity: 1;
+                              }
+                            a {
+                                display: flex;
+                                align-items: center;
+                                justify-content: space-between;
+                            }
+
+                            ul.small-dropdown {
+                                visibility: hidden;
+                                opacity: 0;
+                                box-shadow: rgb(0 0 0 / 20%) 0px 20px 30px;
+                                background: $white;
+                                position: absolute;
+                                top: 70px;
+                                width: 220px;
+                                z-index: 1;
+                                left: 195px;
+                                transition: $trans;
+                                border-radius: 5px;
+                                padding: 15px
+                            }
+
+                            &:hover{
+                                ul.small-dropdown {
+                                    visibility: visible;
+                                    transition: all 0.5s ease-in-out;
+                                    opacity: 1;
+                                    z-index: 9;
+                                    top: 0;
+                                    position: absolute;
+                                }
+                            }
+                        }
+
+                        li {
+                            display: block;
+                            a {
+                                font-family: $font3 !important;
+                                font-weight: $medium;
+                                color: $color1;
+                                padding: 8px;
+                                display: inline-block;
+                                position: relative;
+                                z-index: 1;
+                                border-radius: 4px;
+                                transition: $trans;
+                                &::after{
+                                    position: absolute;
+                                    content: "";
+                                    height: 2px;
+                                    width: 10px;
+                                    transition: $trans;
+                                    z-index: -1;
+                                    background: $btn-bg2;
+                                    left: 10px;
+                                    top: 22px;
+                                    border-radius: 4px;
+                                    display: inline-block;
+                                    visibility: hidden;
+                                    opacity: 0;
+                                    transition: $trans;
+                                }
+                                &:hover{
+                                    transition: $trans;
+                                    color: $btn-bg2;
+                                    padding-left: 25px;
+                                    &::after{
+                                        transition: $trans;
+                                        border-radius: 4px;
+                                        visibility: visible;
+                                        transition: $trans;
+                                        opacity: 1;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            .header-btn2{
+                margin: 0 16px 0 22px;
+            }
+        }
+    }
+}
+.header-area.homepage2.sticky {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    transform: translate3d(0, 0, 0);
+    z-index: 111;
+    -webkit-animation-name: fade-in-down;
+    animation-name: fade-in-down;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+    background-color: $color5;
+    transition: $trans;
+    z-index: 99;
+    .header-elements{
+        margin-top: 0;
+        transition: $trans;
+        border: none;
+        background: none;
+        padding: 14px 0;
+    }
+  }
+
+//   homepgae3 //
+.header-area.homepage3{
+    position: absolute;
+    width: 100%;
+    z-index: 2;
+    .navbar{
+        display: block;
+    }
+    .header-elements{
+        display: flex;
+        align-self: center;
+        justify-content: space-between;
+        transition: $trans;
+        padding: 24px 0 0 0;
+        .site-logo{
+            margin-top: 14px;
+        }
+        .main-menu{
+            display: flex;
+            align-items: center;
+            padding: 12px 16px;
+            transition: $trans;
+            background: $bg19;
+            border-radius: 4px;
+            .nav-item{
+                .nav-link.active{
+                    background: none;
+                    color: $color11;
+                }
+            }
+            ul {
+                li {
+                    display: inline-block;
+                    position: relative;
+                    &:hover > a{
+                        color:$color11;
+                        transition: $trans;
+                      }
+                    &:hover {
+                        ul.dropdown-padding{
+                            visibility: visible;
+                            transition: all 0.5s ease-in-out;
+                            opacity: 1;
+                            z-index: 9;
+                            top: 50px;
+                            position: absolute;
+                        }
+                    }
+                    a {
+                        font-family: $font3 !important;
+                        font-size: $small-size;
+                        font-weight: $medium;
+                        color: $color1;
+                        display: inline-block;
+                        transition: $trans;
+                        padding: 0 10px;
+                    }
+
+                    ul.dropdown-padding {
+                        visibility: hidden;
+                        opacity: 0;
+                        box-shadow: rgb(0 0 0 / 20%) 0px 20px 30px;
+                        position: absolute;
+                        background: $white;
+                        top: 100px;
+                        width: 220px;
+                        z-index: 1;
+                        transition: $trans;
+                        border-radius: 5px;
+                        padding: 15px;
+
+                        li.main-small-menu {
+                            position: relative;
+                            &:hover > a{
+                                color:$color11;
+                                transition: $trans;
+                                padding-left: 25px;
+                              }
+                              &:hover > a::after{
+                                color:$btn-bg2 ;
+                                transition: $trans;
+                                visibility: visible;
+                                opacity: 1;
+                              }
+                            a {
+                                display: flex;
+                                align-items: center;
+                                justify-content: space-between;
+                            }
+
+                            ul.small-dropdown {
+                                visibility: hidden;
+                                opacity: 0;
+                                box-shadow: rgb(0 0 0 / 20%) 0px 20px 30px;
+                                background: $white;
+                                position: absolute;
+                                top: 70px;
+                                width: 220px;
+                                z-index: 1;
+                                left: 195px;
+                                transition: $trans;
+                                border-radius: 5px;
+                                padding: 15px
+                            }
+
+                            &:hover{
+                                ul.small-dropdown {
+                                    visibility: visible;
+                                    transition: all 0.5s ease-in-out;
+                                    opacity: 1;
+                                    z-index: 9;
+                                    top: 0;
+                                    position: absolute;
+                                }
+                            }
+                        }
+
+                        li {
+                            display: block;
+                            a {
+                                font-family: $font3 !important;
+                                font-weight: $medium;
+                                color: $color1;
+                                padding: 8px;
+                                display: inline-block;
+                                position: relative;
+                                z-index: 1;
+                                border-radius: 4px;
+                                transition: $trans;
+                                &::after{
+                                    position: absolute;
+                                    content: "";
+                                    height: 2px;
+                                    width: 10px;
+                                    transition: $trans;
+                                    z-index: -1;
+                                    background: $color11;
+                                    left: 10px;
+                                    top: 22px;
+                                    border-radius: 4px;
+                                    display: inline-block;
+                                    visibility: hidden;
+                                    opacity: 0;
+                                    transition: $trans;
+                                }
+                                &:hover{
+                                    transition: $trans;
+                                    color: $color11;
+                                    padding-left: 25px;
+                                    &::after{
+                                        transition: $trans;
+                                        border-radius: 4px;
+                                        visibility: visible;
+                                        transition: $trans;
+                                        opacity: 1;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .header-padding{
+            ul{
+                 li{
+                    a{
+                        padding: 0 14px;
+                    }
+                 }
+            }
+        }
+    }
+}
+.header-area.homepage3.sticky {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    transform: translate3d(0, 0, 0);
+    z-index: 111;
+    -webkit-animation-name: fade-in-down;
+    animation-name: fade-in-down;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+    background-color: $white;
+    box-shadow: 0px 4px 30px 0px rgba(0, 0, 0, 0.08);
+    transition: $trans;
+    z-index: 99;
+    .header-elements{
+        margin-top: 0;
+        transition: $trans;
+        border: none;
+        background: none;
+        padding: 14px 0;
+        .main-menu{
+            background: none;
+            transition: $trans;
+        }
+    }
+  }
+
+//   homepagr4 //
+.header-area.homepage4{
+    position: absolute;
+    width: 100%;
+    z-index: 2;
+    .navbar{
+        display: block;
+    }
+    .header-elements{
+        display: flex;
+        align-self: center;
+        justify-content: space-between;
+        padding: 16px 16px;
+        transition: $trans;
+        background: $white;
+        border-radius: 0 0 4px 4px;
+        .site-logo{
+            margin-top: 5px;
+            display: flex;
+            align-items: center;
+        }
+        .main-menu{
+            display: flex;
+            align-items: center;
+            margin-left: 50px;
+            .nav-item{
+                .nav-link.active{
+                    background: none;
+                    color: $color15;
+                }
+            }
+            ul {
+                li {
+                    display: inline-block;
+                    position: relative;
+                    &:hover > a{
+                        color:$color15 ;
+                        transition: $trans;
+                      }
+                    &:hover {
+                        ul.dropdown-padding{
+                            visibility: visible;
+                            transition: all 0.5s ease-in-out;
+                            opacity: 1;
+                            z-index: 9;
+                            top: 50px;
+                            position: absolute;
+                        }
+                    }
+                    a {
+                        font-family: $font3 !important;
+                        font-size: $small-size;
+                        font-weight: $medium;
+                        color: $color1;
+                        display: inline-block;
+                        transition: $trans;
+                        padding: 0 10px;
+                    }
+
+                    ul.dropdown-padding {
+                        visibility: hidden;
+                        opacity: 0;
+                        box-shadow: rgb(0 0 0 / 20%) 0px 20px 30px;
+                        position: absolute;
+                        background: $white;
+                        top: 100px;
+                        width: 220px;
+                        z-index: 1;
+                        transition: $trans;
+                        border-radius: 5px;
+                        padding: 15px;
+
+                        li.main-small-menu {
+                            position: relative;
+                            &:hover > a{
+                                color:$color15 ;
+                                transition: $trans;
+                                padding-left: 25px;
+                              }
+                              &:hover > a::after{
+                                color:$color15 ;
+                                transition: $trans;
+                                visibility: visible;
+                                opacity: 1;
+                              }
+                            a {
+                                display: flex;
+                                align-items: center;
+                                justify-content: space-between;
+                            }
+
+                            ul.small-dropdown {
+                                visibility: hidden;
+                                opacity: 0;
+                                box-shadow: rgb(0 0 0 / 20%) 0px 20px 30px;
+                                background: $white;
+                                position: absolute;
+                                top: 70px;
+                                width: 220px;
+                                z-index: 1;
+                                left: 195px;
+                                transition: $trans;
+                                border-radius: 5px;
+                                padding: 15px
+                            }
+
+                            &:hover{
+                                ul.small-dropdown {
+                                    visibility: visible;
+                                    transition: all 0.5s ease-in-out;
+                                    opacity: 1;
+                                    z-index: 9;
+                                    top: 0;
+                                    position: absolute;
+                                }
+                            }
+                        }
+
+                        li {
+                            display: block;
+                            a {
+                                font-family: $font3 !important;
+                                font-weight: $medium;
+                                color: $color1;
+                                padding: 8px;
+                                display: inline-block;
+                                position: relative;
+                                z-index: 1;
+                                border-radius: 4px;
+                                transition: $trans;
+                                &::after{
+                                    position: absolute;
+                                    content: "";
+                                    height: 2px;
+                                    width: 10px;
+                                    transition: $trans;
+                                    z-index: -1;
+                                    background: $color15;
+                                    left: 10px;
+                                    top: 22px;
+                                    border-radius: 4px;
+                                    display: inline-block;
+                                    visibility: hidden;
+                                    opacity: 0;
+                                    transition: $trans;
+                                }
+                                &:hover{
+                                    transition: $trans;
+                                    color: $color15;
+                                    padding-left: 25px;
+                                    &::after{
+                                        transition: $trans;
+                                        border-radius: 4px;
+                                        visibility: visible;
+                                        transition: $trans;
+                                        opacity: 1;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            .header-btn2{
+                margin: 0 16px 0 22px;
+            }
+        }
+    }
+}
+.header-area.homepage4.sticky {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    transform: translate3d(0, 0, 0);
+    z-index: 111;
+    -webkit-animation-name: fade-in-down;
+    animation-name: fade-in-down;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+    background-color: $white;
+    box-shadow: 0px 4px 30px 0px rgba(0, 0, 0, 0.08);
+    transition: $trans;
+    z-index: 99;
+    .header-elements{
+        padding: 14px;
+        transition: $trans;
+    }
+  }
+
+//   homepage5 //
+.header-area.homepage5 {
+    position: absolute;
+    width: 100%;
+    z-index:9999;
+    .navbar{
+        display: block;
+    }
+    .header-elements {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 24px;
+        background: $header-bg1;
+        padding: 10px 24px;
+        border: 1px solid rgba(255, 255, 255, 0.20);
+        border-radius: 35px;
+        transition: $trans;
+        .site-log{
+            margin-top: 5px;
+        }
+        .main-menu{
+            .nav-item{
+                .nav-link.active{
+                    background: none;
+                    color: $btn-bg3;
+                }
+            }
+            ul {
+                li {
+                    display: inline-block;
+                    position: relative;
+                    &:hover > a{
+                        color:$btn-bg3 ;
+                        transition: $trans;
+                      }
+                    &:hover {
+                        color: $btn-bg3;
+                        ul.dropdown-padding{
+                            visibility: visible;
+                            transition: all 0.5s ease-in-out;
+                            opacity: 1;
+                            z-index: 9;
+                            top: 50px;
+                            position: absolute;
+                        }
+                    }
+
+                    a {
+                        font-family: $font1;
+                        font-size: $small-size;
+                        font-weight: $medium;
+                        color: $white;
+                        display: inline-block;
+                        transition: $trans;
+                        padding: 0 10px;
+                    }
+
+                    ul.dropdown-padding {
+                        visibility: hidden;
+                        opacity: 0;
+                        box-shadow: rgb(0 0 0 / 20%) 0px 20px 30px;
+                        position: absolute;
+                        background: $white;
+                        top: 100px;
+                        width: 220px;
+                        z-index: 1;
+                        transition: $trans;
+                        border-radius: 5px;
+                        padding: 15px;
+
+                        li.main-small-menu {
+                            position: relative;
+                            &:hover > a{
+                                color:$btn-bg3 ;
+                                transition: $trans;
+                                padding-left: 25px;
+                              }
+                              &:hover > a::after{
+                                color:$btn-bg3 ;
+                                transition: $trans;
+                                visibility: visible;
+                                opacity: 1;
+                              }
+                            a {
+                                display: flex;
+                                align-items: center;
+                                justify-content: space-between;
+                            }
+
+                            ul.small-dropdown {
+                                visibility: hidden;
+                                opacity: 0;
+                                box-shadow: rgb(0 0 0 / 20%) 0px 20px 30px;
+                                background: $white;
+                                position: absolute;
+                                top: 70px;
+                                width: 220px;
+                                z-index: 1;
+                                left: 195px;
+                                transition: $trans;
+                                border-radius: 5px;
+                                padding: 15px
+                            }
+
+                            &:hover{
+                                ul.small-dropdown {
+                                    visibility: visible;
+                                    transition: all 0.5s ease-in-out;
+                                    opacity: 1;
+                                    z-index: 9;
+                                    top: 0;
+                                    position: absolute;
+                                }
+                            }
+                        }
+
+                        li {
+                            display: block;
+                            a {
+                                font-family: $font1;
+                                font-weight: $medium;
+                                color: $color1;
+                                padding: 8px;
+                                display: inline-block;
+                                position: relative;
+                                z-index: 1;
+                                border-radius: 4px;
+                                transition: $trans;
+                                &::after{
+                                    position: absolute;
+                                    content: "";
+                                    height: 2px;
+                                    width: 10px;
+                                    transition: $trans;
+                                    z-index: -1;
+                                    background: $btn-bg3;
+                                    left: 10px;
+                                    top: 22px;
+                                    border-radius: 4px;
+                                    display: inline-block;
+                                    visibility: hidden;
+                                    opacity: 0;
+                                    transition: $trans;
+                                }
+                                &:hover{
+                                    transition: $trans;
+                                    color: $btn-bg3;
+                                    padding-left: 25px;
+                                    &::after{
+                                        transition: $trans;
+                                        border-radius: 4px;
+                                        visibility: visible;
+                                        transition: $trans;
+                                        opacity: 1;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .navbar-expand{
+        display: block;
+    }
+}
+.header-area.homepage5.sticky {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    transform: translate3d(0, 0, 0);
+    z-index: 111;
+    -webkit-animation-name: fade-in-down;
+    animation-name: fade-in-down;
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+    background: $color1;
+    transition: $trans;
+    z-index: 99;
+    .header-elements{
+        margin-top: 0;
+        transform: $trans;
+        border: none;
+        background: none;
+
+    }
+  }
+
+/*============= HEADER CSS AREA ENDS===============*/

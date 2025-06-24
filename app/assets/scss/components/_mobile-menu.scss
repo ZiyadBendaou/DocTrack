@@ -1,0 +1,697 @@
+/*============= MOBILE-MENU CSS AREA  ===============*/
+.mobile-haeder1{
+    background: $btn-bg1;
+    position: fixed;
+    .mobile-header-elements{
+       .dots-menu{
+        color: $white;
+        cursor: pointer;
+       }
+    }
+}
+
+.mobile-sidebar1{
+    max-height: 100%;
+    overflow-y: scroll;
+    .menu-close{
+        color: $white;
+        cursor: pointer;
+    }
+    .mobile-nav{
+        .mobile-nav-list{
+            li{
+                a{
+                    font-family: $font1;
+                    font-weight: $medium !important;
+                    color: $white;
+                }
+                span{
+                    &::after{
+                        background: $white;
+                        color: $white;
+                    }
+                    &::before{
+                        background: $white;
+                        color: $white;
+                    }
+                }
+                ul{
+                    li{
+                        a{
+                            font-weight: $medium !important;
+                        }
+                    }
+                }
+            }
+        }
+        .allmobilesection{
+            .mobile-get{
+                display: inline-block;
+                border-radius: 25px;
+                background: $btn-bg1;
+                color: $white;
+                font-family: $font1;
+                font-size: $small-size;
+                font-style: normal;
+                font-weight: $bold;
+                line-height: 16px;
+                padding: 16px 28px;
+                transition: $trans;
+                position: relative;
+                z-index: 1;
+                width: 100%;
+                text-align: center;
+                margin-top: 30px;
+                &::after{
+                    position: absolute;
+                    content: "";
+                    left: 50%;
+                    right: 50%;
+                    height: 20px;
+                    width: 20px;
+                    top: 14px;
+                    border-radius: 50%;
+                    background: $color2;
+                    visibility: hidden;
+                    opacity: 0;
+                    z-index: -1;
+                    transition: $trans;
+                }
+                &:hover{
+                    transform: translateY(-5px);
+                    transition: $trans;
+                    &::after{
+                        visibility: visible;
+                        opacity: 1;
+                        height: 100%;
+                        width: 100%;
+                        transition: $trans;
+                        z-index: -1;
+                        border-radius: 25px;
+                        left: 0;
+                        top: 0;
+                    }
+                }
+                svg{
+                    margin-left: 4px;
+                    transform: rotate(-45deg);
+                }
+            }
+            .single-footer{
+                h3{
+                    font-family: $font2;
+                    font-size: $heading4_size;
+                    line-height: 30px;
+                    color: $white;
+                    font-weight: $bold;
+                    margin-bottom: 16px;
+                    margin-top: 30px;
+                }
+                .footer4-contact-info{
+                    .contact-info-single{
+                        display: flex;
+                        color: $white;
+                        svg{
+                            margin: 0 10px 0 0;
+                            counter-reset: $white;
+                        }
+                        a{
+                            font-family: $font1;
+                            font-weight: $medium;
+                            color: $white;
+                            opacity: 0.7;
+                            font-size: $small-size;
+                        }
+                    }
+
+                    .social-links-mobile-menu{
+                        ul{
+                            li{
+                                display: inline-block;
+                                height: 40px;
+                                width: 40px;
+                                border-radius: 50%;
+                                background: $white;
+                                color: $color1;
+                                transition: $trans;
+                                display: inline-block;
+                                text-align: center;
+                                margin: 0 6px 0 0;
+                                cursor: pointer;
+                                &:hover{
+                                    background: $btn-bg1;
+                                    color: $white;
+                                    transition: $trans;
+                                    a{
+                                        svg{
+                                            color: $white;
+                                        }
+                                    }
+                                }
+                                a{
+                                    line-height: 0px;
+                                    &:hover{
+                                        color: $white;
+                                        transition: $trans;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+// homepage2 //
+.mobile-haeder2{
+    background: $color5;
+    position: fixed;
+    .mobile-header-elements{
+       .dots-menu{
+        color: $white;
+        cursor: pointer;
+       }
+    }
+}
+
+.mobile-sidebar2{
+    max-height: 100%;
+    overflow-y: scroll;
+    background: $color5;
+    .menu-close{
+        color: $white;
+        cursor: pointer;
+    }
+    .mobile-nav.mobile-nav2{
+        .mobile-nav-list.nav-list2{
+            li{
+                a{
+                    font-family: $font3 !important;
+                    font-weight: $medium !important;
+                    color: $white;
+                }
+                span{
+                    &::after{
+                        background: $white;
+                        color: $white;
+                    }
+                    &::before{
+                        background: $white;
+                        color: $white;
+                    }
+                }
+                ul{
+                    li{
+                        a{
+                            font-weight: $medium !important;
+                            font-family: $font3 !important;
+                        }
+                    }
+                }
+                ul.sub-menu{
+                    li{
+                        a{
+                            font-family: $font3 !important;
+                            font-weight: $medium !important;
+                        }
+                    }
+                }
+            }
+        }
+        .allmobilesection{
+            .header-btn2{
+                width: 100% !important;
+                text-align: center;
+                margin-top: 30px;
+            }
+            .single-footer{
+                h3{
+                    font-family: $font3;
+                    font-size: $heading4_size;
+                    line-height: 30px;
+                    color: $white;
+                    font-weight: $bold;
+                    margin-bottom: 16px;
+                    margin-top: 30px;
+                }
+                .footer4-contact-info{
+                    .contact-info-single{
+                        display: flex;
+                        color: $white;
+                        svg{
+                            margin: 0 10px 0 0;
+                            counter-reset: $white;
+                        }
+                        a{
+                            font-family: $font3;
+                            font-weight: $medium;
+                            color: $white;
+                            opacity: 0.7;
+                            font-size: $small-size;
+                        }
+                    }
+
+                    .social-links-mobile-menu{
+                        ul{
+                            li{
+                                display: inline-block;
+                                height: 40px;
+                                width: 40px;
+                                border-radius: 50%;
+                                background: $white;
+                                color: $white;
+                                transition: $trans;
+                                display: inline-block;
+                                text-align: center;
+                                margin: 0 6px 0 0;
+                                cursor: pointer;
+                                &:hover{
+                                    background: $btn-bg2;
+                                    color: $white;
+                                    transition: $trans;
+                                    a{
+                                        svg{
+                                            color: $white;
+                                        }
+                                    }
+                                }
+                                a{
+                                    line-height: 0px;
+                                    &:hover{
+                                        color: $white;
+                                        transition: $trans;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+// homepage3 //
+.mobile-haeder3{
+    background: $color11;
+    position: fixed;
+    .mobile-header-elements{
+       .dots-menu{
+        color: $white;
+        cursor: pointer;
+       }
+    }
+}
+
+.mobile-sidebar3{
+    max-height: 100%;
+    overflow-y: scroll;
+    background: $color11;
+    .menu-close{
+        color: $white;
+        cursor: pointer;
+    }
+    .mobile-nav.mobile-nav2{
+        .mobile-nav-list.nav-list2{
+            li{
+                a{
+                    font-family: $font1 !important;
+                    font-weight: $medium !important;
+                    color: $white;
+                }
+                span{
+                    &::after{
+                        background: $white;
+                        color: $white;
+                    }
+                    &::before{
+                        background: $white;
+                        color: $white;
+                    }
+                }
+                ul{
+                    li{
+                        a{
+                            font-weight: $medium !important;
+                            font-family: $font1 !important;
+                        }
+                    }
+                }
+                ul.sub-menu{
+                    li{
+                        a{
+                            font-family: $font1 !important;
+                            font-weight: $medium !important;
+                        }
+                    }
+                }
+            }
+        }
+        .allmobilesection{
+            .header-btn5{
+                width: 100% !important;
+                text-align: center;
+                margin-top: 30px;
+                background: $white;
+                color: $color11;
+            }
+            .single-footer{
+                h3{
+                    font-family: $font1;
+                    font-size: $heading4_size;
+                    line-height: 30px;
+                    color: $white;
+                    font-weight: $bold;
+                    margin-bottom: 16px;
+                    margin-top: 30px;
+                }
+                .footer4-contact-info{
+                    .contact-info-single{
+                        display: flex;
+                        color: $white;
+                        svg{
+                            margin: 0 10px 0 0;
+                            counter-reset: $white;
+                        }
+                        a{
+                            font-family: $font1;
+                            font-weight: $medium;
+                            color: $white;
+                            opacity: 0.7;
+                            font-size: $small-size;
+                        }
+                    }
+
+                    .social-links-mobile-menu{
+                        ul{
+                            li{
+                                display: inline-block;
+                                height: 40px;
+                                width: 40px;
+                                border-radius: 50%;
+                                background: $white;
+                                color: $white;
+                                transition: $trans;
+                                display: inline-block;
+                                text-align: center;
+                                margin: 0 6px 0 0;
+                                cursor: pointer;
+                                &:hover{
+                                    background: $bg20;
+                                    color: $color1;
+                                    transition: $trans;
+                                    a{
+                                        svg{
+                                            color: $white;
+                                        }
+                                    }
+                                }
+                                a{
+                                    line-height: 0px;
+                                    &:hover{
+                                        color: $white;
+                                        transition: $trans;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+// homepage4 //
+.mobile-haeder4{
+    background: $color15;
+    position: fixed;
+    .mobile-header-elements{
+       .dots-menu{
+        color: $white;
+        cursor: pointer;
+       }
+    }
+}
+
+.mobile-sidebar4{
+    max-height: 100%;
+    overflow-y: scroll;
+    background: $color15;
+    .menu-close{
+        color: $white;
+        cursor: pointer;
+    }
+    .mobile-nav.mobile-nav2{
+        .mobile-nav-list.nav-list2{
+            li{
+                a{
+                    font-family: $font1 !important;
+                    font-weight: $medium !important;
+                    color: $white;
+                }
+                span{
+                    &::after{
+                        background: $white;
+                        color: $white;
+                    }
+                    &::before{
+                        background: $white;
+                        color: $white;
+                    }
+                }
+                ul{
+                    li{
+                        a{
+                            font-weight: $medium !important;
+                            font-family: $font1 !important;
+                        }
+                    }
+                }
+                ul.sub-menu{
+                    li{
+                        a{
+                            font-family: $font1 !important;
+                            font-weight: $medium !important;
+                        }
+                    }
+                }
+            }
+        }
+        .allmobilesection{
+            .header-btn7{
+                width: 100% !important;
+                text-align: center;
+                margin-top: 30px;
+                background: none;
+                color: $white;
+                border: 1px solid $white;
+                &::after{
+                    background: $white;
+                }
+                &:hover{
+                    color: $color15;
+                }
+            }
+            .single-footer{
+                h3{
+                    font-family: $font1;
+                    font-size: $heading4_size;
+                    line-height: 30px;
+                    color: $white;
+                    font-weight: $bold;
+                    margin-bottom: 16px;
+                    margin-top: 30px;
+                }
+                .footer4-contact-info{
+                    .contact-info-single{
+                        display: flex;
+                        color: $white;
+                        svg{
+                            margin: 0 10px 0 0;
+                            counter-reset: $white;
+                        }
+                        a{
+                            font-family: $font1;
+                            font-weight: $medium;
+                            color: $white;
+                            opacity: 0.7;
+                            font-size: $small-size;
+                        }
+                    }
+
+                    .social-links-mobile-menu{
+                        ul{
+                            li{
+                                display: inline-block;
+                                height: 40px;
+                                width: 40px;
+                                border-radius: 50%;
+                                background: $white;
+                                color: $white;
+                                transition: $trans;
+                                display: inline-block;
+                                text-align: center;
+                                margin: 0 6px 0 0;
+                                cursor: pointer;
+                                &:hover{
+                                    background: $bg20;
+                                    color: $color1;
+                                    transition: $trans;
+                                    a{
+                                        svg{
+                                            color: $white;
+                                        }
+                                    }
+                                }
+                                a{
+                                    line-height: 0px;
+                                    &:hover{
+                                        color: $white;
+                                        transition: $trans;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+// homepage5 //
+.mobile-haeder5{
+    background: $btn-bg3;
+    position: fixed;
+    .mobile-header-elements{
+       .dots-menu{
+        color: $white;
+        cursor: pointer;
+       }
+    }
+}
+
+.mobile-sidebar5{
+    max-height: 100%;
+    overflow-y: scroll;
+    background: $btn-bg3;
+    .menu-close{
+        color: $white;
+        cursor: pointer;
+    }
+    .mobile-nav{
+        .mobile-nav-list{
+            li{
+                a{
+                    font-family: $font1;
+                    font-weight: $medium !important;
+                    color: $white;
+                }
+                span{
+                    &::after{
+                        background: $white;
+                        color: $white;
+                    }
+                    &::before{
+                        background: $white;
+                        color: $white;
+                    }
+                }
+                ul{
+                    li{
+                        a{
+                            font-weight: $medium !important;
+                        }
+                    }
+                }
+            }
+        }
+        .allmobilesection{
+            .header-btn9{
+                display: inline-block;
+                border-radius: 25px;
+                transition: $trans;
+                position: relative;
+                z-index: 1;
+                width: 100%;
+                text-align: center;
+                margin-top: 30px;
+                &::after{
+                    background: $white;
+                }
+                &:hover{
+                    color: $btn-bg3;
+                }
+                svg{
+                    transform: rotate(-45deg);
+                }
+            }
+            .single-footer{
+                h3{
+                    font-family: $font2;
+                    font-size: $heading4_size;
+                    line-height: 30px;
+                    color: $white;
+                    font-weight: $bold;
+                    margin-bottom: 16px;
+                    margin-top: 30px;
+                }
+                .footer4-contact-info{
+                    .contact-info-single{
+                        display: flex;
+                        color: $white;
+                        svg{
+                            margin: 0 10px 0 0;
+                            counter-reset: $white;
+                        }
+                        a{
+                            font-family: $font1;
+                            font-weight: $medium;
+                            color: $white;
+                            opacity: 0.7;
+                            font-size: $small-size;
+                        }
+                    }
+
+                    .social-links-mobile-menu{
+                        ul{
+                            li{
+                                display: inline-block;
+                                height: 40px;
+                                width: 40px;
+                                border-radius: 50%;
+                                background: $white;
+                                color: $color1;
+                                transition: $trans;
+                                display: inline-block;
+                                text-align: center;
+                                margin: 0 6px 0 0;
+                                cursor: pointer;
+                                &:hover{
+                                    background: $white;
+                                    color: $white;
+                                    transition: $trans;
+                                    a{
+                                        svg{
+                                            color: $white;
+                                        }
+                                    }
+                                }
+                                a{
+                                    line-height: 0px;
+                                    &:hover{
+                                        color: $white;
+                                        transition: $trans;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+/*============= MOBILE-MENU  AREA ENDS===============*/

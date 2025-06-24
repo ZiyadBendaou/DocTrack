@@ -1,0 +1,201 @@
+/*============= COMPLAINT CSS AREA ===============*/
+.complaint-section-area {
+    background: $bg12;
+    @media #{$xs} {
+        padding: 50px 0 50px;
+    }
+    @media #{$md} {
+        padding: 50px 0 50px;
+    }
+    .complaint-header {
+        @media #{$xs} {
+            margin-bottom: 30px;
+        }
+        @media #{$md} {
+            margin-bottom: 30px;
+        }
+        span{
+            color: $color5;
+            font-family: $font3;
+            font-size: $small-size;
+            font-style: normal;
+            font-weight: $medium;
+            line-height: 16px;
+            border-radius: 32px;
+            background: $bg13;
+            padding: 8px 12px;
+            display: inline-block;
+            margin-bottom: 12px;
+        }
+        h2{
+            text-align: start !important;
+        }
+        p{
+            color: $color3;
+            font-family: $font3;
+            font-size: $small-size;
+            font-style: normal;
+            font-weight: $medium;
+            line-height: 28px;
+            margin-top: 16px;
+        }
+        .complaint-list{
+            display: flex;
+            align-items: center;
+            margin-top: 8px;
+            @media #{$xs} {
+                display: inline-block;
+            }
+            ul{
+                margin: 0 80px 0 0;
+                li{
+                    display: flex;
+                    align-items: center;
+                    margin-top: 26px;
+                    a{
+                        color: $color1;
+                        font-family: $font3;
+                        font-size: $small-size;
+                        font-style: normal;
+                        font-weight: $medium;
+                        line-height: 16px;
+                        display: inline-block;
+                        img{
+                            margin: 0 8px 0 0;
+                        }
+                    }
+                }
+            }
+        }
+        .header-btn2{
+            margin-top: 32px;
+            background: $color5;
+        }
+    }
+    .contact-mail{
+        .main-contact-box{
+            position: relative;
+            .main-contact-img{
+                .angle-border{
+                    position: absolute;
+                    left: -122px;
+                    top: 22%;
+                }
+                .instagram-icon{
+                    height: 64px;
+                    width: 64px;
+                    text-align: center;
+                    border-radius: 50%;
+                    line-height: 64px;
+                    display: inline-block;
+                    background: $white;
+                    position: absolute;
+                    left: -150px;
+                    top: 0;
+                    box-shadow:(0px 6px 32px rgba(0, 0, 0, 0.15));
+                }
+            }
+                .main-contact-content{
+                    border-radius: var(--4, 4px);
+                    background: $white;
+                    padding: 24px;
+                    position: relative;
+                    z-index: 1;
+                    box-shadow: 0px 4px 50px 0px rgba(0, 0, 0, 0.08);
+                    .mail-icon{
+                        height: 70px;
+                        width: 70px;
+                        text-align: center;
+                        line-height: 70px;
+                        background: $bg18;
+                        border-radius: 50%;
+                    }
+                    .mail-content{
+                        h3{
+                            color: $color1;;
+                            font-family: $font3;
+                            font-size: $small-size + 4;
+                            font-style: normal;
+                            font-weight: $bold;
+                            line-height: 20px;
+                            margin-top: 16px;
+                            margin-bottom: 16px;
+                            text-transform: capitalize;
+                        }
+                        p {
+                            color: $color3;
+                            font-family: $font3;
+                            font-size: $small-size;
+                            font-style: normal;
+                            font-weight: $medium;
+                            line-height: 28px;
+                        }
+                    }
+                }
+        }
+
+        .main-contact-box.box2{
+            position: relative;
+            .main-contact-img{
+                .angle-border{
+                    position: absolute;
+                    right: -122px;
+                    left: inherit;
+                    top: 22%;
+                }
+                .instagram-icon{
+                    height: 64px;
+                    width: 64px;
+                    text-align: center;
+                    border-radius: 50%;
+                    line-height: 64px;
+                    display: inline-block;
+                    background: $white;
+                    position: absolute;
+                    right: -150px;
+                    left: inherit;
+                    top: 0;
+                    box-shadow:(0px 6px 32px rgba(0, 0, 0, 0.15));
+                }
+            }
+                .main-contact-content{
+                    border-radius: var(--4, 4px);
+                    background: $white;
+                    padding: 24px;
+                    position: relative;
+                    z-index: 1;
+                    box-shadow: 0px 4px 50px 0px rgba(0, 0, 0, 0.08);
+                    .mail-icon{
+                        height: 70px;
+                        width: 70px;
+                        text-align: center;
+                        line-height: 70px;
+                        background: $bg18;
+                        border-radius: 50%;
+                    }
+                    .mail-content{
+                        h3{
+                            color: $color1;;
+                            font-family: $font3;
+                            font-size: $small-size + 4;
+                            font-style: normal;
+                            font-weight: $bold;
+                            line-height: 20px;
+                            margin-top: 16px;
+                            margin-bottom: 16px;
+                            text-transform: capitalize;
+                        }
+                        p {
+                            color: $color3;
+                            font-family: $font3;
+                            font-size: $small-size;
+                            font-style: normal;
+                            font-weight: $medium;
+                            line-height: 28px;
+                        }
+                    }
+                }
+        }
+    }
+}
+/*============= COMPLAINT CSS AREA ENDS ===============*/

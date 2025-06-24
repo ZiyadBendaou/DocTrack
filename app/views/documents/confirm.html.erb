@@ -1,2 +1,21 @@
-<h1>Confirm information</h1>
-<%= render 'edit_form' %>
+<h2>Confirm Extracted Expiration Date</h2>
+
+<p><strong>Extracted date:</strong> <%= @extracted_date ? @extracted_date.strftime('%Y-%m-%d') : 'No date found' %></p>
+
+<%= form_with model: @document, url: documents_path, local: true, multipart: true do |f| %>
+  <%= f.hidden_field :expiration_date, value: @extracted_date %>
+
+  <p>
+    <%= f.label :document_type %><br>
+    <%= f.text_field :document_type %>
+  </p>
+
+  <p>
+    <%= f.label :file, "Upload file again" %><br>
+    <%= f.file_field :file %>
+  </p>
+
+  <%= f.submit "Confirm and Save Document" %>
+<% end %>
+
+<p>If the extracted date is wrong, please edit it before confirming.</p>

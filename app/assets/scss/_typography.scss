@@ -1,0 +1,267 @@
+/*============= TYPHOGRAPHY CSS AREA ===============*/
+
+@import url('https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&display=swap');
+
+*{
+     margin: 0;
+     padding: 0;
+     box-sizing: border-box;
+}
+body,html{
+
+}
+a, a:hover{
+     text-decoration: none;
+}
+
+body{
+     font-size: $body_font_size;
+     font-weight: $medium;
+     font-family: $font1;
+     line-height: $body_font_size + 8;
+     overflow-x: hidden !important;
+;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6{
+     font-family: $font1;
+     font-weight: $bold;
+}
+
+img{
+     max-width: 100%;
+     max-height: 100%;
+}
+
+.sp1{
+     padding: 130px 0 100px;
+}
+.sp2{
+     padding: 130px 0;
+}
+.sp3{
+     padding: 100px 0 100px;
+}
+.sp4{
+     padding: 100px 0 70px;
+}
+.sp5{
+     padding: 70px 0 70px;
+}
+.sp6{
+     padding: 60px 0 60px;
+}
+.sp7{
+     padding: 50px 0 50px;
+}
+.sp8{
+     padding: 80px 0 80px;
+}
+
+
+.space10{
+     height: 10px;
+}
+.space14{
+     height: 14px;
+}
+.space12{
+     height: 12px;
+}
+.space16{
+     height: 16px;
+}
+.space20{
+     height: 20px;
+}
+.space24{
+     height: 24px;
+}
+.space30{
+     height: 30px;
+}
+.space32{
+     height: 32px;
+}
+.space40{
+     height: 40px;
+}
+.space50{
+     height: 50px;
+}
+.space60{
+     height: 60px;
+}
+.space70{
+     height: 70px;
+}
+.space80{
+     height: 80px;
+}
+.space90{
+     height: 90px;
+}
+.space100{
+     height: 100px;
+}
+
+@keyframes animation-6 {
+     0% {
+
+       transform:rotate(0) ;
+     }
+
+     100% {
+
+       transform: rotate(-1000deg);
+     }
+}
+
+@keyframes animation-7 {
+     0% {
+
+       transform:rotate(0) ;
+     }
+
+     100% {
+
+       transform: rotate(-1000deg);
+     }
+}
+
+.keyframe5 {
+     position: relative;
+     animation-name: animation-7;
+     animation-duration: 40s;
+     animation-iteration-count: infinite;
+     animation-direction: alternate;
+     animation-timing-function: cubic-bezier(0.59, 0.59, 1, 1)
+}
+.keyframe4 {
+     position: relative;
+     animation-name: animation-6;
+     animation-duration: 200s;
+     animation-iteration-count: infinite;
+     animation-direction: alternate;
+     animation-timing-function: cubic-bezier(0.59, 0.59, 1, 1)
+}
+
+@keyframes marquee {
+     0% { transform: translateX(0); }
+     100% { transform: translatex(-100%); }
+}
+ @keyframes marquee-2 {
+     0% { transform: translateX(-100%); }
+     100% { transform: translatex(0); }
+}
+
+@keyframes animation-4 {
+     0% {
+       transform: scale(1);
+       transform: translateY(10px);
+     }
+
+     100% {
+       transform: scale(1);
+
+     }
+}
+.aniamtion-key-3 {
+     position: relative;
+     animation-name: animation-4;
+     animation-duration: 2s;
+     animation-iteration-count: infinite;
+     animation-direction: alternate;
+ }
+ @keyframes preloader {
+     0% {
+       transform: scale(0, 0);
+       opacity: 0.5;
+     }
+     100% {
+       transform: scale(1, 1);
+       opacity: 0;
+     }
+   }
+
+   @keyframes fade-in-down {
+     0% {
+       -webkit-transform: translate3d(0, -50px, 0);
+       transform: translate3d(0, -50px, 0);
+     }
+     100% {
+       opacity: 1;
+       -webkit-transform: none;
+       transform: none;
+     }
+   }
+   @keyframes animation-1 {
+     0% {
+
+       transform:translateY(0) ;
+     }
+
+     100% {
+
+       transform: translateY(10px);
+     }
+   }
+   @keyframes animation-2 {
+     0% {
+       transform: scale(1);
+       transform: translateY(10px);
+     }
+
+     100% {
+       transform: scale(1);
+
+     }
+   }
+   .aniamtion-key-1 {
+     position: relative;
+     animation-name: animation-1;
+     animation-duration: 2s;
+     animation-iteration-count: infinite;
+     animation-direction: alternate;
+   }
+   .aniamtion-key-2 {
+     position: relative;
+     animation-name: animation-2;
+     animation-duration: 2s;
+     animation-iteration-count: infinite;
+     animation-direction: alternate;
+   }
+   @keyframes pulse-border {
+     0% {
+       transform: translateX(-50%) translateY(-50%) translateZ(0) scale(1);
+       opacity: 1;
+     }
+     100% {
+       transform: translateX(-50%) translateY(-50%) translateZ(0) scale(1.5);
+       opacity: 0;
+     }
+   }
+
+   @keyframes animation-5 {
+     0% {
+       transform: scale(1);
+     }
+     100% {
+       transform: scale(1.1);
+     }
+   }
+   .aniamtion-key-5 {
+     position: relative;
+     animation-name: animation-5;
+     animation-duration: 1.3s;
+     animation-iteration-count: infinite;
+     animation-direction: alternate;
+     transition: $trans;
+   }
+
+/*============= TYPHOGRAPHY CSS AREA ENDS===============*/

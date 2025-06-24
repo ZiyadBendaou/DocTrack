@@ -1,0 +1,187 @@
+/*============= GENERATION CSS AREA ===============*/
+.genaration2-section-area{
+    background: $bg12;
+    @media #{$xs} {
+        padding: 50px 0 50px;
+    }
+    @media #{$md} {
+        padding: 50px 0 50px;
+    }
+.genaration2-header{
+    span {
+        background: $bg13;
+        display: inline-block;
+        border-radius: 35px;
+        color: $color5;
+        font-family: $font3;
+        font-size: $small-size;
+        font-style: normal;
+        font-weight: $medium;
+        line-height: 16px;
+        padding: 8px 12px;
+        margin-bottom: 16px;
+    }
+}
+.tabs-area {
+    border-radius: 36px;
+    background: var(--white-100, $white);
+    box-shadow: 0px 4px 50px 0px rgba(0, 0, 0, 0.08);
+    text-align: center;
+    justify-content: center;
+    padding: 16px 24px;
+    margin: 0 228px;
+    @media #{$xs} {
+        margin: 0;
+        padding: 16px;
+    }
+    @media #{$md} {
+        margin: 0;
+        padding: 16px;
+    }
+    ul{
+        justify-content: center;
+        li {
+            button {
+                color: $color1;
+                text-align: center;
+                font-family:$font3;
+                font-size: $small-size;
+                font-style: normal;
+                font-weight: $bold;
+                line-height: 16px;
+                display: inline-block;
+                background: $bg4;
+                padding: 12px 24px;
+                border-radius: 20px;
+                margin: 0 16px 0 0;
+                border: none !important;
+                @media #{$xs} {
+                    margin: 0 8px;
+                    margin-bottom: 10px;
+                }
+                @media #{$md} {
+                    margin: 0 8px;
+                    margin-bottom: 5px;
+                }
+            }
+        }
+    }
+    .nav-pills .nav-link.active, .nav-pills .show>.nav-link{
+        background: $color5;
+    }
+}
+.tabs-content-area{
+    .tab-pane{
+        transform: rotateX(45deg) translateY(50px);
+        transition: $trans;
+        opacity: 0;
+        .tabs-contents{
+            .tabs-images{
+                img{
+                    height: 100%;
+                    width: 100%;
+                    object-fit: cover;
+                    border-radius: 4px;
+                    @media #{$xs} {
+                        margin-bottom: 30px;
+                    }
+                    @media #{$md} {
+                        margin-bottom: 30px;
+                    }
+                }
+            }
+            .tabs-text-area{
+                border-radius: var(--4, 4px);
+                border: 1px solid $border4;
+                padding: 20px 16px;
+                position: relative;
+                transition: $trans;
+                margin: 0 0 0 40px;
+                @media #{$xs} {
+                    margin: 0;
+                }
+                @media #{$md} {
+                    margin: 0;
+                }
+                &:hover{
+                    border-radius: var(--4, 4px);
+                    background: $white;
+                    transition: $trans;
+                    transform: translateY(-5px);
+                    box-shadow: 0px 4px 50px 0px rgba(0, 0, 0, 0.08);
+                }
+                .tabs-icon{
+                    height: 84px;
+                    width: 84px;
+                    text-align: center;
+                    line-height: 84px;
+                    background: $bg14;
+                    border-radius: 50%;
+                    display: inline-block;
+                    position: absolute;
+                    @media #{$xs} {
+                        position: relative;
+                    }
+                }
+                .tabs-icon1{
+                    height: 84px;
+                    width: 84px;
+                    text-align: center;
+                    line-height: 84px;
+                    background: $bg15;
+                    border-radius: 50%;
+                    display: inline-block;
+                    position: absolute;
+                    @media #{$xs} {
+                        position: relative;
+                    }
+                }
+                .tabs-icon2{
+                    height: 84px;
+                    width: 84px;
+                    text-align: center;
+                    line-height: 84px;
+                    background: $bg16;
+                    border-radius: 50%;
+                    display: inline-block;
+                    position: absolute;
+                    @media #{$xs} {
+                        position: relative;
+                    }
+                }
+                .tabs-text{
+                    padding-left: 100px;
+                    @media #{$xs} {
+                        padding-left: 0;
+                        margin-top: 20px;
+                    }
+                    a{
+                        color: $color1;
+                        font-family: $font3;
+                        font-size: $small-size + 4;
+                        font-style: normal;
+                        font-weight: $semi_bold;
+                        line-height: 20px;
+                        display: inline-block;
+                        margin-bottom: 12px;
+                        text-transform: capitalize;
+                    }
+                    p{
+                        color: $color3;
+                        font-family: $font3;
+                        font-size: $small-size;
+                        font-style: normal;
+                        font-weight: $medium;
+                        line-height: 28px;
+                    }
+                }
+            }
+        }
+    }
+    .tab-pane.show.active{
+        transform: rotateX(0deg) translateY(0);
+        opacity: 1;
+    }
+}
+}
+/*============= GENERATION CSS AREA ENDS ===============*/

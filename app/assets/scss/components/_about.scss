@@ -1,0 +1,76 @@
+/*============= ABOUT CSS AREA ===============*/
+.about-welcome-section-area{
+    padding: 170px 0 200px;
+    .about-welcome-header{
+        h1{
+            font-size: $heading6_size + 4;
+            line-height:60px;
+            @media #{$xs} {
+                font-size: $heading3_size;
+                line-height: 42px;
+            }
+        }
+        a{
+            font-family: $font1;
+            font-size: $small-size + 2;
+            font-weight: $medium;
+            color: $white;
+            display: inline-block;
+            i{
+                margin: 0 4px;
+            }
+            span{
+                font-weight: $bold;
+                color: $white;
+            }
+        }
+    }
+}
+.about-welcome-section-area.about2{
+    padding: 130px 0 100px;
+}
+.about-section-area{
+    padding: 100px 0 100px 0;
+    @media #{$xs} {
+        padding: 50px 0 50px 0;
+    }
+    @media #{$md} {
+        padding: 50px 0 50px 0;
+    }
+   .about-header-area{
+    @media #{$xs} {
+        margin-bottom: 30px;
+    }
+    @media #{$md} {
+        margin-bottom: 30px;
+    }
+    span{
+       background: $bg18;
+       padding: 8px 12px;
+       line-height: 16px;
+       border-radius: 32px;
+       display: inline-block;
+       font-size: $small-size;
+       font-weight: $medium;
+       color: $color5; 
+    }
+    h2{
+        text-align: start;
+    }
+    p{
+        font-family: $font1;
+        font-weight: $medium;
+        color: $color3;
+        font-size: $small-size;
+    }
+   } 
+   .images{
+    img{
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+        border-radius: 4px;
+    }
+   }
+}
+/*============= ABOUT CSS AREA ENDS===============*/

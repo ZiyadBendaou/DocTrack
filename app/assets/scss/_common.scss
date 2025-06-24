@@ -1,0 +1,194 @@
+/*============= COMMON CSS AREA ===============*/
+.heading1{
+    h1{
+        color: $white;
+        text-align: center;
+        font-family: $font2;
+        font-size: $heading5_size;
+        font-style: normal;
+        font-weight: $bold;
+        line-height: 75px;
+        transition: $trans;
+        margin-bottom: 16px;
+        text-transform: capitalize;
+
+        @media #{$xs} {
+            font-size: $heading3_size + 2;
+            line-height: 50px;
+        }
+    }
+}
+.heading2{
+    h2{
+        color: $color1;
+        font-family: $font2;
+        font-size: $heading2_size + 2;
+        font-style: normal;
+        font-weight: $bold;
+        transition: $trans;
+        line-height: 54px;
+        text-transform: capitalize;
+        @media #{$xs} {
+            font-size: $heading3_size;
+            line-height: 42px;
+        }
+    }
+}
+.heading3{
+    h1{
+        color: $white;
+        font-family: $font3;
+        font-size: $heading5_size;
+        font-style: normal;
+        font-weight: $bold;
+        transition: $trans;
+        line-height: 70px;
+        text-transform: capitalize;
+        @media #{$xs} {
+            font-size: $heading3_size;
+            line-height: 42px;
+        }
+    }
+}
+.heading4{
+    h2{
+        color: $color1;
+        text-align: center;
+        font-family: $font3;
+        font-size: $heading2_size - 2;
+        font-style: normal;
+        font-weight: $bold;
+        line-height: 48px;
+        transition: $trans;
+        text-transform: capitalize;
+        @media #{$xs} {
+            font-size: $heading3_size;
+            line-height: 42px;
+        }
+    }
+}
+.heading5{
+    span.seo{
+        font-size: $small-size + 2;
+        font-weight: $medium;
+        color: $color11;
+        display: inline-block;
+        border-radius: 4px;
+        padding: 8px;
+        transition: $trans;
+        line-height: 18px;
+        background: $bg19;
+    }
+    h1{
+        font-family: $font1;
+        font-size: $heading5_size;
+        line-height: 70px;
+        font-weight: $bold;
+        transition: $trans;
+        color: $color1;
+        text-transform: capitalize;
+        @media #{$xs} {
+            font-size: $heading3_size;
+            line-height: 42px;
+        }
+    }
+    p{
+        font-family: $font1;
+        font-weight: $medium;
+        color: $color3;
+        transition: $trans;
+        font-size: $small-size;
+        line-height: 26px;
+    }
+}
+.heading6{
+    span.seo{
+        font-size: $small-size + 2;
+        font-weight: $medium;
+        color: $color11;
+        display: inline-block;
+        border-radius: 4px;
+        padding: 8px;
+        transition: $trans;
+        line-height: 18px;
+        background: $bg19;
+    }
+    h2{
+        font-family: $font1;
+        font-size: $heading2_size - 2;
+        line-height: 48px;
+        font-weight: $bold;
+        color: $color1;
+        transition: $trans;
+        text-transform: capitalize;
+        @media #{$xs} {
+            font-size: $heading3_size;
+            line-height: 42px;
+        }
+    }
+    p{
+        font-family: $font1;
+        font-weight: $medium;
+        color: $color3;
+        transition: $trans;
+        font-size: $small-size;
+        line-height: 26px;
+    }
+}
+
+.tags{
+    span{
+        font-family: $font1;
+        font-weight: $medium;
+        color: $color5;
+        transition: $trans;
+        font-size: $small-size;
+        line-height: 16px;
+        display: inline-block;
+        padding:8px 12px;
+        border-radius: 32px;
+        background: $bg18;
+    }
+}
+.bg-none{
+    background: none !important;
+}
+.tags2{
+    span{
+        font-family: $font1;
+        font-size: $small-size;
+        font-weight: $bold;
+        color: $color15;
+        transition: $trans;
+        line-height: 16px;
+        display: inline-block;
+        background: $bg41;
+        padding: 8px;
+        border-radius: 4px;
+        img{
+            margin: -4px 6px 0 0;
+
+        }
+        p{
+            font-size: $small-size;
+            font-weight: $medium;
+            color: $color3;
+            font-family: $font1;
+            line-height: 26px;
+        }
+    }
+}
+.tags3{
+    span{
+        font-weight: $medium;
+        font-family: $font1;
+        font-size: $small-size;
+        display: inline-block;
+        color: $btn-bg3;
+        padding: 8px 12px;
+        border-radius: 32px;
+        line-height: 16px;
+        background: $color18;
+    }
+}
+/*============= COMMON CSS AREA ENDS ===============*/

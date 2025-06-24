@@ -1,0 +1,223 @@
+/*============= FAQ CSS AREA ===============*/
+.faq3-section-area{
+    @media #{$xs} {
+        padding: 50px 0 30px;
+    }
+    @media #{$md} {
+        padding: 50px 0 30px;
+    }
+ .faq3-widgets-area{
+    padding: 0 0 0 50px;
+    @media #{$xs} {
+        padding: 0;
+        margin-top: 30px;
+    }
+    @media #{$md} {
+        padding: 0;
+        margin-top: 30px;
+    }
+    .accordion{
+       .accordion-item{
+        padding: 24px 0;
+        border-top: 1px solid $border2;
+        border-bottom: 0;
+        button{
+            box-shadow: none;
+            background: none;
+            font-size: $small-size + 4;
+            font-weight: $bold;
+            color: $color1;
+            font-family: $font1;
+            line-height: 24px;
+            padding: 0;
+        }
+        .accordion-body{
+            font-size: $small-size;
+            font-weight: $medium;
+            font-family: $font1;
+            color: $color3;
+            padding: 0;
+            margin-top: 20px;
+        }
+        .accordion-button {
+            &::after {
+                flex-shrink: 0;
+                width: 16px;
+                height: 2px;
+                margin-left: auto;
+                content: "";
+                background-color: $white;
+                filter: brightness(0);
+                z-index: 2;
+                position: absolute;
+                right: 22px;
+            }
+            &::before {
+                flex-shrink: 0;
+                width: 2px;
+                height: 16px;
+                margin-left: auto;
+                content: "";
+                background-color: $white;
+                filter: brightness(0);
+                position: absolute;
+                right: 29px;
+                z-index: 3;
+                display: none;
+            }
+        }
+       }
+       .accordion-button.collapsed.accordion-button::before {
+        display: block;
+    }
+
+    }
+ }
+}
+
+// innerpages //
+.faq-inner-section-area {
+    @media #{$xs} {
+        padding: 50px 0 50px;
+    }
+    @media #{$md} {
+        padding: 50px 0 50px;
+    }
+    .faq-all-area{
+        .accordion{
+            .accordion-item{
+             padding: 24px;
+             border: 1px solid $border2;
+             border-radius: 4px;
+             button{
+                 box-shadow: none;
+                 background: none;
+                 font-size: $small-size + 4;
+                 font-weight: $bold;
+                 color: $color1;
+                 font-family: $font1;
+                 line-height: 24px;
+                 padding: 0;
+             }
+             .accordion-body{
+                 font-size: $small-size;
+                 font-weight: $medium;
+                 font-family: $font1;
+                 color: $color3;
+                 padding: 0;
+                 margin-top: 20px;
+             }
+             .accordion-button {
+                 &::after {
+                     flex-shrink: 0;
+                     width: 16px;
+                     height: 2px;
+                     margin-left: auto;
+                     content: "";
+                     background-color: $white;
+                     filter: brightness(0);
+                     z-index: 2;
+                 }
+                 &::before {
+                     flex-shrink: 0;
+                     width: 2px;
+                     height: 16px;
+                     margin-left: auto;
+                     content: "";
+                     background-color: $white;
+                     filter: brightness(0);
+                     position: absolute;
+                     right: 7px;
+                     z-index: 3;
+                     display: none;
+                 }
+             }
+            }
+            .accordion-button.collapsed.accordion-button::before {
+             display: block;
+         }
+         }
+    }
+
+}
+
+// homepage5 //
+.faq5-section-area{
+    background:$bg28;
+    @media #{$xs} {
+        padding: 50px 0 50px;
+    }
+    @media #{$md} {
+        padding: 50px 0 50px;
+    }
+    .faq3-widgets-area{
+        padding: 0 0 0 50px;
+        @media #{$xs} {
+            padding: 0;
+            margin-top: 30px;
+        }
+        @media #{$md} {
+            padding: 0;
+            margin-top: 30px;
+        }
+        .accordion{
+            background:$bg28;
+           .accordion-item{
+            padding: 24px 0;
+            border-top: 1px solid $border2;
+            border-bottom: 0;
+            background:$bg28;
+            button{
+                box-shadow: none;
+                background: none;
+                font-size: $small-size + 4;
+                font-weight: $bold;
+                color: $color1;
+                font-family: $font1;
+                line-height: 24px;
+                padding: 0;
+            }
+            .accordion-body{
+                font-size: $small-size;
+                font-weight: $medium;
+                font-family: $font1;
+                color: $color3;
+                padding: 0;
+                margin-top: 20px;
+            }
+            .accordion-button {
+                &::after {
+                    flex-shrink: 0;
+                    width: 16px;
+                    height: 2px;
+                    margin-left: auto;
+                    content: "";
+                    background-color: $white;
+                    filter: brightness(0);
+                    z-index: 2;
+                    position: absolute;
+                    right: 22px;
+                }
+                &::before {
+                    flex-shrink: 0;
+                    width: 2px;
+                    height: 16px;
+                    margin-left: auto;
+                    content: "";
+                    background-color: $white;
+                    filter: brightness(0);
+                    position: absolute;
+                    right: 29px;
+                    z-index: 3;
+                    display: none;
+                }
+            }
+           }
+           .accordion-button.collapsed.accordion-button::before {
+            display: block;
+        }
+
+        }
+     }
+}
+/*============= FAQ CSS AREA ENDS ===============*/

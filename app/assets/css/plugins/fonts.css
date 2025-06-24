@@ -1,0 +1,36 @@
+/* 
+@font-face {
+    font-family:'GoogleSans';
+    src: url('../../fonts/GoogleSans-Bold.ttf') format('woff2'),
+         url('../../fonts/GoogleSans-Bold.ttf') format('woff');
+    font-weight: 700;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family:'GoogleSans';
+    src: url('../../fonts/GoogleSans-Medium.ttf') format('woff2'),
+         url('../../fonts/GoogleSans-MediumItalic.ttf') format('woff');
+    font-weight: 500;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family:'GoogleSans';
+    src: url('../../fonts/GoogleSans-Regular.ttf') format('woff2'),
+         url('../../fonts/GoogleSans-Regular.ttf') format('woff');
+    font-weight: 400;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family:'GoogleSans';
+    src: url('../../fonts/GoogleSans-Regular.ttf') format('woff2'),
+         url('../../fonts/GoogleSans-Regular.ttf') format('woff');
+    font-weight: 400;
+    font-style: normal;
+
+} */

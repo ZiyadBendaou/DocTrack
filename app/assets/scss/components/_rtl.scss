@@ -1,0 +1,522 @@
+/*============= RTL CSS AREA ===============*/
+.rtl-homepage,html{
+    @media #{$md} {
+        overflow-x: hidden !important;
+    }
+}
+.rtl-homepage{
+    .preloader{
+        margin-left: 25px;
+        margin-top: -25px;
+    }
+.header-area.homepage3{
+    position: absolute;
+    width: 100%;
+    z-index: 2;
+    .navbar{
+        display: block;
+    }
+    .header-elements{
+        display: flex;
+        align-self: center;
+        justify-content: space-between;
+        transition: $trans;
+        padding: 24px 0 0 0;
+        .site-logo{
+            margin-top: 5px;
+        }
+        .main-menu{
+            display: flex;
+            align-items: center;
+            padding: 12px 16px;
+            transition: $trans;
+            background: $bg19;
+            border-radius: 4px;
+            .nav-item{
+                .nav-link.active{
+                    background: none;
+                    color: $color11;
+                }
+            }
+            ul {
+                li {
+                    display: inline-block;
+                    position: relative;
+                    &:hover > a{
+                        color:$color11;
+                        transition: $trans;
+                        svg{
+                            padding: 0 !important;
+                        }
+                      }
+                    &:hover {
+                        ul.dropdown-padding{
+                            visibility: visible;
+                            transition: all 0.5s ease-in-out;
+                            opacity: 1;
+                            z-index: 9;
+                            top: 50px;
+                            position: absolute;
+                        }
+                    }
+                    a {
+                        font-family: $font3 !important;
+                        font-size: $small-size;
+                        font-weight: $medium;
+                        color: $color1;
+                        display: inline-block;
+                        transition: $trans;
+                        padding: 0 10px;
+                    }
+
+                    ul.dropdown-padding {
+                        visibility: hidden;
+                        opacity: 0;
+                        box-shadow: rgb(0 0 0 / 20%) 0px 20px 30px;
+                        position: absolute;
+                        background: $white;
+                        top: 100px;
+                        width: 220px;
+                        z-index: 1;
+                        transition: $trans;
+                        border-radius: 5px;
+                        padding: 15px;
+
+                        li.main-small-menu {
+                            position: relative;
+                            &:hover > a{
+                                color:$color11;
+                                transition: $trans;
+                                padding-right: 25px;
+                              }
+                              &:hover > a::after{
+                                color:$btn-bg2 ;
+                                transition: $trans;
+                                visibility: visible;
+                                opacity: 1;
+                              }
+                            a {
+                                display: flex;
+                                align-items: center;
+                                justify-content: space-between;
+                            }
+
+                            ul.small-dropdown {
+                                visibility: hidden;
+                                opacity: 0;
+                                box-shadow: rgb(0 0 0 / 20%) 0px 20px 30px;
+                                background: $white;
+                                position: absolute;
+                                top: 70px;
+                                width: 220px;
+                                z-index: 1;
+                                left: -225px;
+                                transition: $trans;
+                                border-radius: 5px;
+                                padding: 15px;
+                            }
+
+                            &:hover{
+                                ul.small-dropdown {
+                                    visibility: visible;
+                                    transition: all 0.5s ease-in-out;
+                                    opacity: 1;
+                                    z-index: 9;
+                                    top: 0;
+                                    position: absolute;
+                                }
+                            }
+                        }
+
+                        li {
+                            display: block;
+                            a {
+                                font-family: $font3 !important;
+                                font-weight: $medium;
+                                color: $color1;
+                                padding: 8px;
+                                display: inline-block;
+                                position: relative;
+                                z-index: 1;
+                                border-radius: 4px;
+                                transition: $trans;
+                                &::after{
+                                    position: absolute;
+                                    content: "";
+                                    height: 2px;
+                                    width: 10px;
+                                    transition: $trans;
+                                    z-index: -1;
+                                    background: $color11;
+                                    right: 10px;
+                                    left: inherit;
+                                    top: 22px;
+                                    border-radius: 4px;
+                                    display: inline-block;
+                                    visibility: hidden;
+                                    opacity: 0;
+                                    transition: $trans;
+                                }
+                                &:hover{
+                                    transition: $trans;
+                                    color: $color11;
+                                    padding-right: 25px;
+                                    &::after{
+                                        transition: $trans;
+                                        border-radius: 4px;
+                                        visibility: visible;
+                                        transition: $trans;
+                                        opacity: 1;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .header-padding{
+            ul{
+                 li{
+                    a{
+                        padding: 0 14px;
+                    }
+                 }
+            }
+        }
+    }
+}
+.mobile-sidebar.mobile-sidebar3{
+    .menu-close{
+        right: inherit;
+        left: 20px;
+    }
+    .footer4-contact-info{
+        .contact-info-single{
+            .contact-info-icon{
+                svg{
+                    margin: 0 0 0 6px;
+                }
+            }
+            .contact-info-text{
+                margin-right: 10px;
+            }
+        }
+    }
+    .mobile-nav.mobile-nav2{
+        ul{
+            li{
+                span{
+                    &::after{
+                        left: 8px;
+                        right: inherit;
+                    }
+                    &::before{
+                        left: 0;
+                        right: inherit;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.header-area.homepage3.sticky {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    transform: translate3d(0, 0, 0);
+    z-index: 111;
+    -webkit-animation-name: fade-in-down;
+    animation-name: fade-in-down;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+    background-color: $white;
+    box-shadow: 0px 4px 30px 0px rgba(0, 0, 0, 0.08);
+    transition: $trans;
+    z-index: 99;
+    .header-elements{
+        margin-top: 0;
+        transition: $trans;
+        border: none;
+        background: none;
+        padding: 14px 0;
+        .main-menu{
+            background: none;
+            transition: $trans;
+        }
+    }
+  }
+
+  .welcome3-section-area{
+    .welcome3-header{
+        .header-btn5{
+            &:hover{
+                &::after{
+                    right: 0;
+                    left: inherit;
+                }
+            }
+        }
+    }
+  }
+    .tools-section-area{
+       .tabs3-tools-area{
+        .tab-content{
+            .tab-pane{
+                .main-content-area{
+                    .tabs-header{
+                        padding: 0 0 0 30px;
+                        .list{
+                            img{
+                                margin: 0 0 0 30px;
+                            }
+                        }
+                        .header-btn5{
+                            &:hover{
+                                &::after{
+                                    right: 0;
+                                    left: inherit;
+                                }
+                            }
+                        }
+                    }
+                    .tabs-images{
+                        .tabs-img2{
+                            left: 0;
+                            right: inherit;
+                        }
+                    }
+                }
+            }
+        }
+       }
+    }
+
+    .features3-section-area{
+        .features3-images{
+
+            .img2{
+                img{
+                    left: -100px;
+                   right: inherit;
+                   @media #{$xs} {
+                    left: 0;
+                   }
+                   @media #{$md} {
+                    left: 0;
+                   }
+                }
+            }
+        }
+        .features-content-box{
+            @media #{$xs} {
+                margin-bottom: 30px;
+            }
+            .content{
+                padding-left: 0;
+                padding-right: 50px;
+            }
+        }
+    }
+
+    .step-section-area{
+        .step-author-area{
+            margin: 0;
+            &::after{
+                right: 35px;
+                left: inherit;
+            }
+            .content{
+                margin-right: 32px;
+            }
+        }
+        .step-header-area{
+            .header-btn5{
+                &:hover{
+                    &::after{
+                        right: 0;
+                    }
+                }
+            }
+        }
+    }
+
+    .testimonial3-section-area{
+     .testimonial3-slider-area-rtl{
+      .testimonial3-boxarea{
+        border: 1px solid $border2;
+        padding: 20px;
+        transition: $trans;
+        border-radius: 4px;
+        &:hover{
+          background: $white;
+          transition: $trans;
+          border: 1px solid $white;
+          box-shadow: 0px 4px 50px 0px rgba(0, 0, 0, 0.08);
+          border-radius: 4px;
+          .img2{
+            p{
+              color: $color1;
+              transition: $trans;
+            }
+          }
+        }
+        .images-content{
+          display: flex;
+          align-items: center;
+          img{
+            height: 50px;
+            width: 50px;
+            object-fit: cover;
+            border-radius: 50%;
+          }
+          .content{
+            margin-right: 12px;
+            a{
+              font-family: $font1;
+              font-size: $small-size + 4;
+              font-weight: $bold;
+              color: $color1;
+              line-height: 20px;
+              display:inline-block ;
+              margin-bottom: 8px;
+              transition: $trans;
+            }
+            p{
+              font-size: $small-size;
+              font-weight: $medium;
+              color: $color3;
+              font-family: $font1;
+              transition: $trans;
+            }
+          }
+        }
+        .img2{
+          img{
+            height: 40px;
+            width: 40px;
+            object-fit: contain;
+          }
+          p{
+            font-family: $font1;
+            font-size: $small-size;
+            font-weight: $medium;
+            color: $color3;
+            line-height: 28px;
+            transition: $trans;
+          }
+        }
+      }
+      .owl-dots{
+        text-align: center;
+        margin-top: 30px;
+        button{
+          position: relative;
+          height: 16px;
+          width: 16px;
+          border-radius: 50%;
+          background: $bg22;
+          margin: 0 16px 0 0;
+          &::after{
+            position: absolute;
+            content: "";
+            height: 24px;
+            width: 24px;
+            border-radius: 50%;
+            border: 1px solid $color11;
+            left: -5px;
+            top: -5px;
+            display: none;
+          }
+        }
+        button.active{
+          background: $color11;
+          height: 14px;
+          width: 14px;
+          &::after{
+            display: block;
+          }
+        }
+      }
+    }
+  }
+
+.faq3-section-area{
+    .faq3-header{
+        .header-btn5{
+            &:hover{
+                &::after{
+                    right: 0;
+                    left: inherit;
+                }
+            }
+        }
+    }
+   .faq3-widgets-area{
+    padding: 0 50px 0 0;
+    @media #{$xs} {
+        padding: 0;
+        margin-bottom: 30px;
+    }
+    @media #{$md} {
+        padding: 0;
+        margin-bottom: 30px;
+    }
+    .accordion{
+        .accordion-item{
+            button{
+                &::after{
+                    right: inherit;
+                    left: 0;
+                }
+                &::before{
+                    right: inherit;
+                    left: 6px;
+                }
+            }
+        }
+    }
+   }
+ }
+
+ .cta3-section-area {
+    .cta3-header-area{
+        .header-btn5{
+            &:hover{
+                &::after{
+                    left: inherit;
+                    right: 0;
+                }
+            }
+        }
+    }
+ }
+
+.pricing-paln-section-area{
+    .pricing-plans{
+        .tab-content{
+            .price-box{
+                .header-btn5{
+                    &::after{
+                        display: none;
+                    }
+                }
+                .hadding{
+                    .price-list{
+                        ul{
+                            li{
+                                img{
+                                    margin: 0 0 0 6px;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+}
+/*============= RTL CSS AREA ENDS ===============*/

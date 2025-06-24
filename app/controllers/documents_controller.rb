@@ -1,5 +1,5 @@
 class DocumentsController < ApplicationController
-  before_action :set_document, only: [:show, :edit, :update, :destroy, :confirm]
+  before_action :set_document, only: [:show, :edit, :update, :destroy]
   require 'date'
   require 'google/cloud/vision/v1'
 
@@ -9,9 +9,6 @@ class DocumentsController < ApplicationController
 
   def show; end
 
-  def confirm
-  end
-
   def new
     @document = Document.new
   end
@@ -20,26 +17,25 @@ class DocumentsController < ApplicationController
     @document = Document.new(document_params)
     @document.user = current_user
 
+    if params[:extract].present? && params[:document][:file].present?
+      file = params[:document][:file]
+      file_path = Rails.root.join("tmp", file.original_filename)
+      File.open(file_path, "wb") { |f| f.write(file.read) }
+
+      vision = Google::Cloud::Vision::V1::ImageAnnotator::Client.new
+      response = vision.text_detection(image: file_path.to_s)
+      extracted_text = response.responses[0]&.text_annotations&.first&.description || ""
+      File.delete(file_path) if File.exist?(file_path)
+
+      @document.expiration_date = extract_valid_dates(extracted_text).first
+      @extracted = true
+      @extracted_text = extracted_text
+      flash.now[:notice] = "We found a possible expiration date. Please confirm or edit before saving."
+      render :new and return
+    end
+
     if @document.save
-      begin
-
-        path = ActiveStorage::Blob.service.send(:path_for, @document.file.blob.key)
-
-        vision = Google::Cloud::Vision::V1::ImageAnnotator::Client.new
-        response = vision.text_detection(image: path)
-        text = response.responses[0]&.text_annotations&.first&.description || ""
-
-        # Extract date(s) and update document
-        extracted_dates = extract_valid_dates(text)
-        if extracted_dates.any?
-          @document.update(expiration_date: extracted_dates.first)
-        end
-
-      rescue => e
-        Rails.logger.error "OCR error: #{e.message}"
-      end
-
-      redirect_to confirm_document_path(@document), notice: "Document created. Please confirm the extracted expiration date."
+      redirect_to @document, notice: "Document successfully created."
     else
       render :new
     end
@@ -49,7 +45,7 @@ class DocumentsController < ApplicationController
 
   def update
     if @document.update(document_params)
-      redirect_to @document, notice: "Document updated."
+      redirect_to @document, notice: "Document successfully updated."
     else
       render :edit
     end
@@ -57,7 +53,7 @@ class DocumentsController < ApplicationController
 
   def destroy
     @document.destroy
-    redirect_to documents_path, notice: "Document deleted."
+    redirect_to documents_path, notice: "Document successfully deleted."
   end
 
   private
@@ -72,9 +68,7 @@ class DocumentsController < ApplicationController
 
   def extract_valid_dates(text)
     today = Date.today
-
     regex = /\b((?:0?[1-9]|[12][0-9]|3[01])[\/\-.](?:0?[1-9]|1[0-2])[\/\-.](?:\d{2}|\d{4})|(?:\d{4})[\/\-.](?:0?[1-9]|1[0-2])[\/\-.](?:0?[1-9]|[12][0-9]|3[01])|(?:0?[1-9]|1[0-2])[\/\-](?:\d{2}|\d{4})|(?:jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z]*\s+\d{1,4})\b/i
-
     dates = text.scan(regex).flatten.compact
 
     dates.map do |str|
@@ -85,11 +79,7 @@ class DocumentsController < ApplicationController
 
   def parse_date_with_formats(str)
     ['%d/%m/%Y', '%d/%m/%y', '%Y/%m/%d'].each do |fmt|
-      begin
-        return Date.strptime(str, fmt)
-      rescue ArgumentError
-        next
-      end
+      Date.strptime(str, fmt) rescue next
     end
     nil
   end
@@ -97,8 +87,7 @@ class DocumentsController < ApplicationController
   def parse_month_year(str)
     parts = str.split('/')
     return nil unless parts.size == 2
-    month = parts[0].to_i
-    year = parts[1].to_i
+    month, year = parts[0].to_i, parts[1].to_i
     year += 2000 if year < 100
     Date.new(year, month, -1) rescue nil
   end

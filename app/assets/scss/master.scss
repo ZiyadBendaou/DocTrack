@@ -1,0 +1,63 @@
+/*
+============================
+Name:  Quad - Sass Landing Page Theme
+Version: 1.0.2
+Description: Quad - Sass Landing Page Theme
+Author: Vikiglab
+Author URI :https://themeforest.net/user/vikinglab/portfolio
+Location:
+============================
+*/
+
+/*============= VARIABLES CSS AREA ===============*/
+/*============= TYPHOGRAPHY CSS AREA ===============*/
+/*============= BUTTON CSS AREA ===============*/
+/*============= HEADER CSS AREA ===============*/
+/*============= WELCOME CSS AREA ===============*/
+/*============= COMMON CSS AREA ===============*/
+/*============= MOBILE-MENU CSS AREA ===============*/
+/*============= COUNTER CSS AREA ===============*/
+/*============= ABOUT CSS AREA ===============*/
+/*============= SLIDER CSS AREA ===============*/
+/*============= SERVICE CSS AREA ===============*/
+/*============= FEATURES CSS AREA ===============*/
+/*============= OTHERS CSS AREA ===============*/
+/*============= WORKS CSS AREA ===============*/
+/*============= BLOG CSS AREA ===============*/
+/*============= GENERATION CSS AREA ===============*/
+/*============= PROCESS CSS AREA ===============*/
+/*============= TEMPELETE CSS AREA ===============*/
+/*============= COMPLAINT CSS AREA ===============*/
+/*============= TESTIMONIALS CSS AREA ===============*/
+/*============= FAQ CSS AREA ===============*/
+/*============= PRELOADER CSS AREA ===============*/
+/*============= CONTACT CSS AREA ===============*/
+/*============= FOOTER CSS AREA ===============*/
+/*============= RTL CSS AREA ===============*/
+
+@import 'variables';
+@import 'typography';
+@import 'responsive';
+@import 'common';
+@import 'components/header';
+@import 'components/welcome';
+@import 'components/preloader';
+@import 'components/button';
+@import 'components/testimonials';
+@import 'components/counter';
+@import 'components/slider';
+@import 'components/service';
+@import 'components/features';
+@import 'components/others';
+@import 'components/works';
+@import 'components/blog';
+@import 'components/footer';
+@import 'components/mobile-menu';
+@import 'components/generation';
+@import 'components/process';
+@import 'components/templete';
+@import 'components/complaint';
+@import 'components/faq';
+@import 'components/about';
+@import 'components/contact';
+@import 'components/rtl';

@@ -1,0 +1,48 @@
+/*============= SLIDER CSS AREA ===============*/
+
+.slider1-section-area{
+    overflow: hidden;
+    .brand-single-box {
+        display: inline-block;
+      }
+      .marquee-wrap {
+        background-color: $btn-bg1;
+        width: 100%;
+        position: relative;
+        .marquee-text {
+            animation: marquee 100s linear infinite;
+            position: relative;
+            width: 100%;
+            white-space: nowrap;
+            padding: 30px 0;
+            @media #{$md} {
+                animation: marquee 50s linear infinite;
+            }
+            @media #{$xs} {
+                animation: marquee 50s linear infinite;
+            }
+            .brand-single-box {
+                display: inline-block;
+                h3{
+                    color: $white;
+                    font-family: $font2;
+                    font-size: $heading2_size - 2;
+                    font-style: normal;
+                    font-weight: $bold;
+                    line-height: 40px;
+                    img{
+                        margin: 0 10px;
+                    }
+                }
+            }
+        }
+      }
+}
+
+// innerpages //
+.slider1-section-area.slider2{
+    .marquee-wrap{
+        background: $color5;
+    }
+}
+/*============= SLIDER CSS AREA ENDS===============*/
