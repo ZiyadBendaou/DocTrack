@@ -1,0 +1,89 @@
+<!-- Back to Top Button -->
+<button id="btnBackToTop" class="btn-back-to-top" aria-label="Back to top" title="Back to top" style="display:none;">
+  <svg id="btnBackToTopIcon" class="btn-back-to-top-icon" viewBox="0 0 384 512" aria-hidden="true" focusable="false">
+    <path
+      d="M214.6 41.4c-12.5-12.5-32.8-12.5-45.3 0l-160 160c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 141.2V448c0 17.7 14.3 32 32 32s32-14.3 32-32V141.2L329.4 246.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-160-160z"
+    ></path>
+  </svg>
+</button>
+
+<script>
+  document.addEventListener("turbo:load", () => {
+    const backToTopBtn = document.getElementById('btnBackToTop');
+    if (!backToTopBtn) return;
+
+    function toggleBackToTop() {
+      if (window.scrollY > 200) {
+        backToTopBtn.style.display = 'flex';
+      } else {
+        backToTopBtn.style.display = 'none';
+      }
+    }
+
+    toggleBackToTop();
+
+    window.addEventListener('scroll', toggleBackToTop);
+
+    backToTopBtn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  });
+</script>
+
+<style>
+  /* Unique styles for Back to Top button */
+  #btnBackToTop.btn-back-to-top {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: rgb(20, 20, 20);
+    border: none;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 0 4px rgba(180, 160, 255, 0.253);
+    cursor: pointer;
+    transition-duration: 0.3s;
+    overflow: hidden;
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 1000;
+  }
+
+  #btnBackToTopIcon.btn-back-to-top-icon {
+    width: 12px;
+    transition-duration: 0.3s;
+  }
+
+  #btnBackToTopIcon.btn-back-to-top-icon path {
+    fill: white;
+  }
+
+  #btnBackToTop.btn-back-to-top:hover {
+    width: 140px;
+    border-radius: 50px;
+    background-color: rgb(181, 160, 255);
+  }
+
+  #btnBackToTop.btn-back-to-top:hover #btnBackToTopIcon.btn-back-to-top-icon {
+    transition-duration: 0.3s;
+    transform: translateY(-200%);
+  }
+
+  #btnBackToTop.btn-back-to-top::before {
+    position: absolute;
+    bottom: -20px;
+    content: "Back to Top";
+    color: white;
+    font-size: 0px;
+    transition-duration: 0.3s;
+  }
+
+  #btnBackToTop.btn-back-to-top:hover::before {
+    font-size: 13px;
+    opacity: 1;
+    bottom: unset;
+  }
+</style>

@@ -2,9 +2,14 @@
   <div class="container">
     <h1 class="hero-title">Stay Ahead of Your Expirations</h1>
     <p class="hero-subtitle">DocTrack ensures you're always notified before important documents expire — from passports to contracts.</p>
-    <a href="#features" class="btn btn-light btn-lg px-5 py-3 rounded-pill hero-btn">
-      Explore Features
-    </a>
+    <div class="d-flex justify-content-center gap-3">
+      <a href="#features" class="btn btn-light btn-lg px-5 py-3 rounded-pill hero-btn">
+        Explore Features
+      </a>
+      <% unless user_signed_in? %>
+        <%= link_to "Get Started", new_user_registration_path, class: "btn btn-primary btn-lg px-5 py-3 rounded-pill hero-btn" %>
+      <% end %>
+    </div>
   </div>
 </section>
 
@@ -27,23 +32,32 @@
   <div class="container">
     <h2 class="text-center mb-5 fw-bold">Key Features</h2>
     <div class="row g-4 justify-content-center text-center">
-      <div class="col-md-4">
-        <img src="https://cdn-icons-png.flaticon.com/512/3064/3064197.png" width="80" alt="Upload icon" loading="lazy" decoding="async" class="mb-3">
-        <h5 class="fw-semibold">Fast Uploads</h5>
-        <p>Upload or drag and drop any document in seconds.</p>
-      </div>
-      <div class="col-md-4">
-        <img src="https://cdn-icons-png.flaticon.com/512/3652/3652191.png" width="80" alt="Reminder icon" loading="lazy" decoding="async" class="mb-3">
-        <h5 class="fw-semibold">Email Alerts</h5>
-        <p>We’ll remind you before any expiry hits your inbox.</p>
-      </div>
-      <div class="col-md-4">
-        <img src="https://cdn-icons-png.flaticon.com/512/3064/3064198.png" width="80" alt="Secure icon" loading="lazy" decoding="async" class="mb-3">
-        <h5 class="fw-semibold">End-to-End Security</h5>
-        <p>256-bit encryption guarantees your documents stay private.</p>
-      </div>
+      <% features = [
+        { title: "Multi-Device Sync", icon: "https://cdn-icons-png.flaticon.com/512/9068/9068655.png", color: ["#3a8dff", "#0053ba"], desc: "Your documents and reminders are synced across all devices." },
+        { title: "Smart OCR Detection", icon: "https://cdn-icons-png.flaticon.com/512/1067/1067555.png", color: ["#00b894", "#008e72"], desc: "Let AI detect expiration dates directly from uploads." },
+        { title: "Personalized Alerts", icon: "https://cdn-icons-png.flaticon.com/512/1827/1827363.png", color: ["#ff6b6b", "#c0392b"], desc: "Get notified via email, SMS or both — on your terms." },
+        { title: "Secure Cloud Storage", icon: "https://cdn-icons-png.flaticon.com/512/3064/3064198.png", color: ["#4a90e2", "#2a5dab"], desc: "Your documents are encrypted and stored securely." },
+        { title: "Expiration Dashboard", icon: "https://cdn-icons-png.flaticon.com/512/1828/1828817.png", color: ["#6c5ce7", "#341f97"], desc: "View and filter all upcoming expirations at a glance." },
+        { title: "Categorization", icon: "https://cdn-icons-png.flaticon.com/512/2910/2910764.png", color: ["#ffa502", "#e67e22"], desc: "Organize documents by category for easy access." }
+      ] %>
+
+      <% features.each do |f| %>
+        <div class="col-md-4 d-flex justify-content-center">
+          <div class="card" style="--front-color: <%= f[:color][0] %>; --back-color: <%= f[:color][1] %>;">
+            <div class="card-inner">
+              <div class="card-front d-flex flex-column align-items-center justify-content-center px-3" style="background-color: var(--front-color); border-color: var(--front-color);">
+                <img src="<%= f[:icon] %>" width="64" alt="<%= f[:title] %> icon" class="mb-3" loading="lazy">
+                <h5 class="fw-semibold text-white"><%= f[:title] %></h5>
+              </div>
+              <div class="card-back d-flex align-items-center justify-content-center px-3 text-white fs-6" style="background-color: var(--back-color); border-color: var(--back-color);">
+                <%= f[:desc] %>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
     </div>
-    <p class="text-center mt-4 text-muted fs-6">DocTrack helps you focus on what matters most, while we handle the tedious task of tracking your documents.</p>
+    <p class="text-center mt-4 text-muted fs-6">DocTrack combines simplicity with powerful tools — built for modern users who can’t afford to miss a deadline.</p>
   </div>
 </section>
 
@@ -111,156 +125,3 @@
     </small>
   </div>
 </footer>
-
-<style>
-  html, body {
-    height: 100%;
-    margin: 0;
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    background: #f9fbfd;
-    color: #333;
-  }
-
-  h1, h2 {
-    font-family: 'Segoe UI Semibold', sans-serif;
-  }
-
-  /* Hero */
-  .hero {
-    background: linear-gradient(135deg, #3a8dff, #0053ba);
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0 1rem;
-  }
-
-  .container {
-    max-width: 900px;
-    margin: 0 auto;
-  }
-
-  /* Hero testo animato leggero */
-  .hero-title, .hero-subtitle, .hero-btn {
-    opacity: 0;
-    transform: translateY(-20px);
-    animation-fill-mode: forwards;
-  }
-
-  .hero-title {
-    font-size: 3.5rem;
-    font-weight: 700;
-    animation: fadeSlideDown 0.7s ease forwards;
-    animation-delay: 0.3s;
-  }
-
-  .hero-subtitle {
-    font-size: 1.5rem;
-    margin-top: 1rem;
-    margin-bottom: 2.5rem;
-    animation: fadeSlideDown 0.7s ease forwards;
-    animation-delay: 1s;
-  }
-
-  .hero-btn {
-    animation: fadeSlideDown 0.7s ease forwards;
-    animation-delay: 1.6s;
-  }
-
-  @keyframes fadeSlideDown {
-    0% {
-      opacity: 0;
-      transform: translateY(-20px);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  /* Pulsante */
-  .btn-light {
-    background-color: #fff;
-    color: #0053ba;
-    font-weight: 600;
-    border-radius: 50rem;
-    box-shadow: 0 4px 8px rgb(58 141 255 / 0.25);
-    transition: background-color 0.3s ease, color 0.3s ease;
-  }
-  .btn-light:hover,
-  .btn-light:focus {
-    background-color: #e7f1ff;
-    color: #003f7f;
-  }
-
-  /* Cards ombre leggere */
-  .card {
-    transition: box-shadow 0.3s ease, transform 0.3s ease;
-  }
-  .card:hover {
-    box-shadow: 0 10px 20px rgb(0 0 0 / 0.07);
-    transform: translateY(-4px);
-  }
-
-  /* Accordion */
-  .accordion-button {
-    font-weight: 600;
-    font-size: 1.1rem;
-    color: #0053ba;
-    background: #fff;
-    border-radius: 0.5rem;
-    box-shadow: 0 2px 6px rgb(0 0 0 / 0.05);
-    transition: background-color 0.25s ease, box-shadow 0.25s ease;
-  }
-  .accordion-button:not(.collapsed) {
-    background: #3a8dff;
-    color: white;
-    box-shadow: 0 4px 12px rgb(58 141 255 / 0.3);
-  }
-  .accordion-button:focus {
-    box-shadow: 0 0 0 0.2rem rgba(58,141,255,0.5);
-    outline: none;
-  }
-  .accordion-body {
-    background: #f0f6ff;
-    border-radius: 0 0 0.5rem 0.5rem;
-    color: #333;
-    font-size: 1rem;
-    line-height: 1.6;
-    padding: 1rem 1.5rem;
-  }
-
-  /* Responsive */
-  @media (max-width: 768px) {
-    .hero-title {
-      font-size: 2.6rem;
-    }
-    .hero-subtitle {
-      font-size: 1.2rem;
-    }
-  }
-</style>
-
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    // Lascio solo fade-in semplice sulle sezioni con class .fade-in per migliorare performance
-    const faders = document.querySelectorAll('.fade-in');
-    if (faders.length === 0) return;
-
-    const appearOptions = {
-      threshold: 0.2,
-      rootMargin: "0px 0px -100px 0px"
-    };
-
-    const appearOnScroll = new IntersectionObserver((entries, observer) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, appearOptions);
-
-    faders.forEach(fader => appearOnScroll.observe(fader));
-  });
-</script>

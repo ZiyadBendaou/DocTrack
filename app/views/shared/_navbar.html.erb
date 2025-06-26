@@ -1,10 +1,17 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
-  <div class="container d-flex align-items-center">
-    <%= link_to root_path, class: "navbar-brand d-flex align-items-center fw-bold text-primary" do %>
-      <%= image_tag("https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/logo.png", height: 30, class: "me-2") %>
-      DocTrack
-    <% end %>
+  <div class="container d-flex align-items-center justify-content-between">
 
+    <!-- Brand (Left) -->
+    <div class="navbar-left d-flex align-items-center">
+      <%= link_to root_path, class: "navbar-brand d-flex align-items-center fw-bold text-primary" do %>
+        <button class="button" data-text="DocTrack" aria-label="Homepage">
+          <span class="actual-text"> DocTrack </span>
+          <span aria-hidden="true" class="hover-text animate-on-load"> DocTrack </span>
+        </button>
+      <% end %>
+    </div>
+
+    <!-- Toggler for small screens -->
     <button
       class="navbar-toggler border-0"
       type="button"
@@ -17,83 +24,63 @@
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="collapse navbar-collapse" id="mainNavbar">
-      <ul class="navbar-nav mx-auto align-items-center gap-4">
-        <% if user_signed_in? %>
-          <li class="nav-item">
-            <%= link_to "Dashboard", documents_path, class: "nav-link fw-semibold text-secondary" %>
-          </li>
-          <li class="nav-item">
-            <%= link_to "Reminders", "#", class: "nav-link fw-semibold text-secondary" %>
-          </li>
-          <li class="nav-item dropdown">
-            <a
-              class="nav-link dropdown-toggle fw-semibold text-secondary"
-              href="#"
-              id="supportDropdown"
-              role="button"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
-              Support
-            </a>
-            <ul class="dropdown-menu shadow-sm" aria-labelledby="supportDropdown">
-              <li><%= link_to "How it works", "#", class: "dropdown-item" %></li>
-              <li><%= link_to "Contact us", "#", class: "dropdown-item" %></li>
-              <li><%= link_to "FAQ", "#", class: "dropdown-item" %></li>
-            </ul>
-          </li>
-        <% else %>
-          <li class="nav-item">
-            <%= link_to "About", "#", class: "nav-link fw-semibold text-secondary" %>
-          </li>
-          <li class="nav-item">
-            <%= link_to "Features", "#", class: "nav-link fw-semibold text-secondary" %>
-          </li>
-          <li class="nav-item">
-            <%= link_to "Testimonials", "#", class: "nav-link fw-semibold text-secondary" %>
-          </li>
-          <li class="nav-item">
-            <%= link_to "FAQ", "#", class: "nav-link fw-semibold text-secondary" %>
-          </li>
-        <% end %>
-      </ul>
+    <!-- Center Links -->
+    <div class="navbar-center flex-grow-1">
+      <div class="collapse navbar-collapse justify-content-center" id="mainNavbar">
+        <ul class="navbar-nav mx-auto align-items-center gap-4">
+          <% if user_signed_in? %>
+            <li class="nav-item"><%= link_to "Dashboard", documents_path, class: "nav-link fw-semibold text-secondary" %></li>
+            <li class="nav-item"><%= link_to "Reminders", "#", class: "nav-link fw-semibold text-secondary" %></li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle fw-semibold text-secondary"
+                href="#" id="supportDropdown" role="button"
+                data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">
+                Support
+              </a>
+              <ul class="dropdown-menu shadow-sm" aria-labelledby="supportDropdown">
+                <li><%= link_to "How it works", "#{root_path}#how-it-works", class: "dropdown-item" %></li>
+                <li><%= link_to "Contact us", "#{root_path}#contact", class: "dropdown-item" %></li>
+                <li><%= link_to "FAQ", "#{root_path}#faq", class: "dropdown-item" %></li>
+              </ul>
+            </li>
+          <% else %>
+            <li class="nav-item"><%= link_to "About", "#{root_path}#about", class: "nav-link fw-semibold text-secondary" %></li>
+            <li class="nav-item"><%= link_to "Features", "#{root_path}#features", class: "nav-link fw-semibold text-secondary" %></li>
+            <li class="nav-item"><%= link_to "Testimonials", "#{root_path}#testimonials", class: "nav-link fw-semibold text-secondary" %></li>
+            <li class="nav-item"><%= link_to "FAQ", "#{root_path}#faq", class: "nav-link fw-semibold text-secondary" %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
 
+    <!-- Right Actions -->
+    <div class="navbar-right d-flex align-items-center">
       <% if user_signed_in? %>
         <ul class="navbar-nav ms-auto align-items-center gap-3">
           <li class="nav-item">
             <%= link_to "Upload Document", new_document_path, class: "btn btn-primary px-4 py-2 rounded-pill fw-semibold" %>
           </li>
-
           <li class="nav-item dropdown">
-            <a
-              class="nav-link dropdown-toggle d-flex align-items-center gap-2"
-              href="#"
-              id="userDropdown"
-              role="button"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-              aria-haspopup="true"
-            >
-              <%= image_tag(
-                    "https://kitt.lewagon.com/placeholder/users/ssaunier",
-                    alt: "User avatar",
-                    class: "rounded-circle border border-2 border-primary",
-                    size: "36x36"
-                  ) %>
+            <a class="nav-link dropdown-toggle d-flex align-items-center gap-2"
+              href="#" id="userDropdown" role="button"
+              data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">
+              <%= image_tag("https://kitt.lewagon.com/placeholder/users/ssaunier",
+                            alt: "User avatar",
+                            class: "rounded-circle border border-2 border-primary",
+                            size: "36x36") %>
             </a>
             <ul class="dropdown-menu dropdown-menu-end shadow-sm" aria-labelledby="userDropdown">
               <li><%= link_to "Profile", edit_user_registration_path, class: "dropdown-item" %></li>
-              <li><%= link_to "Help", "#", class: "dropdown-item" %></li>
+              <li><%= link_to "Help", "#{root_path}#help", class: "dropdown-item" %></li>
               <li><hr class="dropdown-divider" /></li>
               <li>
-                <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item text-danger"%>
+                <%= link_to "Log out", destroy_user_session_path, data: { turbo_method: :delete }, class: "dropdown-item text-danger" %>
               </li>
             </ul>
           </li>
         </ul>
       <% else %>
-        <ul class="navbar-nav ms-auto gap-3">
+        <ul class="navbar-nav ms-auto gap-3 flex-nowrap">
           <li class="nav-item">
             <%= link_to "Sign In", new_user_session_path, class: "nav-link fw-semibold text-secondary" %>
           </li>

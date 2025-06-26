@@ -1,332 +1,221 @@
+<main class="w-100 min-vh-100 d-flex justify-content-center align-items-center bg-blur px-3" style="backdrop-filter: blur(12px); background: rgba(255,255,255,0.75); overflow: hidden;">
+  <div class="upload-box bg-white rounded-5 shadow-lg p-5 w-100" style="max-width: 600px; animation: fadeInUp 0.6s ease-out; position: relative;">
 
-<main>
-  <div class="upload-page-container" role="main" aria-labelledby="page-title">
-    <h1 id="page-title" class="page-title">Upload a New Document</h1>
+    <!-- Close -->
+    <button onclick="window.location.href='<%= documents_path %>'" class="btn-close position-absolute top-3 end-3" aria-label="Close"></button>
 
-    <%= form_with model: @document, local: true, html: { multipart: true, data: { turbo: false } } do |form| %>
+    <h2 class="text-center text-primary fw-bold mb-5 fs-3">Upload a New Document</h2>
+
+    <%= form_with model: @document, local: true, html: { multipart: true, data: { turbo: false }, id: "uploadForm" } do |form| %>
+
       <% if @document.errors.any? %>
-        <div class="alert alert-danger" role="alert">
-          <h4><%= pluralize(@document.errors.count, "error") %> prevented the document from being saved:</h4>
-          <ul>
-            <% @document.errors.full_messages.each do |message| %>
-              <li><%= message %></li>
+        <div class="alert alert-danger mb-4">
+          <ul class="mb-0 small">
+            <% @document.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
             <% end %>
           </ul>
         </div>
       <% end %>
 
-      <div>
-        <%= form.label :document_type, class: "form-label" %>
-        <%= form.text_field :document_type, class: "form-control", placeholder: "e.g. ID card, Passport", autocomplete: "off" %>
+      <!-- Document Type -->
+      <div class="mb-4">
+        <label class="form-label fw-semibold mb-2">Document Type</label>
+        <div class="d-flex justify-content-between gap-3">
+          <% [["ID", "id", "bi-card-text"],
+              ["Passport", "passport", "bi-person-badge"],
+              ["Other", "other", "bi-file-earmark-text"]].each do |label, val, icon| %>
+            <div tabindex="0" role="button" class="doc-type-select flex-fill p-3 border rounded-4 text-center cursor-pointer" data-value="<%= val %>">
+              <i class="bi <%= icon %> fs-1 text-primary mb-2"></i>
+              <div class="fw-semibold"><%= label %></div>
+            </div>
+          <% end %>
+        </div>
+        <%= form.hidden_field :document_type, id: "document_type" %>
       </div>
 
-      <div>
-        <%= form.label :expiration_date, class: "form-label" %>
-        <%= form.date_field :expiration_date, class: "form-control" %>
+      <!-- Custom Document Name (only for "Other") -->
+      <div id="customDocNameWrapper" class="mb-4 d-none">
+        <%= form.label :custom_document_name, "Document Name", class: "form-label fw-semibold" %>
+        <%= form.text_field :custom_document_name, class: "form-control form-control-lg rounded-pill", placeholder: "Enter document name" %>
       </div>
 
-      <div>
-        <%= form.label :file, class: "form-label" %>
-        <%= form.file_field :file, class: "form-control" %>
+      <!-- Date Input Method -->
+      <div class="mb-4">
+        <label class="form-label fw-semibold mb-2">Expiration Date Input</label>
+        <div class="d-flex gap-3">
+          <div class="form-check flex-fill">
+            <input class="form-check-input" type="radio" name="date_input_method" id="inputDate" value="manual" checked>
+            <label class="form-check-label cursor-pointer" for="inputDate">
+              Enter manually
+            </label>
+          </div>
+          <div class="form-check flex-fill">
+            <input class="form-check-input" type="radio" name="date_input_method" id="inputFile" value="upload">
+            <label class="form-check-label cursor-pointer" for="inputFile">
+              Upload photo
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Date Field -->
+      <div id="dateFieldWrapper" class="mb-4">
+        <%= form.label :expiration_date, "Expiration Date", class: "form-label fw-semibold" %>
+        <%= form.date_field :expiration_date, class: "form-control form-control-lg rounded-pill" %>
+      </div>
+
+      <!-- File Upload (hidden by default) -->
+      <div id="fileUploadWrapper" class="mb-4 d-none">
+        <label class="form-label fw-semibold mb-2">Upload Document Photo</label>
+        <div id="dropzone" class="rounded-4 border border-dashed border-2 border-primary text-center p-5 bg-light" style="cursor: pointer;">
+          <i class="bi bi-cloud-upload-fill fs-1 text-primary mb-3"></i>
+          <p class="fw-semibold mb-1 small">Drag & drop your file here</p>
+          <p class="text-muted small">or <span class="text-primary text-decoration-underline" id="browseText" style="cursor: pointer;">click to browse</span></p>
+          <%= form.file_field :file, id: "fileInput", class: "d-none" %>
+        </div>
       </div>
 
       <% if @extracted %>
-        <div class="alert alert-info" role="alert">
-          <strong>Detected Text from OCR:</strong>
-          <pre><%= @extracted_text %></pre>
+        <div class="bg-light p-3 rounded-3 mb-4">
+          <strong class="text-primary">Detected Text from OCR:</strong>
+          <pre class="small text-muted mt-2"><%= @extracted_text %></pre>
         </div>
       <% end %>
 
-      <div class="btn-group" role="group" aria-label="Form actions">
-        <%= form.submit "Save Document", class: "btn btn-primary" %>
-        <%= form.submit "Extract Expiration Date", name: "extract", class: "btn btn-outline-secondary" %>
+      <div class="d-flex justify-content-center gap-3 mt-4 flex-wrap">
+        <%= form.submit "Save Document", class: "btn btn-primary px-5 py-2 rounded-pill fw-semibold" %>
+        <%= form.submit "Extract Expiration Date", name: "extract", class: "btn btn-outline-primary px-5 py-2 rounded-pill fw-semibold" %>
       </div>
+
     <% end %>
   </div>
 </main>
 
 <style>
-  /* Reset */
-  * {
-    box-sizing: border-box;
+  @keyframes fadeInUp {
+    from {opacity: 0; transform: translateY(30px);}
+    to {opacity: 1; transform: translateY(0);}
   }
-  body {
-    margin: 0;
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
-      Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    background: linear-gradient(135deg, #e0e7ff, #f9fbfd);
-    color: #1b1f3b;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-  }
-  a {
-    text-decoration: none;
-    color: inherit;
-  }
-  /* Navbar */
-  nav {
-    background: white;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    padding: 0.75rem 2rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    font-weight: 600;
-    font-size: 1rem;
-  }
-  nav .brand {
-    color: #0d47a1;
-    font-size: 1.4rem;
-    letter-spacing: 0.05em;
-    font-weight: 700;
-  }
-  nav ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    gap: 2rem;
-  }
-  nav ul li {
-    position: relative;
-  }
-  nav ul li a {
-    color: #4a4a4a;
-    padding: 0.3rem 0;
-    transition: color 0.25s ease;
-    cursor: pointer;
-    display: inline-block;
-    position: relative;
-  }
-  /* Underline animation */
-  nav ul li a::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: -3px;
-    height: 2px;
-    width: 0;
-    background: #0d47a1;
-    transition: width 0.3s ease;
-    border-radius: 2px;
-  }
-  nav ul li a:hover,
-  nav ul li a:focus {
-    color: #0d47a1;
-    outline: none;
-  }
-  nav ul li a:hover::after,
-  nav ul li a:focus::after {
-    width: 100%;
-  }
-  /* Dropdown */
-  nav ul li .dropdown {
-    position: absolute;
-    top: 110%;
-    left: 0;
-    background: white;
-    border-radius: 0.5rem;
-    box-shadow: 0 6px 18px rgba(13, 71, 161, 0.12);
-    min-width: 160px;
-    opacity: 0;
-    pointer-events: none;
-    transform: translateY(10px);
-    transition: opacity 0.25s ease, transform 0.25s ease;
-    z-index: 2000;
-  }
-  nav ul li:hover .dropdown,
-  nav ul li:focus-within .dropdown {
-    opacity: 1;
-    pointer-events: auto;
-    transform: translateY(0);
-  }
-  nav ul li .dropdown a {
-    display: block;
-    padding: 0.7rem 1rem;
-    color: #0d47a1;
-    font-weight: 600;
-    font-size: 0.95rem;
-    border-radius: 0.3rem;
-    transition: background-color 0.2s ease;
-  }
-  nav ul li .dropdown a:hover,
-  nav ul li .dropdown a:focus {
-    background: #e7f1ff;
-    color: #003f7f;
-    outline: none;
-  }
-  /* Main container */
-  main {
-    flex-grow: 1;
-    display: flex;
-    justify-content: center;
-    align-items: start;
-    padding: 4rem 1rem 6rem;
-    background: transparent;
-  }
-  .upload-page-container {
-    max-width: 520px;
-    width: 100%;
-    background: #ffffffdd;
-    border-radius: 1rem;
-    box-shadow: 0 10px 30px rgba(13,71,161,0.12);
-    backdrop-filter: saturate(180%) blur(15px);
-    padding: 2.5rem 2rem;
-    animation: fadeInUp 0.5s ease forwards;
-    color: #1b1f3b;
-  }
-  .page-title {
-    font-weight: 700;
-    font-size: 2.25rem;
-    text-align: center;
-    color: #0d47a1;
-    margin-bottom: 2rem;
-    text-shadow: 0 1px 3px rgba(13,71,161,0.4);
-  }
-  /* Form */
-  label {
-    font-weight: 600;
-    font-size: 1.05rem;
-    margin-bottom: 0.4rem;
-    color: #0d47a1;
-    cursor: pointer;
-    display: block;
-  }
-  input[type="text"],
-  input[type="date"],
-  input[type="file"] {
-    padding: 0.65rem 1rem;
-    font-size: 1rem;
-    border-radius: 8px;
-    border: 1.8px solid #a8b9ff;
+
+  .doc-type-select {
+    border: 2px solid transparent;
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
-    outline-offset: 3px;
-    width: 100%;
-    font-family: inherit;
-  }
-  input[type="text"]:focus,
-  input[type="date"]:focus,
-  input[type="file"]:focus {
-    border-color: #0d47a1;
-    box-shadow: 0 0 10px rgba(13,71,161,0.35);
-    outline: none;
-  }
-  /* Buttons container */
-  .btn-group {
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-  button, input[type="submit"] {
-    padding: 0.75rem 2rem;
-    font-size: 1.1rem;
-    border-radius: 30px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background 0.35s ease, box-shadow 0.35s ease, transform 0.2s ease;
-    border: none;
-    font-family: inherit;
     user-select: none;
   }
-  .btn-primary {
-    background: linear-gradient(135deg, #3a8dff, #0053ba);
-    color: white;
-    box-shadow: 0 6px 12px rgba(58,141,255,0.5);
+  .doc-type-select:hover,
+  .doc-type-select:focus {
+    border-color: #0d6efd;
+    box-shadow: 0 0 15px rgba(13,110,253,0.5);
+    outline: none;
   }
-  .btn-primary:hover {
-    background: linear-gradient(135deg, #0053ba, #003f7f);
-    box-shadow: 0 8px 20px rgba(0,63,127,0.7);
-    transform: translateY(-2px);
+  .doc-type-select.selected {
+    border-color: #0d6efd;
+    box-shadow: 0 0 20px rgba(13,110,253,0.8);
+    background-color: #e7f1ff;
   }
-  .btn-primary:active {
-    transform: translateY(1px);
+
+  #dropzone.dragover {
+    background-color: #e7f1ff;
+    border-color: #0d6efd;
   }
-  .btn-outline-secondary {
-    background: transparent;
-    color: #0d47a1;
-    border: 2px solid #0d47a1;
+  .border-dashed {
+    border-style: dashed !important;
   }
-  .btn-outline-secondary:hover {
-    background: #0d47a1;
-    color: white;
-    box-shadow: 0 6px 12px rgba(13,71,161,0.5);
-  }
-  /* Alerts */
-  .alert {
-    border-radius: 12px;
-    padding: 1rem 1.5rem;
-    font-size: 0.95rem;
-    box-shadow: 0 3px 14px rgba(13,71,161,0.12);
-  }
-  .alert-danger {
-    background: #ffe0e0;
-    color: #8b0000;
-    animation: shake 0.3s ease;
-  }
-  .alert-info {
-    background: #e8f0ff;
-    color: #094aad;
-  }
-  /* OCR pre block */
-  pre {
-    background: #f5faff;
-    border-radius: 12px;
-    padding: 1rem;
-    white-space: pre-wrap;
-    font-family: 'Source Code Pro', monospace;
-    color: #09327a;
-    max-height: 150px;
-    overflow-y: auto;
-    margin-top: 0.5rem;
-  }
-  /* Animations */
-  @keyframes fadeInUp {
-    0% {
-      opacity: 0;
-      transform: translateY(30px);
+
+  @media (max-width: 576px) {
+    .upload-box {
+      padding: 2rem 1.5rem !important;
     }
-    100% {
-      opacity: 1;
-      transform: translateY(0);
+    h2 {
+      font-size: 1.6rem !important;
     }
-  }
-  @keyframes shake {
-    0%, 100% { transform: translateX(0); }
-    25% { transform: translateX(-5px); }
-    75% { transform: translateX(5px); }
-  }
-  /* Responsive */
-  @media (max-width: 520px) {
-    .upload-page-container {
-      padding: 2rem 1rem;
-      max-width: 100%;
-    }
-    .btn-group {
-      flex-direction: column;
-    }
-    button, input[type="submit"] {
-      width: 100%;
-      padding: 0.75rem 0;
-    }
-    nav ul {
-      gap: 1rem;
+    .doc-type-select {
+      font-size: 0.9rem;
     }
   }
 </style>
 
 <script>
-  // Accessibility: allow keyboard users to open dropdown with Enter or Space
-  document.querySelectorAll('nav ul li[tabindex]').forEach(li => {
-    li.addEventListener('keydown', e => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        li.classList.toggle('open');
+  document.addEventListener("DOMContentLoaded", () => {
+    const docTypeCards = document.querySelectorAll(".doc-type-select");
+    const hiddenInput = document.getElementById("document_type");
+    const customNameWrapper = document.getElementById("customDocNameWrapper");
+
+    // Selezione tipo documento e toggle campo nome custom
+    function updateDocTypeUI(value) {
+      if (value === "other") {
+        customNameWrapper.classList.remove("d-none");
+      } else {
+        customNameWrapper.classList.add("d-none");
       }
+    }
+
+    docTypeCards.forEach(card => {
+      card.addEventListener("click", () => {
+        docTypeCards.forEach(c => c.classList.remove("selected"));
+        card.classList.add("selected");
+        hiddenInput.value = card.dataset.value;
+        updateDocTypeUI(card.dataset.value);
+      });
+      card.addEventListener("keydown", e => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          card.click();
+        }
+      });
+    });
+
+    // Inizializza selezione tipo documento (se già valorizzata da backend)
+    if (hiddenInput.value) {
+      const selectedCard = Array.from(docTypeCards).find(c => c.dataset.value === hiddenInput.value);
+      if (selectedCard) {
+        selectedCard.classList.add("selected");
+        updateDocTypeUI(hiddenInput.value);
+      }
+    }
+
+    // Toggle metodo input data
+    const manualRadio = document.getElementById("inputDate");
+    const uploadRadio = document.getElementById("inputFile");
+    const dateFieldWrapper = document.getElementById("dateFieldWrapper");
+    const fileUploadWrapper = document.getElementById("fileUploadWrapper");
+
+    function toggleInputMethod() {
+      if (manualRadio.checked) {
+        dateFieldWrapper.classList.remove("d-none");
+        fileUploadWrapper.classList.add("d-none");
+      } else {
+        dateFieldWrapper.classList.add("d-none");
+        fileUploadWrapper.classList.remove("d-none");
+      }
+    }
+
+    manualRadio.addEventListener("change", toggleInputMethod);
+    uploadRadio.addEventListener("change", toggleInputMethod);
+    toggleInputMethod(); // iniziale
+
+    // Dropzone drag and drop e click
+    const dropzone = document.getElementById("dropzone");
+    const fileInput = document.getElementById("fileInput");
+    const browseText = document.getElementById("browseText");
+
+    browseText.addEventListener("click", () => fileInput.click());
+    dropzone.addEventListener("click", () => fileInput.click());
+
+    dropzone.addEventListener("dragover", e => {
+      e.preventDefault();
+      dropzone.classList.add("dragover");
+    });
+
+    dropzone.addEventListener("dragleave", () => {
+      dropzone.classList.remove("dragover");
+    });
+
+    dropzone.addEventListener("drop", e => {
+      e.preventDefault();
+      dropzone.classList.remove("dragover");
+      fileInput.files = e.dataTransfer.files;
     });
   });
 </script>
