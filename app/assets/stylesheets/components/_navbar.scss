@@ -17,9 +17,8 @@
   }
 
   .navbar-brand {
-    font-size: 1.4rem;
-    letter-spacing: 0.05em;
-    margin-right: 2rem;
+    font-size: 1.2rem;
+    margin-right: 1rem;
     color: #0d6efd !important;
     display: flex;
     align-items: center;
@@ -181,11 +180,6 @@
       border-color: #0d6efd;
     }
   }
-
-  .navbar-brand {
-    font-size: 1.2rem;
-    margin-right: 1rem;
-  }
 }
 
 /* Button brand effect */
@@ -247,6 +241,7 @@
     filter: drop-shadow(0 0 10px var(--animation-color));
   }
 }
+
 .navbar-center {
   display: flex;
   justify-content: center;

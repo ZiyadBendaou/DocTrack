@@ -1,221 +1,46 @@
-<main class="w-100 min-vh-100 d-flex justify-content-center align-items-center bg-blur px-3" style="backdrop-filter: blur(12px); background: rgba(255,255,255,0.75); overflow: hidden;">
-  <div class="upload-box bg-white rounded-5 shadow-lg p-5 w-100" style="max-width: 600px; animation: fadeInUp 0.6s ease-out; position: relative;">
+<main class="form-wrapper d-flex justify-content-center align-items-center min-vh-100 px-3">
+  <div class="upload-card p-5 w-100">
+    <h2 class="form-title">📄 Upload a New Document</h2>
 
-    <!-- Close -->
-    <button onclick="window.location.href='<%= documents_path %>'" class="btn-close position-absolute top-3 end-3" aria-label="Close"></button>
-
-    <h2 class="text-center text-primary fw-bold mb-5 fs-3">Upload a New Document</h2>
-
-    <%= form_with model: @document, local: true, html: { multipart: true, data: { turbo: false }, id: "uploadForm" } do |form| %>
-
-      <% if @document.errors.any? %>
-        <div class="alert alert-danger mb-4">
-          <ul class="mb-0 small">
-            <% @document.errors.full_messages.each do |msg| %>
-              <li><%= msg %></li>
-            <% end %>
-          </ul>
-        </div>
-      <% end %>
-
-      <!-- Document Type -->
-      <div class="mb-4">
-        <label class="form-label fw-semibold mb-2">Document Type</label>
-        <div class="d-flex justify-content-between gap-3">
-          <% [["ID", "id", "bi-card-text"],
-              ["Passport", "passport", "bi-person-badge"],
-              ["Other", "other", "bi-file-earmark-text"]].each do |label, val, icon| %>
-            <div tabindex="0" role="button" class="doc-type-select flex-fill p-3 border rounded-4 text-center cursor-pointer" data-value="<%= val %>">
-              <i class="bi <%= icon %> fs-1 text-primary mb-2"></i>
-              <div class="fw-semibold"><%= label %></div>
-            </div>
+    <% if @document.errors.any? %>
+      <div class="alert alert-danger mb-4">
+        <ul class="mb-0 small">
+          <% @document.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
           <% end %>
-        </div>
-        <%= form.hidden_field :document_type, id: "document_type" %>
+        </ul>
+      </div>
+    <% end %>
+
+    <%= form_with model: @document, local: true, html: { multipart: true, data: { turbo: false }, class: "form-styled" } do |form| %>
+
+      <div class="form-group mb-4 form-floating">
+        <%= form.select :document_type, [["ID", "id"], ["Passport", "passport"], ["Other", "other"]], {}, class: "form-select fancy" %>
+        <%= form.label :document_type, "Document Type" %>
       </div>
 
-      <!-- Custom Document Name (only for "Other") -->
-      <div id="customDocNameWrapper" class="mb-4 d-none">
-        <%= form.label :custom_document_name, "Document Name", class: "form-label fw-semibold" %>
-        <%= form.text_field :custom_document_name, class: "form-control form-control-lg rounded-pill", placeholder: "Enter document name" %>
+      <div class="form-group mb-4 form-floating">
+        <%= form.date_field :expiration_date, value: (@document.expiration_date&.strftime("%Y-%m-%d") || ""), class: "form-control fancy", placeholder: "Expiration Date" %>
+        <%= form.label :expiration_date, "Expiration Date" %>
       </div>
 
-      <!-- Date Input Method -->
-      <div class="mb-4">
-        <label class="form-label fw-semibold mb-2">Expiration Date Input</label>
-        <div class="d-flex gap-3">
-          <div class="form-check flex-fill">
-            <input class="form-check-input" type="radio" name="date_input_method" id="inputDate" value="manual" checked>
-            <label class="form-check-label cursor-pointer" for="inputDate">
-              Enter manually
-            </label>
-          </div>
-          <div class="form-check flex-fill">
-            <input class="form-check-input" type="radio" name="date_input_method" id="inputFile" value="upload">
-            <label class="form-check-label cursor-pointer" for="inputFile">
-              Upload photo
-            </label>
-          </div>
+      <div class="form-group mb-4">
+        <label class="form-label fw-semibold">Upload Document Photo</label>
+        <div class="custom-file fancy-upload">
+          <%= form.file_field :file, class: "form-control fancy" %>
         </div>
       </div>
 
-      <!-- Date Field -->
-      <div id="dateFieldWrapper" class="mb-4">
-        <%= form.label :expiration_date, "Expiration Date", class: "form-label fw-semibold" %>
-        <%= form.date_field :expiration_date, class: "form-control form-control-lg rounded-pill" %>
+      <div class="form-group mb-4 form-floating">
+        <%= form.number_field :reminder_days, min: 0, step: 1, class: "form-control fancy", placeholder: "Days before expiry" %>
+        <%= form.label :reminder_days, "Remind me how many days before expiration?" %>
       </div>
 
-      <!-- File Upload (hidden by default) -->
-      <div id="fileUploadWrapper" class="mb-4 d-none">
-        <label class="form-label fw-semibold mb-2">Upload Document Photo</label>
-        <div id="dropzone" class="rounded-4 border border-dashed border-2 border-primary text-center p-5 bg-light" style="cursor: pointer;">
-          <i class="bi bi-cloud-upload-fill fs-1 text-primary mb-3"></i>
-          <p class="fw-semibold mb-1 small">Drag & drop your file here</p>
-          <p class="text-muted small">or <span class="text-primary text-decoration-underline" id="browseText" style="cursor: pointer;">click to browse</span></p>
-          <%= form.file_field :file, id: "fileInput", class: "d-none" %>
-        </div>
-      </div>
-
-      <% if @extracted %>
-        <div class="bg-light p-3 rounded-3 mb-4">
-          <strong class="text-primary">Detected Text from OCR:</strong>
-          <pre class="small text-muted mt-2"><%= @extracted_text %></pre>
-        </div>
-      <% end %>
-
-      <div class="d-flex justify-content-center gap-3 mt-4 flex-wrap">
-        <%= form.submit "Save Document", class: "btn btn-primary px-5 py-2 rounded-pill fw-semibold" %>
-        <%= form.submit "Extract Expiration Date", name: "extract", class: "btn btn-outline-primary px-5 py-2 rounded-pill fw-semibold" %>
+      <div class="d-flex flex-column flex-sm-row justify-content-center gap-3 mt-4">
+        <%= form.submit "💾 Save Document", class: "btn btn-glow" %>
+        <%= form.submit "🧠 Extract Expiration Date", name: "extract", class: "btn btn-glow-outline" %>
       </div>
 
     <% end %>
   </div>
 </main>
-
-<style>
-  @keyframes fadeInUp {
-    from {opacity: 0; transform: translateY(30px);}
-    to {opacity: 1; transform: translateY(0);}
-  }
-
-  .doc-type-select {
-    border: 2px solid transparent;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
-    user-select: none;
-  }
-  .doc-type-select:hover,
-  .doc-type-select:focus {
-    border-color: #0d6efd;
-    box-shadow: 0 0 15px rgba(13,110,253,0.5);
-    outline: none;
-  }
-  .doc-type-select.selected {
-    border-color: #0d6efd;
-    box-shadow: 0 0 20px rgba(13,110,253,0.8);
-    background-color: #e7f1ff;
-  }
-
-  #dropzone.dragover {
-    background-color: #e7f1ff;
-    border-color: #0d6efd;
-  }
-  .border-dashed {
-    border-style: dashed !important;
-  }
-
-  @media (max-width: 576px) {
-    .upload-box {
-      padding: 2rem 1.5rem !important;
-    }
-    h2 {
-      font-size: 1.6rem !important;
-    }
-    .doc-type-select {
-      font-size: 0.9rem;
-    }
-  }
-</style>
-
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const docTypeCards = document.querySelectorAll(".doc-type-select");
-    const hiddenInput = document.getElementById("document_type");
-    const customNameWrapper = document.getElementById("customDocNameWrapper");
-
-    // Selezione tipo documento e toggle campo nome custom
-    function updateDocTypeUI(value) {
-      if (value === "other") {
-        customNameWrapper.classList.remove("d-none");
-      } else {
-        customNameWrapper.classList.add("d-none");
-      }
-    }
-
-    docTypeCards.forEach(card => {
-      card.addEventListener("click", () => {
-        docTypeCards.forEach(c => c.classList.remove("selected"));
-        card.classList.add("selected");
-        hiddenInput.value = card.dataset.value;
-        updateDocTypeUI(card.dataset.value);
-      });
-      card.addEventListener("keydown", e => {
-        if (e.key === "Enter" || e.key === " ") {
-          e.preventDefault();
-          card.click();
-        }
-      });
-    });
-
-    // Inizializza selezione tipo documento (se già valorizzata da backend)
-    if (hiddenInput.value) {
-      const selectedCard = Array.from(docTypeCards).find(c => c.dataset.value === hiddenInput.value);
-      if (selectedCard) {
-        selectedCard.classList.add("selected");
-        updateDocTypeUI(hiddenInput.value);
-      }
-    }
-
-    // Toggle metodo input data
-    const manualRadio = document.getElementById("inputDate");
-    const uploadRadio = document.getElementById("inputFile");
-    const dateFieldWrapper = document.getElementById("dateFieldWrapper");
-    const fileUploadWrapper = document.getElementById("fileUploadWrapper");
-
-    function toggleInputMethod() {
-      if (manualRadio.checked) {
-        dateFieldWrapper.classList.remove("d-none");
-        fileUploadWrapper.classList.add("d-none");
-      } else {
-        dateFieldWrapper.classList.add("d-none");
-        fileUploadWrapper.classList.remove("d-none");
-      }
-    }
-
-    manualRadio.addEventListener("change", toggleInputMethod);
-    uploadRadio.addEventListener("change", toggleInputMethod);
-    toggleInputMethod(); // iniziale
-
-    // Dropzone drag and drop e click
-    const dropzone = document.getElementById("dropzone");
-    const fileInput = document.getElementById("fileInput");
-    const browseText = document.getElementById("browseText");
-
-    browseText.addEventListener("click", () => fileInput.click());
-    dropzone.addEventListener("click", () => fileInput.click());
-
-    dropzone.addEventListener("dragover", e => {
-      e.preventDefault();
-      dropzone.classList.add("dragover");
-    });
-
-    dropzone.addEventListener("dragleave", () => {
-      dropzone.classList.remove("dragover");
-    });
-
-    dropzone.addEventListener("drop", e => {
-      e.preventDefault();
-      dropzone.classList.remove("dragover");
-      fileInput.files = e.dataTransfer.files;
-    });
-  });
-</script>

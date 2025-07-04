@@ -11,20 +11,7 @@
       <% end %>
     </div>
 
-    <!-- Toggler for small screens -->
-    <button
-      class="navbar-toggler border-0"
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#mainNavbar"
-      aria-controls="mainNavbar"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <!-- Center Links -->
+    <!-- Center Links + mobile-only right actions -->
     <div class="navbar-center flex-grow-1">
       <div class="collapse navbar-collapse justify-content-center" id="mainNavbar">
         <ul class="navbar-nav mx-auto align-items-center gap-4">
@@ -43,18 +30,68 @@
                 <li><%= link_to "FAQ", "#{root_path}#faq", class: "dropdown-item" %></li>
               </ul>
             </li>
+
+            <!-- Mobile only: Upload Document -->
+            <li class="nav-item d-lg-none">
+              <%= link_to "Upload Document", new_document_path, class: "nav-link fw-semibold text-primary" %>
+            </li>
+
+            <!-- Mobile only: User menu dropdown -->
+            <li class="nav-item dropdown d-lg-none">
+              <a class="nav-link dropdown-toggle d-flex align-items-center gap-2"
+                href="#" id="mobileUserDropdown" role="button"
+                data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">
+                <%= image_tag("https://kitt.lewagon.com/placeholder/users/ssaunier",
+                              alt: "User avatar",
+                              class: "rounded-circle border border-2 border-primary",
+                              size: "36x36") %>
+                <span class="fw-semibold text-primary">User Menu</span>
+              </a>
+              <ul class="dropdown-menu shadow-sm" aria-labelledby="mobileUserDropdown">
+                <li><%= link_to "Profile", edit_user_registration_path, class: "dropdown-item" %></li>
+                <li><%= link_to "Help", "#{root_path}#help", class: "dropdown-item" %></li>
+                <li><hr class="dropdown-divider" /></li>
+                <li>
+                  <%= link_to "Log out", destroy_user_session_path, data: { turbo_method: :delete }, class: "dropdown-item text-danger" %>
+                </li>
+              </ul>
+            </li>
+
           <% else %>
             <li class="nav-item"><%= link_to "About", "#{root_path}#about", class: "nav-link fw-semibold text-secondary" %></li>
             <li class="nav-item"><%= link_to "Features", "#{root_path}#features", class: "nav-link fw-semibold text-secondary" %></li>
             <li class="nav-item"><%= link_to "Testimonials", "#{root_path}#testimonials", class: "nav-link fw-semibold text-secondary" %></li>
             <li class="nav-item"><%= link_to "FAQ", "#{root_path}#faq", class: "nav-link fw-semibold text-secondary" %></li>
+
+            <!-- Mobile only: Sign In -->
+            <li class="nav-item d-lg-none">
+              <%= link_to "Sign In", new_user_session_path, class: "nav-link fw-semibold text-primary" %>
+            </li>
+
+            <!-- Mobile only: Register -->
+            <li class="nav-item d-lg-none">
+              <%= link_to "Register", new_user_registration_path, class: "nav-link fw-semibold text-primary" %>
+            </li>
           <% end %>
         </ul>
       </div>
     </div>
 
-    <!-- Right Actions -->
-    <div class="navbar-right d-flex align-items-center">
+    <!-- Toggler for small screens, spostato all’estrema destra -->
+    <button
+      class="navbar-toggler border-0"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#mainNavbar"
+      aria-controls="mainNavbar"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Desktop only right actions -->
+    <div class="navbar-right d-none d-lg-flex align-items-center">
       <% if user_signed_in? %>
         <ul class="navbar-nav ms-auto align-items-center gap-3">
           <li class="nav-item">
@@ -90,5 +127,6 @@
         </ul>
       <% end %>
     </div>
+
   </div>
 </nav>

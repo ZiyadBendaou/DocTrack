@@ -1,140 +1,150 @@
-<div id="documents-page" class="py-5 px-4">
-  <h1 class="mb-5 text-center">All Documents</h1>
+<!-- 💎 Professional Dashboard (With Pagination) - Compact & Clean -->
+<div id="dashboard" class="container-xl py-5">
 
-  <% if @documents.any? %>
-    <section class="documents-list">
-      <% @documents.each do |document| %>
-        <article class="document-card" tabindex="0">
-          <h2 class="document-type"><%= document.document_type %></h2>
-          <% if document.expiration_date.present? %>
-            <p class="document-expiration">
-              Expiration date:
-              <time datetime="<%= document.expiration_date %>">
-                <%= document.expiration_date.strftime("%B %d, %Y") %>
-              </time>
-            </p>
-          <% else %>
-            <p class="document-expiration no-date">No expiration date set</p>
-          <% end %>
-        </article>
-      <% end %>
-    </section>
-  <% else %>
-    <p class="text-center text-muted">No documents found. Please add one!</p>
-  <% end %>
+  <!-- Header -->
+  <header class="mb-5 text-center">
+    <h1 class="fw-bold display-4 mb-2 text-primary-emphasis">📂 Your Documents</h1>
+    <p class="text-muted fs-5">Smartly manage, track and interact with your files</p>
+    <a href="<%= new_document_path %>" class="btn btn-primary px-4 py-2 rounded-pill fw-semibold">
+      <i class="bi bi-plus-circle me-2"></i> New Document
+    </a>
+  </header>
 
-  <div class="text-center mt-5">
-    <%= link_to 'New Document', new_document_path, class: "btn btn-primary btn-lg" %>
-  </div>
+  <!-- Stats -->
+  <section class="row g-4 mb-4">
+    <div class="col-md-4">
+      <div class="bg-white rounded-4 shadow-sm p-4 d-flex align-items-center gap-3">
+        <i class="bi bi-archive-fill fs-1 text-primary"></i>
+        <div>
+          <p class="mb-0 text-muted">Total</p>
+          <h4 class="fw-bold mb-0"><%= @documents.count %></h4>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="bg-white rounded-4 shadow-sm p-4 d-flex align-items-center gap-3">
+        <i class="bi bi-clock-history fs-1 text-warning"></i>
+        <div>
+          <p class="mb-0 text-muted">Expiring Soon</p>
+          <h4 class="fw-bold mb-0"><%= @documents.where("expiration_date <= ?", Date.today + 30).count %></h4>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="bg-white rounded-4 shadow-sm p-4 d-flex align-items-center gap-3">
+        <i class="bi bi-bell-fill fs-1 text-success"></i>
+        <div>
+          <p class="mb-0 text-muted">Reminders</p>
+          <h4 class="fw-bold mb-0"><%= Reminder.where(document: @documents).count %></h4>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Filters & Search -->
+  <section class="row g-2 align-items-center mb-4">
+    <div class="col-md-8 d-flex gap-2">
+      <input id="search-input" type="text" class="form-control form-control-lg rounded-pill" placeholder="Search documents...">
+      <select id="filter-type" class="form-select form-select-lg rounded-pill">
+        <option value="">All Types</option>
+        <% @documents.pluck(:document_type).uniq.each do |type| %>
+          <option value="<%= type %>"><%= type %></option>
+        <% end %>
+      </select>
+    </div>
+    <div class="col-md-4 text-end">
+      <span class="text-muted small">Showing <span id="filtered-count"><%= @documents.count %></span> docs</span>
+    </div>
+  </section>
+
+  <!-- Table -->
+  <section class="table-responsive mb-3">
+    <table class="table align-middle table-hover rounded-4 overflow-hidden bg-white shadow-sm">
+      <thead class="table-light">
+        <tr>
+          <th>Type</th>
+          <th>Expiration</th>
+          <th>Reminder</th>
+          <th>Created</th>
+          <th class="text-end">Actions</th>
+        </tr>
+      </thead>
+      <tbody id="documents-table-body">
+        <% @documents.each do |doc| %>
+          <tr data-type="<%= doc.document_type.downcase %>" data-search="<%= [doc.document_type, doc.created_at.to_s].join(" ").downcase %>">
+            <td><%= doc.document_type %></td>
+            <td><%= doc.expiration_date&.strftime("%b %d, %Y") || "—" %></td>
+            <td><%= doc.reminder_days || "—" %></td>
+            <td><%= doc.created_at.strftime("%b %d, %Y") %></td>
+            <td class="text-end">
+              <%= link_to '', document_path(doc), class: "btn btn-sm btn-outline-primary rounded-circle bi bi-eye", title: "View" %>
+              <%= link_to '', edit_document_path(doc), class: "btn btn-sm btn-outline-secondary rounded-circle bi bi-pencil", title: "Edit" %>
+              <%= link_to '', document_path(doc), data: { turbo_method: :delete, confirm: "Are you sure?" }, class: "btn btn-sm btn-outline-danger rounded-circle bi bi-trash", title: "Delete" %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- Pagination -->
+  <nav>
+    <ul class="pagination justify-content-center" id="pagination">
+      <!-- Pagination links will be added by JS -->
+    </ul>
+  </nav>
 </div>
 
-<style>
-  /* Isolated styles for documents page */
-  #documents-page {
-    max-width: 900px;
-    margin: 0 auto;
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    color: #222;
-  }
-
-  #documents-page h1 {
-    font-weight: 700;
-    font-size: 2.8rem;
-    color: #003f7f;
-  }
-
-  /* Document cards container */
-  #documents-page .documents-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.8rem;
-  }
-
-  /* Each document card */
-  #documents-page .document-card {
-    background: white;
-    border-radius: 0.8rem;
-    box-shadow: 0 3px 8px rgb(0 0 0 / 0.07);
-    padding: 1.8rem 2rem;
-    transition: box-shadow 0.3s ease, transform 0.3s ease;
-    cursor: pointer;
-    outline-offset: 4px;
-  }
-
-  #documents-page .document-card:hover,
-  #documents-page .document-card:focus {
-    box-shadow: 0 10px 24px rgb(0 0 0 / 0.12);
-    transform: translateY(-6px);
-    background: #f9faff;
-  }
-
-  /* Document type title */
-  #documents-page .document-type {
-    font-size: 1.3rem;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
-    color: #0053ba;
-    letter-spacing: 0.03em;
-  }
-
-  /* Expiration date */
-  #documents-page .document-expiration {
-    font-size: 1rem;
-    color: #555;
-    font-weight: 500;
-  }
-
-  /* Special case if no expiration date */
-  #documents-page .document-expiration.no-date {
-    font-style: italic;
-    color: #999;
-  }
-
-  /* Button styling */
-  #documents-page .btn-primary {
-    background-image: linear-gradient(135deg, #3a8dff, #0053ba);
-    border: none;
-    box-shadow: 0 4px 10px rgba(58, 141, 255, 0.45);
-    font-weight: 600;
-    padding: 0.9rem 2.5rem;
-    border-radius: 50px;
-    transition: background-image 0.3s ease, box-shadow 0.3s ease;
-  }
-
-  #documents-page .btn-primary:hover,
-  #documents-page .btn-primary:focus {
-    background-image: linear-gradient(135deg, #0053ba, #003f7f);
-    box-shadow: 0 6px 16px rgba(0, 63, 127, 0.6);
-  }
-
-  /* Animation: fade-in + slide up on cards */
-  #documents-page .document-card {
-    opacity: 0;
-    transform: translateY(20px);
-    animation-fill-mode: forwards;
-    animation-duration: 0.5s;
-  }
-  #documents-page .document-card:nth-child(1) { animation-name: fadeSlideUp; animation-delay: 0.15s; }
-  #documents-page .document-card:nth-child(2) { animation-name: fadeSlideUp; animation-delay: 0.3s; }
-  #documents-page .document-card:nth-child(3) { animation-name: fadeSlideUp; animation-delay: 0.45s; }
-  #documents-page .document-card:nth-child(4) { animation-name: fadeSlideUp; animation-delay: 0.6s; }
-  #documents-page .document-card:nth-child(5) { animation-name: fadeSlideUp; animation-delay: 0.75s; }
-  /* add more if needed */
-
-  @keyframes fadeSlideUp {
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-</style>
-
 <script>
-  // Animate cards on DOMContentLoaded
   document.addEventListener("DOMContentLoaded", () => {
-    const cards = document.querySelectorAll("#documents-page .document-card");
-    cards.forEach(card => {
-      card.style.animationPlayState = "running";
-    });
+    const rowsPerPage = 10;
+    const rows = Array.from(document.querySelectorAll("#documents-table-body tr"));
+    const pagination = document.getElementById("pagination");
+
+    function showPage(page) {
+      const start = (page - 1) * rowsPerPage;
+      const end = start + rowsPerPage;
+      rows.forEach((row, index) => {
+        row.style.display = index >= start && index < end ? "" : "none";
+      });
+
+      pagination.innerHTML = '';
+      const pageCount = Math.ceil(rows.length / rowsPerPage);
+      for (let i = 1; i <= pageCount; i++) {
+        const li = document.createElement("li");
+        li.className = `page-item ${i === page ? 'active' : ''}`;
+        li.innerHTML = `<a class="page-link" href="#">${i}</a>`;
+        li.addEventListener("click", (e) => {
+          e.preventDefault();
+          showPage(i);
+        });
+        pagination.appendChild(li);
+      }
+    }
+
+    function updateTable() {
+      const type = document.getElementById("filter-type").value.toLowerCase();
+      const term = document.getElementById("search-input").value.toLowerCase();
+      let visibleCount = 0;
+
+      rows.forEach(row => {
+        const rowType = row.dataset.type;
+        const searchContent = row.dataset.search;
+        const visible = (!type || rowType === type) && (!term || searchContent.includes(term));
+        row.style.display = visible ? "" : "none";
+        row.classList.toggle("filtered-out", !visible);
+        if (visible) visibleCount++;
+      });
+
+      document.getElementById("filtered-count").textContent = visibleCount;
+      showPage(1);
+    }
+
+    document.getElementById("filter-type").addEventListener("change", updateTable);
+    document.getElementById("search-input").addEventListener("input", updateTable);
+
+    showPage(1);
   });
 </script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
