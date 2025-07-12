@@ -1,3 +1,4 @@
+/* Modern Button and Card Styles */
 .option-card {
   border: 1px solid #ddd;
   border-radius: 1rem;
@@ -5,19 +6,16 @@
   cursor: pointer;
   padding: 0;
 }
-
 .option-card .card-inner {
   padding: 1rem 1.2rem;
   font-weight: 500;
   display: flex;
   align-items: center;
 }
-
 .option-card:hover {
   background: #f8f9fa;
   border-color: #0d6efd;
 }
-
 .option-card input[type="radio"]:checked + .card-inner {
   background: linear-gradient(90deg, #0d6efd, #6f42c1);
   color: white;
@@ -41,26 +39,59 @@
 .btn-modern-violet {
   background: linear-gradient(135deg, #8e44ad, #6f42c1);
 }
-
-.btn-modern-violet:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 28px rgba(111, 66, 193, 0.35), inset 0 0 6px rgba(255, 255, 255, 0.15);
-}
-
 .btn-modern-blue {
   background: linear-gradient(135deg, #0d6efd, #00bfff);
 }
-
-.btn-modern-blue:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 28px rgba(13, 110, 253, 0.35), inset 0 0 6px rgba(255, 255, 255, 0.15);
-}
-
 .btn-modern-green {
   background: linear-gradient(135deg, #28a745, #218838);
 }
 
+.btn-modern-violet:hover,
+.btn-modern-blue:hover,
 .btn-modern-green:hover {
   transform: translateY(-2px);
-  box-shadow: 0 12px 28px rgba(40, 167, 69, 0.35), inset 0 0 6px rgba(255, 255, 255, 0.15);
+  box-shadow: 0 12px 28px rgba(111, 66, 193, 0.35), inset 0 0 6px rgba(255, 255, 255, 0.15);
+}
+
+/* Fullscreen Overlay Loader */
+.overlay-loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(5px);
+  background-color: rgba(255, 255, 255, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.overlay-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.spinner-circle-lg {
+  width: 64px;
+  height: 64px;
+  border: 6px solid #e0e0e0;
+  border-top: 6px solid #6f42c1;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.spinner-text {
+  font-weight: 500;
+  color: #6f42c1;
+  font-size: 1.1rem;
+  margin-top: 1rem;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }

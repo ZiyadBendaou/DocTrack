@@ -1,2 +1,111 @@
-<h1>Edit Document</h1>
-<%= render 'edit_form' %>
+<%# app/views/documents/edit.html.erb %>
+
+<style>
+  /* Reuse the drip and container styles */
+  :root {
+    --gradient-start: #ff6ec4;
+    --gradient-end:   #7873f5;
+    --light-bg:       #f1f3f5;
+    --text-dark:      #2c2e3e;
+    --text-muted:     #555;
+  }
+  .form-wrapper { background: var(--light-bg); position: relative; overflow: hidden; }
+  .form-wrapper::before {
+    content: ""; position: absolute; width: 400px; height: 400px;
+    background: radial-gradient(circle at top left, var(--gradient-start), transparent 70%);
+    top: -150px; left: -150px; opacity: 0.4; z-index: 0;
+  }
+  .upload-card {
+    background: #fff; border-radius: 1rem; padding: 2rem;
+    max-width: 800px; margin: auto; position: relative; z-index: 1;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+  }
+  /* Header Section */
+  .header-section {
+    background: linear-gradient(135deg, #00c6ff, #0072ff);
+    color: #fff; padding: 1.5rem; border-radius: 1rem;
+    display: flex; justify-content: space-between; align-items: center;
+    position: relative; overflow: hidden; margin-bottom: 2rem;
+  }
+  .header-section::before {
+    content: ""; position: absolute; top:0; left:0;
+    width:100%; height:100%;
+    background: radial-gradient(circle at bottom right, rgba(255,255,255,0.15), transparent 60%);
+    mix-blend-mode: overlay; z-index: 0;
+  }
+  .header-content { display: flex; align-items: center; gap: .75rem; position: relative; z-index:1; }
+  .header-icon { font-size: 2.5rem; line-height:1; color: #fff; }
+  .header-section h2 {
+    margin:0; font-size:1.75rem; font-weight:900;
+    background: linear-gradient(135deg,#fff,rgba(255,255,255,0.7));
+    -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+  }
+  .subtitle { margin: .25rem 0 0; font-size:.9rem; color: rgba(255,255,255,0.85); }
+  .btn-modern-violet { background: #fff; color: var(--gradient-end);
+    border:none; padding:.5rem 1rem; border-radius:50rem; font-size:.8rem;
+    text-decoration:none; position: relative; z-index:1; transition: all .3s;
+  }
+  .btn-modern-violet:hover { transform: translateY(-2px); box-shadow:0 6px 25px rgba(0,0,0,0.25); }
+
+  /* Form fields */
+  .form-group { margin-bottom: 1rem; }
+  .form-group label { display: block; margin-bottom: .5rem; font-weight: 600; }
+  .form-control {
+    width: 100%; padding: .5rem 1rem; border: 1px solid #ddd;
+    border-radius: 2rem; font-size: 1rem; color: var(--text-dark);
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
+  }
+
+  /* Actions */
+  .actions { display: flex; justify-content: flex-end; gap: 1rem; margin-top: 2rem; }
+  .actions .btn-primary { background: var(--gradient-end); color: #fff;
+    border: none; padding: .5rem 1rem; border-radius: .5rem;
+    transition: background .3s; text-decoration: none;
+  }
+  .actions .btn-primary:hover { background: #005ec2; }
+  .actions .btn-secondary { background: #fff; color: var(--gradient-end);
+    border: 1px solid var(--gradient-end); padding: .5rem 1rem;
+    border-radius: .5rem; transition: background .3s; text-decoration: none;
+  }
+  .actions .btn-secondary:hover { background: var(--light-bg); }
+</style>
+
+<main class="form-wrapper d-flex justify-content-center align-items-start min-vh-100 px-3">
+  <div class="upload-card w-100">
+
+    <!-- Header -->
+    <div class="header-section">
+      <div class="header-content">
+        <i class="bi bi-pencil-square header-icon"></i>
+        <div>
+          <h2>Edit Document</h2>
+          <p class="subtitle">Update details & reminders</p>
+        </div>
+      </div>
+      <%= link_to 'Cancel', document_path(@document), class: 'btn-modern-violet' %>
+    </div>
+
+    <!-- Edit Form -->
+    <%= form_with model: @document, local: true, html: { multipart: true } do |f| %>
+      <div class="form-group">
+        <%= f.label :document_type, 'Document Type' %>
+        <%= f.text_field :document_type, class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= f.label :expiration_date, 'Expiration Date' %>
+        <%= f.date_field :expiration_date, class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= f.label :reminder_days, 'Reminder Days Before' %>
+        <%= f.number_field :reminder_days, class: 'form-control', min: 0 %>
+      </div>
+
+      <!-- Save/Cancel -->
+      <div class="actions">
+        <%= f.submit 'Save Changes', class: 'btn-primary' %>
+        <%= link_to 'Back', document_path(@document), class: 'btn-secondary' %>
+      </div>
+    <% end %>
+
+  </div>
+</main>

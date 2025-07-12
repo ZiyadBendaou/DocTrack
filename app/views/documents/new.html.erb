@@ -1,4 +1,4 @@
-<main class="form-wrapper d-flex justify-content-center align-items-center min-vh-100 px-3 bg-light">
+<main class="form-wrapper d-flex justify-content-center align-items-center min-vh-100 px-3 bg-light position-relative">
   <div class="upload-card bg-white shadow rounded-5 p-5 w-100" style="max-width: 640px;">
     <h2 class="form-title text-center fw-bold mb-4">📄 Upload a New Document</h2>
 
@@ -48,7 +48,7 @@
       <!-- Step 2 -->
       <div id="step-2" class="form-step" style="display:none;">
         <button type="button" class="btn btn-link text-decoration-none mb-3" onclick="goToStep(1)">← Back</button>
-        <p class="mb-3 fw-semibold">How do you want to provide the expiration date?</p>
+        <p class="mb-3 fw-semibold">How would you like to provide the expiration date?</p>
         <div class="d-flex flex-column gap-3">
           <button type="button" class="btn btn-modern-blue w-100" onclick="goToStep(4)">📷 Upload an image</button>
           <button type="button" class="btn btn-modern-violet w-100" onclick="goToStep(3)">📝 Enter manually</button>
@@ -81,13 +81,21 @@
           <%= form.file_field :file, class: "form-control" %>
         </div>
 
-        <%= form.submit "🧠 Extract Expiration Date", name: "extract", class: "btn btn-modern-blue w-100" %>
+        <%= form.submit "🧠 Extract Expiration Date", name: "extract", class: "btn btn-modern-blue w-100", id: "extract-btn" %>
       </div>
     <% end %>
   </div>
-</main>
-<script>
 
+  <!-- Fullscreen Overlay Loader -->
+  <div id="overlay-loader" class="overlay-loader d-none">
+    <div class="overlay-content">
+      <div class="spinner-circle-lg"></div>
+      <p class="spinner-text mt-3">Extracting expiration date…</p>
+    </div>
+  </div>
+</main>
+
+<script>
 function goToStep(step) {
   document.querySelectorAll(".form-step").forEach(el => el.style.display = "none");
   document.getElementById("step-" + step).style.display = "block";
@@ -114,6 +122,23 @@ function initStepFlow() {
   goToStep(extracted ? 3 : 1);
 }
 
-document.addEventListener("DOMContentLoaded", initStepFlow);
-document.addEventListener("turbo:load", initStepFlow);
+function setupOverlayLoader() {
+  const btn = document.getElementById("extract-btn");
+  if (btn) {
+    btn.addEventListener("click", () => {
+      const overlay = document.getElementById("overlay-loader");
+      if (overlay) overlay.classList.remove("d-none");
+    });
+  }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  initStepFlow();
+  setupOverlayLoader();
+});
+
+document.addEventListener("turbo:load", () => {
+  initStepFlow();
+  setupOverlayLoader();
+});
 </script>

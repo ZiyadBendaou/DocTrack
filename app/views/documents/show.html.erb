@@ -1,2 +1,190 @@
-<%= @document.document_type %>
-<%= @document.expiration_date %>
+<%# app/views/documents/show.html.erb %>
+
+<style>
+  :root {
+    --gradient-start: #ff6ec4;
+    --gradient-end:   #7873f5;
+    --light-bg:       #f1f3f5;
+    --text-dark:      #2c2e3e;
+    --text-muted:     #555;
+  }
+
+  /* Drip background */
+  .form-wrapper { background: var(--light-bg); position: relative; overflow: hidden; }
+  .form-wrapper::before {
+    content: "";
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle at top left, var(--gradient-start), transparent 70%);
+    top: -150px;
+    left: -150px;
+    opacity: 0.4;
+    z-index: 0;
+  }
+
+  /* Container */
+  .upload-card {
+    background: #fff;
+    border-radius: 1rem;
+    padding: 2rem;
+    max-width: 800px;
+    margin: auto;
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+  }
+
+  /* Header */
+  .header-section {
+    background: linear-gradient(135deg, #00c6ff, #0072ff);
+    color: #fff;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 2rem;
+  }
+  .header-section::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at bottom right, rgba(255,255,255,0.15), transparent 60%);
+    mix-blend-mode: overlay;
+    z-index: 0;
+  }
+  .header-content {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    position: relative;
+    z-index: 1;
+  }
+  .header-icon {
+    font-size: 2.5rem;
+    line-height: 1;
+    color: #fff;
+  }
+  .header-section h2 {
+    margin: 0;
+    font-size: 1.75rem;
+    font-weight: 900;
+    background: linear-gradient(135deg,#fff,rgba(255,255,255,0.7));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .subtitle {
+    margin: 0.25rem 0 0;
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.85);
+  }
+
+  /* Detail cards */
+  .details-container { display: flex; gap: 1rem; margin-bottom: 2rem; }
+  .detail-card {
+    flex: 1;
+    background: #fff;
+    border-radius: 1rem;
+    padding: 1rem;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    transition: transform 0.2s;
+  }
+  .detail-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,0.1); }
+  .detail-card .icon {
+    font-size: 2rem;
+    color: var(--gradient-start);
+    margin-bottom: 0.5rem;
+  }
+  .detail-card .label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 0.25rem;
+  }
+  .detail-card .value {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-dark);
+  }
+
+  /* File preview */
+  .file-preview { text-align: center; margin-bottom: 2rem; }
+  .file-preview img { max-width: 100%; border-radius: 1rem; }
+
+  /* Actions */
+  .actions { display: flex; justify-content: flex-end; gap: 1rem; }
+  .actions a { text-decoration: none; }
+  .actions .btn-primary {
+    background: var(--gradient-end);
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    transition: background 0.3s;
+  }
+  .actions .btn-primary:hover { background: #005ec2; }
+  .actions .btn-secondary {
+    background: #fff;
+    color: var(--gradient-end);
+    border: 1px solid var(--gradient-end);
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    transition: background 0.3s;
+  }
+  .actions .btn-secondary:hover { background: var(--light-bg); }
+</style>
+
+<main class="form-wrapper d-flex justify-content-center align-items-start min-vh-100 px-3">
+  <div class="upload-card w-100" style="max-width:800px;">
+    <!-- Header -->
+    <div class="header-section">
+      <div class="header-content">
+        <i class="bi bi-clock-history header-icon"></i>
+        <div>
+          <h2>Document Details</h2>
+          <p class="subtitle">Track expiration & manage reminders</p>
+        </div>
+      </div>
+      <%= link_to 'Back to List', documents_path, class: 'btn-modern-violet' %>
+    </div>
+
+    <!-- Detail Cards -->
+    <div class="details-container">
+      <div class="detail-card">
+        <i class="bi bi-folder2-open icon"></i>
+        <div class="label">Type</div>
+        <div class="value"><%= @document.document_type.titleize %></div>
+      </div>
+      <div class="detail-card">
+        <i class="bi bi-calendar icon"></i>
+        <div class="label">Expires On</div>
+        <div class="value"><%= @document.expiration_date&.strftime("%b %d, %Y") || '—' %></div>
+      </div>
+      <div class="detail-card">
+        <i class="bi bi-bell icon"></i>
+        <div class="label">Reminder Days</div>
+        <div class="value"><%= @document.reminder_days || '—' %></div>
+      </div>
+    </div>
+
+    <!-- File Preview -->
+    <% if @document.file.attached? %>
+      <div class="file-preview">
+        <%= image_tag @document.file.variant(resize_to_limit: [700,700]), alt: 'Document image' %>
+      </div>
+    <% end %>
+
+    <!-- Actions -->
+    <div class="actions">
+      <%= link_to 'Edit', edit_document_path(@document), class: 'btn-secondary' %>
+      <%= link_to 'Delete', document_path(@document), data: { turbo_method: :delete, turbo_confirm: 'Really delete?' }, class: 'btn-primary' %>
+    </div>
+  </div>
+</main>

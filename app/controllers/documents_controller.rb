@@ -7,7 +7,25 @@ class DocumentsController < ApplicationController
   require 'tempfile'
 
   def index
+    # Base scope: only current user's documents
     @documents = current_user.documents
+
+    # Metric card filters
+    if params[:expiring_1m].present?
+      # Documents expiring within the next 1 month
+      @documents = @documents.where("expiration_date <= ?", Date.current + 1.month)
+    elsif params[:expiring_6m].present?
+      # Documents expiring within the next 6 months
+      @documents = @documents.where("expiration_date <= ?", Date.current + 6.months)
+    end
+
+    # Text-based search applied after filters
+    if params[:query].present?
+      @documents = @documents.where("document_type ILIKE ?", "%#{params[:query]}%")
+    end
+
+    # Paginate: 12 per page
+    @documents = @documents.page(params[:page]).per(12)
   end
 
   def show; end

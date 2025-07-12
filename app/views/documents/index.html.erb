@@ -1,5 +1,3 @@
-<%# app/views/documents/index.html.erb %>
-
 <style>
   :root {
     --gradient-start: #ff6ec4;
@@ -13,66 +11,89 @@
   .form-wrapper {
     background: var(--light-bg);
     position: relative;
-    overflow: visible;
+    overflow: hidden;
   }
   .form-wrapper::before {
     content: "";
     position: absolute;
-    width: 250px; height: 250px;
+    width: 400px;
+    height: 400px;
     background: radial-gradient(circle at top left, var(--gradient-start), transparent 70%);
-    top: -100px; left: -100px; z-index: 0;
-  }
-  .form-wrapper::after {
-    content: "";
-    position: absolute;
-    width: 300px; height: 300px;
-    background: radial-gradient(circle at bottom right, var(--gradient-end), transparent 70%);
-    bottom: -150px; right: -150px; z-index: 0;
+    top: -150px;
+    left: -150px;
+    opacity: 0.4;
+    z-index: 0;
   }
 
+  /* Card container */
   .upload-card {
     background: #fff;
     border-radius: 1rem;
     padding: 2.5rem;
     position: relative;
     z-index: 1;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
   }
 
-  /* Hero/Header (ingrandito) */
+  /* Enhanced Header (smaller) */
   .header-section {
-    background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+    position: relative;
+    /* Updated banner colors: teal to blue gradient */
+    background: linear-gradient(135deg, #00c6ff, #0072ff);
     color: #fff;
-    padding: 3rem 2rem;
+    padding: 1.5rem 1rem;
     border-radius: 1rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin-bottom: 2.5rem;
-    min-height: 180px;
+    overflow: hidden;
+  }
+  .header-section::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: radial-gradient(circle at bottom right, rgba(255,255,255,0.15), transparent 60%);
+    mix-blend-mode: overlay;
+    z-index: 0;
+  }
+  .header-section .header-content {
+    position: relative;
+    z-index: 1;
   }
   .header-section h2 {
     margin: 0;
-    font-size: 2.75rem;
-    font-weight: 800;
-    line-height: 1.1;
+    font-size: 1.75rem;
+    font-weight: 900;
+    background: linear-gradient(135deg, #fff, rgba(255,255,255,0.7));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: flex;
+    align-items: center;
+  }
+  .header-section h2 .bi {
+    font-size: 2rem;
+    margin-right: 0.5rem;
+  }
+  .header-section .subtitle {
+    margin: 0.5rem 0 0;
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.85);
   }
   .header-section .btn-modern-violet {
+    position: relative;
+    z-index: 1;
     background: #fff;
-    color: var(--gradient-start);
+    color: var(--gradient-end);
     border: none;
-    font-weight: 600;
-    padding: 0.75rem 1.5rem;
-    border-radius: 50rem;
-    transition: all 0.3s ease;
-    box-shadow: 0 8px 16px rgba(0,0,0,0.15);
-  }
-  .header-section .btn-modern-violet i {
-    font-size: 1.25rem;
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+    transition: all 0.3s;
   }
   .header-section .btn-modern-violet:hover {
-    background: #f1f1f1;
     transform: translateY(-2px);
+    box-shadow: 0 6px 25px rgba(0,0,0,0.25);
   }
 
   /* Metrics */
@@ -81,24 +102,27 @@
     gap: 1rem;
     margin-bottom: 1.5rem;
   }
-  .metric-card {
+  a.metric-card {
     flex: 1;
     background: #fff;
     border-radius: 1rem;
     padding: 1rem;
     text-align: center;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
   }
-  .metric-card:hover {
+  a.metric-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
   }
   .metric-card .icon {
     font-size: 2rem;
     color: var(--gradient-start);
     margin-bottom: 0.5rem;
-    animation: float 3s ease-in-out infinite;
   }
   .metric-card .value {
     font-size: 1.5rem;
@@ -106,101 +130,99 @@
     color: var(--text-dark);
   }
   .metric-card .label {
-    text-transform: uppercase;
     font-size: 0.75rem;
+    text-transform: uppercase;
     color: var(--text-muted);
   }
-  @keyframes float {
-    0%,100% { transform: translateY(0); }
-    50%     { transform: translateY(-5px); }
-  }
 
-  /* Search box */
+  /* Search */
   .search-wrapper {
     position: relative;
     width: 100%;
-    max-width: 400px;
     margin-bottom: 1.5rem;
   }
   .search-wrapper input {
     width: 100%;
-    padding: 0.75rem 1.5rem 0.75rem 3.5rem;
+    padding: 0.75rem 1.5rem 0.75rem 3rem;
     border: none;
     border-radius: 2rem;
     font-size: 1rem;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    transition: box-shadow 0.2s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     color: var(--text-dark);
+    transition: box-shadow 0.2s;
   }
   .search-wrapper input::placeholder {
     color: #aaa;
   }
   .search-wrapper input:focus {
+    box-shadow: 0 4px 12px rgba(255, 110, 196, 0.5);
     outline: none;
-    box-shadow: 0 4px 12px rgba(255,110,196,0.5);
   }
   .search-icon {
     position: absolute;
     left: 1rem;
     top: 50%;
     transform: translateY(-50%);
-    color: #999;
     font-size: 1.2rem;
+    color: var(--text-muted);
   }
 
-  /* Document cards grid */
-  #docsList {
+  /* Grid */
+  .grid-container {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 1rem;
   }
   .doc-card {
+    position: relative;
     background: #fff;
     border-radius: 1rem;
     padding: 1.25rem;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-    position: relative;
-    overflow: hidden;
-    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s;
   }
   .doc-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
   }
-  .doc-card .card-header {
+  .card-header {
     display: flex;
     align-items: center;
     margin-bottom: 1rem;
   }
-  .doc-card .card-header i {
+  .card-header i {
     font-size: 1.5rem;
     color: var(--gradient-end);
     margin-right: 0.5rem;
   }
-  .doc-card .card-body p {
+  .card-body p {
     margin: 0.25rem 0;
+    color: var(--text-muted);
     font-size: 0.9rem;
-    color: var(--text-muted);
   }
-  .doc-card .actions {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
+
+  /* Pagination */
+  .pagination {
     display: flex;
-    gap: 0.5rem;
-    opacity: 0;
-    transition: opacity 0.2s;
+    justify-content: center;
+    gap: 1rem;
+    margin: 1.5rem 0;
   }
-  .doc-card:hover .actions {
-    opacity: 1;
-  }
-  .doc-card .actions a {
-    color: var(--text-muted);
-    font-size: 1.1rem;
-    transition: color 0.2s;
-  }
-  .doc-card .actions a:hover {
+  .page-link {
+    font-size: 1.5rem;
     color: var(--gradient-end);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    transition: transform 0.2s, opacity 0.2s;
+  }
+  .page-link.disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+  .page-link:hover {
+    transform: scale(1.2);
   }
 </style>
 
@@ -209,43 +231,42 @@
 
     <!-- Header -->
     <div class="header-section">
-      <h2>🚀 Document Vault</h2>
+      <div class="header-content">
+        <h2><i class="bi bi-clock-history me-2"></i>Never Miss Again.</h2>
+        <p class="subtitle">Track. Remind. Secure.</p>
+      </div>
       <%= link_to new_document_path, class: "btn btn-modern-violet" do %>
-        <i class="bi bi-file-earmark-plus me-1"></i> New Document
+        <i class="bi bi-file-earmark-plus me-1"></i> Add New Document
       <% end %>
     </div>
 
     <!-- Metrics -->
     <div class="metrics-container">
-      <div class="metric-card">
+      <%= link_to documents_path, class: 'metric-card' do %>
         <i class="bi bi-folder2-open icon"></i>
-        <div class="value"><%= @documents.count %></div>
-        <div class="label">Total Docs</div>
-      </div>
-      <div class="metric-card">
-        <i class="bi bi-clock-history icon"></i>
-        <div class="value"><%= @documents.where("expiration_date <= ?", Date.current + 30).count %></div>
-        <div class="label">Expiring Soon</div>
-      </div>
-      <div class="metric-card">
-        <i class="bi bi-bell icon"></i>
-        <div class="value"><%= Reminder.where(document: @documents).count %></div>
-        <div class="label">Reminders</div>
-      </div>
+        <div class="value"><%= current_user.documents.count %></div>
+        <div class="label">All Docs</div>
+      <% end %>
+      <%= link_to documents_path(expiring_6m: true), class: 'metric-card' do %>
+        <i class="bi bi-calendar3-event icon"></i>
+        <div class="value"><%= current_user.documents.where("expiration_date <= ?", Date.current + 6.months).count %></div>
+        <div class="label">Expiring in less than 6 months</div>
+      <% end %>
+      <%= link_to documents_path(expiring_1m: true), class: 'metric-card' do %>
+        <i class="bi bi-hourglass-split icon"></i>
+        <div class="value"><%= current_user.documents.where("expiration_date <= ?", Date.current + 1.month).count %></div>
+        <div class="label">Expiring in 1 month or less</div>
+      <% end %>
     </div>
 
-    <!-- Search box -->
+    <!-- Search -->
     <div class="search-wrapper">
       <i class="bi bi-search search-icon"></i>
-      <input
-        id="searchBox"
-        type="text"
-        placeholder="Cerca documenti..."
-      />
+      <input id="searchBox" type="text" placeholder="Search documents..." />
     </div>
 
     <!-- Documents Card Grid -->
-    <div id="docsList">
+    <div id="docsList" class="grid-container">
       <% icon_map = {
            "id"              => "bi-person-badge",
            "passport"        => "bi-globe",
@@ -254,9 +275,9 @@
          } %>
 
       <% @documents.each do |doc| %>
-        <div class="doc-card">
+        <%= link_to document_path(doc), class: "doc-card text-decoration-none text-reset" do %>
           <div class="card-header">
-            <i class="bi <%= icon_map[doc.document_type] || "bi-file-earmark-text" %>"></i>
+            <i class="bi <%= icon_map[doc.document_type] || 'bi-file-earmark-text' %>"></i>
             <strong><%= doc.document_type.titleize %></strong>
           </div>
           <div class="card-body">
@@ -264,37 +285,36 @@
             <p><strong>Reminder:</strong> <%= doc.reminder_days || "—" %> days</p>
             <p><strong>Created:</strong> <%= doc.created_at.strftime("%b %d, %Y") %></p>
           </div>
-          <div class="actions">
-            <%= link_to document_path(doc), title: "View" do %>
-              <i class="bi bi-eye"></i>
-            <% end %>
-            <%= link_to edit_document_path(doc), title: "Edit" do %>
-              <i class="bi bi-pencil-square"></i>
-            <% end %>
-            <%= link_to document_path(doc),
-                        method: :delete,
-                        data: { confirm: "Really delete?" },
-                        title: "Delete" do %>
-              <i class="bi bi-trash"></i>
-            <% end %>
-          </div>
-        </div>
+        <% end %>
       <% end %>
     </div>
 
-  </div>
+    <!-- Pagination -->
+    <div class="pagination">
+      <% if @documents.prev_page %>
+        <%= link_to '&lsaquo;'.html_safe, url_for(page: @documents.prev_page, expiring_6m: params[:expiring_6m], expiring_1m: params[:expiring_1m], query: params[:query]), class: 'page-link' %>
+      <% else %>
+        <span class="page-link disabled">&lsaquo;</span>
+      <% end %>
+      <% if @documents.next_page %>
+        <%= link_to '&rsaquo;'.html_safe, url_for(page: @documents.next_page, expiring_6m: params[:expiring_6m], expiring_1m: params[:expiring_1m], query: params[:query]), class: 'page-link' %>
+      <% else %>
+        <span class="page-link disabled">&rsaquo;</span>
+      <% end %>
+    </div>
+
+    <script>
+      (function() {
+        const searchBox = document.getElementById("searchBox");
+        function filterCards() {
+          const term = searchBox.value.toLowerCase();
+          document.querySelectorAll("#docsList .doc-card").forEach(card => {
+            card.style.display = card.textContent.toLowerCase().includes(term) ? "" : "none";
+          });
+        }
+        if (searchBox) {
+          searchBox.addEventListener("input", filterCards);
+        }
+      })();
+    </script>
 </main>
-
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const searchBox = document.getElementById("searchBox");
-    const cards     = document.querySelectorAll("#docsList .doc-card");
-
-    searchBox.addEventListener("input", () => {
-      const term = searchBox.value.toLowerCase();
-      cards.forEach(card => {
-        card.style.display = card.textContent.toLowerCase().includes(term) ? "" : "none";
-      });
-    });
-  });
-</script>
