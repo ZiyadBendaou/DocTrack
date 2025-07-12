@@ -1,98 +1,66 @@
-body {
-  background: radial-gradient(circle at top left, #e0f7fa, #ffffff);
-  font-family: 'Inter', sans-serif;
-}
-
-.form-wrapper {
-  backdrop-filter: blur(10px);
-}
-
-.upload-card {
-  background: #fff;
-  border-radius: 30px;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.15);
-  max-width: 600px;
-  animation: fadeIn 0.7s ease;
-  transition: all 0.3s ease;
-}
-
-.form-title {
-  background: linear-gradient(90deg, #007bff, #6f42c1);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  font-weight: 800;
-  text-align: center;
-  margin-bottom: 40px;
-}
-
-.form-control.fancy,
-.form-select.fancy {
+.option-card {
+  border: 1px solid #ddd;
   border-radius: 1rem;
-  border: 2px solid #dee2e6;
-  transition: all 0.3s ease;
-  background-color: #fff;
-  padding-left: 1.25rem;
-}
-
-.form-control.fancy:focus,
-.form-select.fancy:focus {
-  border-color: #6f42c1;
-  box-shadow: 0 0 0 0.2rem rgba(111, 66, 193, 0.25);
-}
-
-.fancy-upload input[type="file"] {
-  border-radius: 1rem;
-  padding: 0.75rem;
-  background: #f8f9fa;
-  transition: all 0.3s;
-}
-
-.fancy-upload input[type="file"]:hover {
-  background: #e9ecef;
+  transition: all 0.2s ease-in-out;
   cursor: pointer;
+  padding: 0;
 }
 
-.btn-glow {
+.option-card .card-inner {
+  padding: 1rem 1.2rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+}
+
+.option-card:hover {
+  background: #f8f9fa;
+  border-color: #0d6efd;
+}
+
+.option-card input[type="radio"]:checked + .card-inner {
   background: linear-gradient(90deg, #0d6efd, #6f42c1);
   color: white;
-  font-weight: 600;
-  border-radius: 2rem;
-  padding: 0.75rem 2rem;
-  border: none;
-  transition: all 0.3s ease-in-out;
-}
-
-.btn-glow:hover {
-  box-shadow: 0 0 15px rgba(111, 66, 193, 0.5);
-  transform: translateY(-2px);
-}
-
-.btn-glow-outline {
-  background: white;
-  color: #6f42c1;
-  border: 2px solid #6f42c1;
-  font-weight: 600;
-  border-radius: 2rem;
-  padding: 0.75rem 2rem;
-  transition: all 0.3s ease-in-out;
-}
-
-.btn-glow-outline:hover {
-  background: #f5f0fa;
-  box-shadow: 0 0 15px rgba(111, 66, 193, 0.3);
-}
-
-.alert {
   border-radius: 1rem;
-  animation: slideIn 0.3s ease;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
+.btn-modern-violet,
+.btn-modern-blue,
+.btn-modern-green {
+  border: none;
+  font-weight: 600;
+  color: white;
+  padding: 0.85rem 1.5rem;
+  border-radius: 50rem;
+  transition: all 0.3s ease-in-out;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08), inset 0 0 4px rgba(255, 255, 255, 0.1);
 }
 
-@keyframes slideIn {
-  from { opacity: 0; transform: translateY(-10px); }
-  to   { opacity: 1; transform: translateY(0); }
+.btn-modern-violet {
+  background: linear-gradient(135deg, #8e44ad, #6f42c1);
+}
+
+.btn-modern-violet:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(111, 66, 193, 0.35), inset 0 0 6px rgba(255, 255, 255, 0.15);
+}
+
+.btn-modern-blue {
+  background: linear-gradient(135deg, #0d6efd, #00bfff);
+}
+
+.btn-modern-blue:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(13, 110, 253, 0.35), inset 0 0 6px rgba(255, 255, 255, 0.15);
+}
+
+.btn-modern-green {
+  background: linear-gradient(135deg, #28a745, #218838);
+}
+
+.btn-modern-green:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(40, 167, 69, 0.35), inset 0 0 6px rgba(255, 255, 255, 0.15);
 }

@@ -20,6 +20,7 @@ class DocumentsController < ApplicationController
     @document = Document.new(document_params)
     @document.user = current_user
 
+    # Se è stato richiesto l'OCR
     if extracting_date_from_image?
       if validate_uploaded_file(params[:document][:file])
         extract_expiration_date_with_ocr
@@ -65,7 +66,9 @@ class DocumentsController < ApplicationController
   end
 
   def document_params
-    params.require(:document).permit(:document_type, :expiration_date, :file, :reminder_days)
+    base = params.require(:document).permit(:document_type, :expiration_date, :file, :reminder_days)
+    base[:document_type] = params[:custom_document_type] if params[:custom_document_type].present?
+    base
   end
 
   def extracting_date_from_image?
