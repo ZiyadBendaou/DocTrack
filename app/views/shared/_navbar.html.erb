@@ -4,9 +4,13 @@
     <!-- Brand (Left) -->
     <div class="navbar-left d-flex align-items-center">
       <%= link_to root_path, class: "navbar-brand d-flex align-items-center fw-bold text-primary" do %>
-        <button class="button" data-text="DocTrack" aria-label="Homepage">
-          <span class="actual-text"> DocTrack </span>
-          <span aria-hidden="true" class="hover-text animate-on-load"> DocTrack </span>
+                <%= image_tag("logodoctrack.png",
+                        alt: "DocTrack Logo",
+                        class: "logo-img") %>
+        <button class="button d-flex align-items-center gap-2" data-text="DocTrack" aria-label="Homepage">
+
+          <span class="actual-text">DocTrack</span>
+          <span aria-hidden="true" class="hover-text animate-on-load">DocTrack</span>
         </button>
       <% end %>
     </div>
