@@ -108,8 +108,9 @@ class DocumentsController < ApplicationController
     tempfile.rewind
 
     begin
-      vision = Google::Cloud::Vision::V1::ImageAnnotator::Client.new do
-        config.credentials=ENV.fetch('GOOGLE_API_CREDS')
+      puts ENV['GOOGLE_API_CREDS']
+      vision = Google::Cloud::Vision::V1::ImageAnnotator::Client.new do |config|
+        config.credentials=JSON.parse(ENV['GOOGLE_API_CREDS'])
       end
       response = vision.text_detection(image: tempfile.path)
 
