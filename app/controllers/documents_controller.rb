@@ -109,7 +109,7 @@ class DocumentsController < ApplicationController
 
     begin
       vision = Google::Cloud::Vision::V1::ImageAnnotator::Client.new do
-        config.credentials=JSON.parse(ENV.fetch('GOOGLE_API_CREDS'))
+        config.credentials=ENV.fetch('GOOGLE_API_CREDS')
       end
       response = vision.text_detection(image: tempfile.path)
 
