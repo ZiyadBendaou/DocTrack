@@ -3,6 +3,7 @@ class DocumentsController < ApplicationController
   before_action :authorize_document, only: [:edit, :update, :destroy]
 
   require 'google/cloud/vision/v1'
+
   require 'securerandom'
   require 'tempfile'
 
@@ -107,7 +108,9 @@ class DocumentsController < ApplicationController
     tempfile.rewind
 
     begin
-      vision = Google::Cloud::Vision::V1::ImageAnnotator::Client.new
+      vision = Google::Cloud::Vision::V1::ImageAnnotator::Client.new do
+        config.credentials=JSON.parse(ENV.fetch('GOOGLE_API_CREDS'))
+      end
       response = vision.text_detection(image: tempfile.path)
 
       extracted_text = response.responses[0]&.text_annotations&.first&.description || ""
