@@ -50,8 +50,9 @@
         <button type="button" class="btn btn-link text-decoration-none mb-3" onclick="goToStep(1)">← Back</button>
         <p class="mb-3 fw-semibold">How would you like to provide the expiration date?</p>
         <div class="d-flex flex-column gap-3">
-          <button type="button" class="btn btn-modern-blue w-100" onclick="goToStep(4)">📷 Upload an image</button>
-          <button type="button" class="btn btn-modern-violet w-100" onclick="goToStep(3)">📝 Enter manually</button>
+          <button type="button" class="btn btn-modern-blue w-100" onclick="goToStep(4)">
+          <%= image_tag "scan.svg", class: "icon" %>  Upload an image</button>
+          <button type="button" class="btn btn-modern-violet w-100" onclick="goToStep(3)"> <%= image_tag "edit.svg", class: "icon" %> Enter manually</button>
         </div>
       </div>
 
@@ -69,7 +70,7 @@
           <%= form.label :reminder_days, "Remind me how many days before expiration?" %>
         </div>
 
-        <%= form.submit "💾 Save Document", class: "btn btn-modern-green w-100" %>
+        <%= form.submit "Save Document", class: "btn btn-modern-green w-100" %>
       </div>
 
       <!-- Step 4 -->
@@ -81,7 +82,8 @@
           <%= form.file_field :file, class: "form-control" %>
         </div>
 
-        <%= form.submit "🧠 Extract Expiration Date", name: "extract", class: "btn btn-modern-blue w-100", id: "extract-btn" %>
+        <%= form.submit " Extract Expiration Date", name: "extract", class: "btn btn-modern-blue w-100", id: "extract-btn" %>
+
       </div>
     <% end %>
   </div>
