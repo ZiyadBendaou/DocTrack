@@ -1,0 +1,14 @@
+<h1>Document Expiration Reminder</h1>
+
+<p>Hi</p>
+
+<p>This is a friendly reminder that your document
+<strong>“<%= @document.document_type %>”</strong>
+will expire on <strong><%= @document.expiration_date.strftime("%d/%m/%Y") %></strong>.</p>
+
+<p>
+  To review or postpone this reminder, please
+  <a href="<%= document_url(@document) %>">click here</a>.
+</p>
+
+<p>Thank you,<br/>The Doctrack Team</p>

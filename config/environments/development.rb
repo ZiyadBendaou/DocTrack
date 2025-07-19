@@ -1,9 +1,7 @@
+# config/environments/development.rb
 require "active_support/core_ext/integer/time"
 
 Rails.application.configure do
-  config.action_mailer.default_url_options = { host: "http://localhost:3000" }
-  # Settings specified here will take precedence over those in config/application.rb.
-
   # In the development environment your application's code is reloaded any time
   # it changes. This slows down response time but is perfect for development
   # since you don't have to restart the web server when you make code changes.
@@ -18,6 +16,45 @@ Rails.application.configure do
   # Enable server timing
   config.server_timing = true
 
+  # Store uploaded files on the local file system (see config/storage.yml for options).
+  config.active_storage.service = :local
+
+  # --------------------------------------------------------------------------
+  # ActionMailer configuration for development
+  # --------------------------------------------------------------------------
+
+  # Generate full URLs in emails
+  config.action_mailer.default_url_options = {
+    host: 'localhost',
+    port: 3000
+  }
+
+  # Raise errors if the mailer can't send.
+  config.action_mailer.raise_delivery_errors = true
+
+  # Actually send out emails in development
+  config.action_mailer.perform_deliveries = true
+
+  # Choose SMTP as the delivery method
+  config.action_mailer.delivery_method = :smtp
+
+  # SMTP settings for Zoho Mail
+  config.action_mailer.smtp_settings = {
+    address:              'smtp-relay.brevo.com',
+    port:                 587,
+    domain:               'doctrack.dev',
+    user_name:            ENV['SMTP_USERNAME'], # e.g. contact@doctrack.dev
+    password:             ENV['SMTP_PASSWORD'], # your Zoho (app‑specific) password
+    authentication:       :plain,
+    enable_starttls_auto: true
+  }
+
+  # Disable caching of mailer views
+  config.action_mailer.perform_caching = false
+
+  # --------------------------------------------------------------------------
+  # Caching, logging, and other default Rails settings
+  # --------------------------------------------------------------------------
   # Enable/disable caching. By default caching is disabled.
   # Run rails dev:cache to toggle caching.
   if Rails.root.join("tmp/caching-dev.txt").exist?
@@ -33,14 +70,6 @@ Rails.application.configure do
 
     config.cache_store = :null_store
   end
-
-  # Store uploaded files on the local file system (see config/storage.yml for options).
-  config.active_storage.service = :local
-
-  # Don't care if the mailer can't send.
-  config.action_mailer.raise_delivery_errors = false
-
-  config.action_mailer.perform_caching = false
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
@@ -74,6 +103,8 @@ Rails.application.configure do
 
   # Raise error when a before_action's only/except options reference missing actions
   config.action_controller.raise_on_missing_callback_actions = true
+
+  # Allow ngrok domains (if you use ngrok for tunneling)
   config.hosts << /.*\.ngrok\.io$/
   config.hosts << /.*\.ngrok-free\.app$/
 end

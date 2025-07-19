@@ -28,6 +28,10 @@ gem "stimulus-rails"
 gem "jbuilder"
 gem 'mini_magick'
 gem 'kaminari'
+gem 'redis'
+gem 'rack-attack'
+gem 'rufus-scheduler'
+
 
 # Use Redis adapter to run Action Cable in production
 # gem "redis", ">= 4.0.1"

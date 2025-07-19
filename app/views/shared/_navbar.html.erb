@@ -21,7 +21,7 @@
         <ul class="navbar-nav mx-auto align-items-center gap-4">
           <% if user_signed_in? %>
             <li class="nav-item"><%= link_to "Dashboard", documents_path, class: "nav-link fw-semibold text-secondary" %></li>
-            <li class="nav-item"><%= link_to "Reminders", "#", class: "nav-link fw-semibold text-secondary" %></li>
+            <li class="nav-item"><%= link_to "How it works", "#{root_path}#how-it-works", class: "nav-link fw-semibold text-secondary" %></li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle fw-semibold text-secondary"
                 href="#" id="supportDropdown" role="button"
@@ -29,7 +29,6 @@
                 Support
               </a>
               <ul class="dropdown-menu shadow-sm" aria-labelledby="supportDropdown">
-                <li><%= link_to "How it works", "#{root_path}#how-it-works", class: "dropdown-item" %></li>
                 <li><%= link_to "Contact us", "#{root_path}#contact", class: "dropdown-item" %></li>
                 <li><%= link_to "FAQ", "#{root_path}#faq", class: "dropdown-item" %></li>
               </ul>

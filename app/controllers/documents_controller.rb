@@ -1,31 +1,25 @@
 class DocumentsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_document, only: [:show, :edit, :update, :destroy]
-  before_action :authorize_document, only: [:edit, :update, :destroy]
+  before_action :authorize_document, only: [:show, :edit, :update, :destroy]
 
   require 'google/cloud/vision/v1'
-
   require 'securerandom'
   require 'tempfile'
 
   def index
-    # Base scope: only current user's documents
     @documents = current_user.documents
 
-    # Metric card filters
     if params[:expiring_1m].present?
-      # Documents expiring within the next 1 month
       @documents = @documents.where("expiration_date <= ?", Date.current + 1.month)
     elsif params[:expiring_6m].present?
-      # Documents expiring within the next 6 months
       @documents = @documents.where("expiration_date <= ?", Date.current + 6.months)
     end
 
-    # Text-based search applied after filters
     if params[:query].present?
       @documents = @documents.where("document_type ILIKE ?", "%#{params[:query]}%")
     end
 
-    # Paginate: 12 per page
     @documents = @documents.page(params[:page]).per(12)
   end
 
@@ -39,7 +33,6 @@ class DocumentsController < ApplicationController
     @document = Document.new(document_params)
     @document.user = current_user
 
-    # Se è stato richiesto l'OCR
     if extracting_date_from_image?
       if validate_uploaded_file(params[:document][:file])
         extract_expiration_date_with_ocr
@@ -51,7 +44,7 @@ class DocumentsController < ApplicationController
 
     if @document.save
       generate_reminder_for(@document)
-      redirect_to @document, notice: "Document successfully created."
+      redirect_to document_path(@document), notice: "Document successfully created."
     else
       render :new
     end
@@ -108,9 +101,8 @@ class DocumentsController < ApplicationController
     tempfile.rewind
 
     begin
-      puts ENV['GOOGLE_API_CREDS']
       vision = Google::Cloud::Vision::V1::ImageAnnotator::Client.new do |config|
-        config.credentials=JSON.parse(ENV['GOOGLE_API_CREDS'])
+        config.credentials = JSON.parse(ENV['GOOGLE_API_CREDS'])
       end
       response = vision.text_detection(image: tempfile.path)
 

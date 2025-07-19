@@ -9,7 +9,6 @@
     --text-muted:     #555;
   }
 
-  /* Drip background */
   .form-wrapper { background: var(--light-bg); position: relative; overflow: hidden; }
   .form-wrapper::before {
     content: "";
@@ -23,7 +22,6 @@
     z-index: 0;
   }
 
-  /* Container */
   .upload-card {
     background: #fff;
     border-radius: 1rem;
@@ -35,7 +33,6 @@
     box-shadow: 0 20px 40px rgba(0,0,0,0.1);
   }
 
-  /* Header */
   .header-section {
     background: linear-gradient(135deg, #00c6ff, #0072ff);
     color: #fff;
@@ -85,7 +82,6 @@
     color: rgba(255,255,255,0.85);
   }
 
-  /* Detail cards */
   .details-container { display: flex; gap: 1rem; margin-bottom: 2rem; }
   .detail-card {
     flex: 1;
@@ -114,11 +110,9 @@
     color: var(--text-dark);
   }
 
-  /* File preview */
   .file-preview { text-align: center; margin-bottom: 2rem; }
   .file-preview img { max-width: 100%; border-radius: 1rem; }
 
-  /* Actions */
   .actions { display: flex; justify-content: flex-end; gap: 1rem; }
   .actions a { text-decoration: none; }
   .actions .btn-primary {
@@ -139,11 +133,34 @@
     transition: background 0.3s;
   }
   .actions .btn-secondary:hover { background: var(--light-bg); }
+
+  .gcal-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #00c6ff, #0072ff);
+    color: #fff;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 0.75rem;
+    text-decoration: none;
+    box-shadow: 0 4px 15px rgba(0, 114, 255, 0.3);
+    transition: all 0.3s ease;
+  }
+  .gcal-button:hover {
+    background: linear-gradient(135deg, #0072ff, #005ec2);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 114, 255, 0.4);
+  }
+  .btn-modern-violet{
+    text-decoration: none;
+  }
 </style>
 
 <main class="form-wrapper d-flex justify-content-center align-items-start min-vh-100 px-3">
   <div class="upload-card w-100" style="max-width:800px;">
-    <!-- Header -->
     <div class="header-section">
       <div class="header-content">
         <i class="bi bi-clock-history header-icon"></i>
@@ -155,7 +172,6 @@
       <%= link_to 'Back to List', documents_path, class: 'btn-modern-violet' %>
     </div>
 
-    <!-- Detail Cards -->
     <div class="details-container">
       <div class="detail-card">
         <i class="bi bi-folder2-open icon"></i>
@@ -174,17 +190,37 @@
       </div>
     </div>
 
-    <!-- File Preview -->
+    <% if @document.expiration_date.present? %>
+      <% start_time = @document.expiration_date.to_datetime.change(hour: 9).utc.strftime("%Y%m%dT%H%M%SZ") %>
+      <% end_time   = @document.expiration_date.to_datetime.change(hour: 10).utc.strftime("%Y%m%dT%H%M%SZ") %>
+      <% gcal_url = [
+          "https://calendar.google.com/calendar/render?action=TEMPLATE",
+          "text=#{ERB::Util.url_encode("Expiration: #{@document.document_type.titleize}")}",
+          "dates=#{start_time}/#{end_time}",
+          "details=#{ERB::Util.url_encode("Your document expires on #{@document.expiration_date}. See it here: #{document_url(@document)}")}",
+          "location=#{ERB::Util.url_encode(document_url(@document))}"
+        ].join("&") %>
+
+      <div class="text-center mb-4">
+        <%= link_to gcal_url, target: "_blank", rel: "noopener", class: "gcal-button" do %>
+          <%= image_tag("google-calendar-icon.png", alt: "Google Calendar", style: "height: 2.0rem; margin-right: 0.5rem;") %>
+
+          Add to Google Calendar
+        <% end %>
+      </div>
+    <% end %>
+
     <% if @document.file.attached? %>
       <div class="file-preview">
         <%= image_tag @document.file.variant(resize_to_limit: [700,700]), alt: 'Document image' %>
       </div>
     <% end %>
 
-    <!-- Actions -->
     <div class="actions">
       <%= link_to 'Edit', edit_document_path(@document), class: 'btn-secondary' %>
-      <%= link_to 'Delete', document_path(@document), data: { turbo_method: :delete, turbo_confirm: 'Really delete?' }, class: 'btn-primary' %>
+      <%= link_to 'Delete', document_path(@document),
+                  data: { turbo_method: :delete, turbo_confirm: 'Really delete?' },
+                  class: 'btn-primary' %>
     </div>
   </div>
 </main>
