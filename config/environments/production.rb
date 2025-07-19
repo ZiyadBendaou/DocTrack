@@ -1,11 +1,7 @@
 require "active_support/core_ext/integer/time"
 
 Rails.application.configure do
-  config.action_mailer.default_url_options = {
-    host: "http://doctrack.dev",
-    protocol: "https"
-
-  }
+  config.action_mailer.default_url_options = { host: "https://doctrack.dev" }
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Code is not reloaded between requests.
@@ -15,8 +11,8 @@ Rails.application.configure do
     address:              'smtp-relay.brevo.com',
     port:                 587,
     domain:               'doctrack.dev',
-    user_name:            SMTP_USERNAME,  # contact@doctrack.dev
-    password:             SMTP_PASSWORD,  # app‑specific o normale
+    user_name:            ENV['SMTP_USERNAME'],  # contact@doctrack.dev
+    password:             ENV['SMTP_PASSWORD'],  # app‑specific o normale
     authentication:       :plain,
     enable_starttls_auto: true
   }
